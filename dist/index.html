@@ -3,13 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Page</title>
+    <title>To-Do App</title>
     <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" type="text/css" href="css-reset.css">
 </head>
 <body>
     <div id="content">
-        
+        <main>
+            <div id="navbar">
+                <div id="search-container">
+                    <img id="search-icon" class="nav-icons" src="icons/search.svg">
+                    <input id="searchbar" type="text" placeholder="Search..">
+                </div>
+                <div id="misc-container">
+                    <img id="plus-icon" class="nav-icons" src="icons/plus.svg">
+                    <img id="settings-icon" class="nav-icons" src="icons/settings.svg">
+                </div>
+            </div>
+            <div id="sidebar">
+                <div id="user-data-section" class="sidebar-section">
+                    <h2 class="user-titles">Home</h2>
+                    <h2 class="user-titles">All</h2>
+                    <details>
+                        <summary class="user-titles">Projects</summary>
+                        <ul id="sidebar-projects">
+                            <li>Work</li>
+                            <li>Investing</li>
+                            <li>Personal</li>
+                            <li>Coding</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+            <div id="project-display-container">
+                <div class="project-displayed">
+                    <div class="title-container">
+                        <h3 class="project-tile">Work</h3>
+                        <h3 class="project-date">Date</h3>
+                        <img src="icons/chevrons-down.svg">
+                    </div>
+                    <div class="task-container">
+                        <div class="task">
+                            <div class="task-left-container">
+                                <img src="icons/circle.svg">
+                                <p class="task-time">15:00h</p>
+                                <p class="task-name">Board meeting</p>
+                            </div>
+                            <div class="task-right-container">
+                                <p class="task-date">29/08/2021</p>
+                                <img src="icons/edit-3.svg">
+                                <img src="icons/trash-2.svg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
     <script src="main.js"></script>
 </body>
