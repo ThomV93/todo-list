@@ -21,60 +21,151 @@
             </div>
             <div id="sidebar">
                 <div id="user-data-section">
+                    <h1 class="sidebar-section-title">To-Do's</h1>
                     <img id="sidebar-home-icon" src="icons/home.svg">
                     <h2 id="sidebar-title-home" class="user-titles">Home</h2>
+                    <p id="sidebar-value-home">4</p>
                     <img id="sidebar-all-icon" src="icons/calendar.svg">
                     <h2 id="sidebar-title-all" class="user-titles">All</h2>
+                    <p id="sidebar-value-all">23</p>
                     <img id="sidebar-trash-icon" src="icons/trash.svg">
                     <h2 id="sidebar-title-trash" class="user-titles">Trash</h2>
-                    <details>
-                        <summary id="sidebar-projects-summary" class="user-titles">Projects</summary>
-                        <ul id="sidebar-projects">
-                            <li>Work</li>
-                            <li>Investing</li>
-                            <li>Personal</li>
-                            <li>Coding</li>
-                        </ul>
-                    </details>
+                    <p id="sidebar-value-trash">7</p>
+                </div>
+                <img id="sidebar-section-chevron-icon" src="icons/chevron-right.svg">
+                <h1 class="sidebar-section-title">Projects</h1>
+                <img id="sidebar-section-plus-icon" src="icons/plus-2.svg">
+                <div id="sidebar-projects-section">
+                    <div class="sidebar-project">
+                        <div class="sidebar-project-title-container">
+                            <img class="sidebar-project-icon" src="icons/layers.svg">
+                            <h2 class="sidebar-project-title">Investing</h2>
+                        </div>
+                        <div class="sidebar-project-task-container">
+                            <img class="sidebar-task-icon" src="icons/square.svg">
+                            <p class="sidebar-task-title">Board meeting</p>
+                        </div>
+                        <div class="sidebar-project-task-container">
+                            <img class="sidebar-task-icon" src="icons/square.svg">
+                            <p class="sidebar-task-title">Tea time</p>
+                        </div>
+                        <div class="sidebar-project-task-container">
+                            <img class="sidebar-task-icon" src="icons/square.svg">
+                            <p class="sidebar-task-title">Buy the dip</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="project-display-container">
-                <div class="project-title-container">
-                    <h3 class="project-title">Investing</h3>
-                    <h3 class="project-date">Date</h3>
-                    <img class="project-date-filter" src="icons/chevrons-down.svg">
-                </div>
-                <div class="task-container">
-                    <div class="task">
-                        <div id="task-creator-container">
-                            <img id="task-creator-img" src="icons/plus-2.svg">
-                            <p id="task-creator">Add task</p>
+                <div class="project">
+                    <div class="project-title-container">
+                        <h3 class="project-title">Investing</h3>
+                        <h3 class="project-date">Date</h3>
+                        <img class="project-date-filter" src="icons/chevrons-down.svg">
+                    </div>
+                    <div class="task-container">
+                        <div class="task">
+                            <div id="task-creator-container">
+                                <img id="task-creator-img" src="icons/plus-2.svg">
+                                <p id="task-creator">Add task</p>
+                            </div>
                         </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">15:00h</p>
+                            <p class="task-name">Board meeting</p>
+                            <p class="task-date">29/08/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">16:00h</p>
+                            <p class="task-name">Tea time</p>
+                            <p class="task-date">29/08/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">17:00h</p>
+                            <p class="task-name">Buy the dip</p>
+                            <p class="task-date">29/08/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="project">
+                    <div class="project-title-container">
+                        <h3 class="project-title">Coding</h3>
+                        <h3 class="project-date">Date</h3>
+                        <img class="project-date-filter" src="icons/chevrons-down.svg">
                     </div>
-                    <div class="task">
-                        <img class="task-check-circle" src="icons/circle.svg">
-                        <p class="task-time">15:00h</p>
-                        <p class="task-name">Board meeting</p>
-                        <p class="task-date">29/08/2021</p>
-                        <img class="task-edit-icon" src="icons/edit-3.svg">
-                        <img class="task-trash-icon" src="icons/trash-2.svg">
-                    </div>
-                    <div class="task">
-                        <img class="task-check-circle" src="icons/circle.svg">
-                        <p class="task-time">16:00h</p>
-                        <p class="task-name">Tea time</p>
-                        <p class="task-date">29/08/2021</p>
-                        <img class="task-edit-icon" src="icons/edit-3.svg">
-                        <img class="task-trash-icon" src="icons/trash-2.svg">
-                    </div>
-                    <div class="task">
-                        <img class="task-check-circle" src="icons/circle.svg">
-                        <p class="task-time">17:00h</p>
-                        <p class="task-name">Buy the dip</p>
-                        <p class="task-date">29/08/2021</p>
-                        <img class="task-edit-icon" src="icons/edit-3.svg">
-                        <img class="task-trash-icon" src="icons/trash-2.svg">
-                    </div>
+                    <div class="task-container">
+                        <div class="task">
+                            <div id="task-creator-container">
+                                <img id="task-creator-img" src="icons/plus-2.svg">
+                                <p id="task-creator">Add task</p>
+                            </div>
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">19:00h</p>
+                            <p class="task-name">Study a lot</p>
+                            <p class="task-date">16/07/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">21:00h</p>
+                            <p class="task-name">More study</p>
+                            <p class="task-date">16/07/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">19:00h</p>
+                            <p class="task-name">Study a lot</p>
+                            <p class="task-date">16/07/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">21:00h</p>
+                            <p class="task-name">More study</p>
+                            <p class="task-date">16/07/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">19:00h</p>
+                            <p class="task-name">Study a lot</p>
+                            <p class="task-date">16/07/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">21:00h</p>
+                            <p class="task-name">More study</p>
+                            <p class="task-date">16/07/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                        <div class="task">
+                            <img class="task-check-circle" src="icons/circle.svg">
+                            <p class="task-time">22:30h</p>
+                            <p class="task-name">Stretch my back</p>
+                            <p class="task-date">16/07/2021</p>
+                            <img class="task-edit-icon" src="icons/edit-3.svg">
+                            <img class="task-trash-icon" src="icons/trash-2.svg">
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </main>
