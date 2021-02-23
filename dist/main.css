@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap');
 
-html, main {
+html, #content {
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
 }
 
-main {
+#content {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
