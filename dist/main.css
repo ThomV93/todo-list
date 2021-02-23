@@ -47,9 +47,15 @@ main {
     font-family: "Open Sans", sans-serif;
     width: 220px;
     border-radius: 22px;
-    color: #333;
+    color: #fff;
     padding: 8px 12px 8px 10px;
     border: none;
+    background-color: #F26627;
+}
+
+::-webkit-input-placeholder {
+    color: #fff;
+    font-size: 14px;
 }
 
 #searchbar:focus {
@@ -65,12 +71,12 @@ main {
     height: 35px;
     width: auto;
     grid-column: 11;
-    margin: auto 8px auto auto;
+    margin: auto 5px auto auto;
 }
 
 #settings-icon {
     grid-column: 12;
-    margin: auto auto auto 8px;
+    margin: auto 2px;
 }
 
 /*------------------sidebar------------------------------*/
@@ -102,7 +108,7 @@ main {
     font-size: 28px;
     color: #F26627;
     font-family: "Montserrat", sans-serif;
-    margin: auto 10px;
+    margin: auto 5px;
 }
 
 .user-titles {
@@ -179,7 +185,6 @@ main {
 #sidebar > h1 {
     grid-column: 3/ 10;
     grid-row: 4;
-    margin: auto;
 }
 
 #sidebar-section-plus-icon {
@@ -191,26 +196,62 @@ main {
 #sidebar-projects-section {
     grid-column: 3/ -1;
     grid-row: 5/ 10;
+    overflow: scroll;
+}
+
+.sidebar-project {
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .sidebar-project-title-container {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.sidebar-project-title {
+    font-family: "Montserrat", sans-serif;
+    margin: auto;
+    font-size: 18px;
+    margin: auto 5px;
+}
+
+.sidebar-project-icon {
+    margin: auto 5px;
 }
 
 .sidebar-project-task-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    height: auto;
+    margin-top: 5px;
 }
 
 .sidebar-task-icon {
-    grid-column: 3/ -1;
+    grid-column: 2;
     margin: auto;
 }
 
 .sidebar-task-title {
-    grid-column: 4/ -1;
+    grid-column: 3/ -1;
+    margin: auto 3px;
+    font-size: 16px;
+}
+
+#sidebar > p {
+    font-size: 14px;
+    color: #949494;
+    grid-column: 3/ 8;
+    grid-row: 10;
     margin: auto;
+}
+
+#github-logo {
+    grid-column: 8;
+    grid-row: 10;
+    margin: auto 3px;
 }
 
 /*---------------------project display----------------------*/
@@ -219,7 +260,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5rem;
+    padding: 4rem 5rem;
     grid-column: 4/ -1;
     grid-row: 2/ -1;
     overflow: scroll;
@@ -294,17 +335,17 @@ main {
 
 .task-time {
     grid-column: 2;
-    margin: auto auto auto 0;
+    margin: auto 0;
 }
 
 .task-name {
     grid-column: 3/ 9;
-    margin: auto auto auto 10px;
+    margin: auto 10px;
 }
 
 .task-date {
     grid-column: 10/ 11;
-    margin: auto auto auto 75px; 
+    margin: auto auto auto 75px;
 }
 
 .task-edit-icon {
