@@ -2,14 +2,12 @@ const project = name => {
     let taskList = [];
 
     //task factory
-    const task = (name, time, date) => {
-        return {name, time, date};
+    const task = (name, time, date, priority) => {
+        return {name, time, date, priority};
     };
 
     //add new task to project
     const addTask = task => taskList.push(task);
-
-    const displayAllTasks = () => taskList.forEach(e => console.log(e));
 
     //find text index in the array by it's name
     const findTaskIdx = taskName => taskList.findIndex(task => task.name === taskName);
@@ -22,7 +20,6 @@ const project = name => {
         taskList,
         task,
         addTask,
-        displayAllTasks,
         findTaskIdx,
         deleteTask
     };

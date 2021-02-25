@@ -18,13 +18,7 @@ const todoApp = (() => {
     let task2 = investing.task("dinner", "18h", "08/21");
     investing.addTask(task1);
     investing.addTask(task2);
-    console.log(task2);
-    console.log(investing.taskList[1]);
     console.log(investing.taskList);
-    console.log(investing.findTaskIdx("dinner"));
-    investing.deleteTask(1);
-    console.log(investing.taskList);
-
     
 
     pageLoad();
