@@ -182,6 +182,7 @@ html, #content {
     grid-column: 2;
     grid-row: 4;
     margin: auto;
+    transform: rotate(90deg);
 }
 
 #sidebar > h1 {
