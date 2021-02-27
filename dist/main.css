@@ -15,7 +15,7 @@ html, #content {
     background-color: #fff;
 }
 
-/*---------------------navbar-------------------------*/
+/*---------------------   Navbar    -------------------------*/
 
 #navbar {
     display: grid;
@@ -79,7 +79,7 @@ html, #content {
     margin: auto 2px;
 }
 
-/*------------------sidebar------------------------------*/
+/*------------------    Sidebar    ------------------------------*/
 
 #sidebar {
     display: grid;
@@ -176,6 +176,8 @@ html, #content {
     font-size: 14px;
 }
 
+/*-------------    Sidebar Projects    --------------*/
+
 #sidebar-section-chevron-icon {
     grid-column: 2;
     grid-row: 4;
@@ -229,9 +231,26 @@ html, #content {
     margin-top: 5px;
 }
 
-.sidebar-task-icon {
+.sidebar-task-input {
     grid-column: 2;
     margin: auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid #F26627;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.sidebar-task-input:checked {
+    background-color: #F26627;
+}
+
+.sidebar-task-label {
+    grid-column: 3/ -1;
+    margin: auto 3px;
+    font-size: 16px;
 }
 
 .sidebar-task-title {
@@ -254,7 +273,7 @@ html, #content {
     margin: auto 3px;
 }
 
-/*---------------------project display----------------------*/
+/*---------------------      Project Display     ----------------------*/
 
 #project-display-container {
     display: flex;
@@ -299,6 +318,8 @@ html, #content {
     margin: auto 0;
 }
 
+/*----   Tasks    ----*/
+
 .task-container {
     height: auto;
     width: auto;
@@ -334,9 +355,20 @@ html, #content {
     background-color: #ececec;
 }
 
-.task-check-circle {
+.task-checkbox-input {
     grid-column: 1;
     margin: auto;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #F26627;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.task-checkbox-input:checked {
+    background-color: #F26627;
 }
 
 .task-time {
@@ -368,6 +400,8 @@ html, #content {
     grid-column: 12;
     margin: auto auto auto 8px;
 }
+
+/*---   Task Expanded   ----*/
 
 .task-expanded {
     padding: 1.2rem 0;
