@@ -1,6 +1,7 @@
 //import necessary modules
 import navbar from "./navbar";
 import sidebar from "./sidebar";
+import projectContainer from "./projectContainer";
 import project from "./factory";
 
 const todoApp = (() => {
@@ -11,6 +12,7 @@ const todoApp = (() => {
     const pageLoad = () => {
         navbar(contentContainer_div);
         sidebar(contentContainer_div);
+        projectContainer(contentContainer_div);
     };
 
     let investing = project("investing");
