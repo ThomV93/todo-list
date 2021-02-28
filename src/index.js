@@ -13,7 +13,7 @@ const todoApp = (() => {
         //run default display modules
         navbar(contentContainer_div);
         sidebar(contentContainer_div);
-        projectContainer(contentContainer_div);
+        //projectContainer(contentContainer_div);
     })();
 
     let investing = project("investing");

@@ -350,6 +350,7 @@ html, #content {
     min-height: 4.5vh;
     height: auto;
     padding: 0.5rem 0;
+    border-radius: 5px;
 }
 
 .task:hover {
@@ -418,12 +419,17 @@ html, #content {
     margin: auto 0;
 }
 
-#notes-container > p {
+#notes-container > textarea {
     color: #333;
-    margin-left: 1.5rem;
-    padding-left: 0.5rem;
+    height: 8vh;
+    width: 80%;
     font-size: 14px;
-    border-left: 1.8px solid #dedede;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    padding: 0.2rem 0.8rem;
+    font-family: "Open Sans", sans-serif;
 }
 
 #checkbox-container {
@@ -436,9 +442,8 @@ html, #content {
 .checkbox {
     display: flex;
     align-items: center;
-    margin-left: 1.5rem;
-    padding-left: 0.5rem;
-    border-left: 1.8px solid #dedede;
+    box-sizing: border-box;
+    padding: 0 0.8rem;
 }
 
 .checkbox > label {
