@@ -3,10 +3,10 @@ const renderSidebarProject = (container) => {
     let sidebarProject = document.createElement("div");
     sidebarProject.className = "sidebar-project";
 
-    const projectTitle = (name) => {
+    const sideProjectTitle = (name) => {
         //Project title container
-        let projectTitleContainer = document.createElement("div");
-        projectTitleContainer.className = "sidebar-project-title-container";
+        let sideProjectTitleContainer = document.createElement("div");
+        sideProjectTitleContainer.className = "sidebar-project-title-container";
     
         //Project icon
         let projectIcon = document.createElement("img");
@@ -14,15 +14,15 @@ const renderSidebarProject = (container) => {
         projectIcon.src = "icons/box.svg";
     
         //Project Title
-        let projectTitle = document.createElement("h2");
-        projectTitle.className = "sidebar-project-title";
-        projectTitle.innerHTML = name;
+        let sideProjectTitle = document.createElement("h2");
+        sideProjectTitle.className = "sidebar-project-title";
+        sideProjectTitle.innerHTML = name;
     
         //Append to elements container
-        projectTitleContainer.append(projectIcon, projectTitle);
+        sideProjectTitleContainer.append(projectIcon, sideProjectTitle);
 
         //Append to project container
-        sidebarProject.append(projectTitleContainer);
+        sidebarProject.append(sideProjectTitleContainer);
     };
     
     const sideTask = (name) => {
@@ -49,7 +49,7 @@ const renderSidebarProject = (container) => {
 
     container.append(sidebarProject);
 
-    return {projectTitle, sideTask};
+    return {sideProjectTitle, sideTask};
 };
 
 export default renderSidebarProject;

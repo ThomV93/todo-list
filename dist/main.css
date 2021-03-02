@@ -339,7 +339,7 @@ html, #content {
     margin-right: 10px;
 }
 
-#task-creator {
+#task-creator-text {
     color: #949494;
 }
 
@@ -406,6 +406,7 @@ html, #content {
 /*---   Task Expanded   ----*/
 
 .task-expanded {
+    display: none;
     padding: 1.2rem 0;
 }
 
