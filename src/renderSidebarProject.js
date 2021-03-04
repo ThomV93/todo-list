@@ -3,7 +3,7 @@ const renderSidebarProject = (container) => {
     let sidebarProject = document.createElement("div");
     sidebarProject.className = "sidebar-project";
 
-    const sideProjectTitle = (name) => {
+    const renderSideProjectTitle = (name) => {
         //Project title container
         let sideProjectTitleContainer = document.createElement("div");
         sideProjectTitleContainer.className = "sidebar-project-title-container";
@@ -25,7 +25,7 @@ const renderSidebarProject = (container) => {
         sidebarProject.append(sideProjectTitleContainer);
     };
     
-    const sideTask = (name) => {
+    const renderSideTask = (name) => {
         //Task container
         let taskContainer = document.createElement("div");
         taskContainer.className = "sidebar-project-task-container";
@@ -49,7 +49,7 @@ const renderSidebarProject = (container) => {
 
     container.append(sidebarProject);
 
-    return {sideProjectTitle, sideTask};
+    return {renderSideProjectTitle, renderSideTask};
 };
 
 export default renderSidebarProject;

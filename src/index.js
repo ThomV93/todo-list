@@ -30,15 +30,15 @@ const todoApp = (() => {
     let sideInvestingProj = renderSidebarProject(sidebarProjectContainer_div);
     let sideCodingProj = renderSidebarProject(sidebarProjectContainer_div);
 
-    sideInvestingProj.sideProjectTitle("Investing");
-    sideInvestingProj.sideTask("Buy the dip!");
-    sideInvestingProj.sideTask("Tea Time");
-    sideInvestingProj.sideTask("Diamond hands");
+    sideInvestingProj.renderSideProjectTitle("Investing");
+    sideInvestingProj.renderSideTask("Buy the dip!");
+    sideInvestingProj.renderSideTask("Tea Time");
+    sideInvestingProj.renderSideTask("Diamond hands");
 
-    sideCodingProj.sideProjectTitle("Coding");
-    sideCodingProj.sideTask("Study");
-    sideCodingProj.sideTask("Chill");
-    sideCodingProj.sideTask("Study");
+    sideCodingProj.renderSideProjectTitle("Coding");
+    sideCodingProj.renderSideTask("Study");
+    sideCodingProj.renderSideTask("Chill");
+    sideCodingProj.renderSideTask("Study");
 
 
     const projectDisplayContainer_div = document.getElementById("project-display-container");
@@ -46,13 +46,13 @@ const todoApp = (() => {
     let investingProj = renderProject(projectDisplayContainer_div);
     let codingProj = renderProject(projectDisplayContainer_div);
 
-    investingProj.projectTitle("Investing");
-    investingProj.task("Buy the dip!", "29/08/2021", "15:00h");
-    investingProj.task("Tea time", "29/08/2021", "17:00h");
-    investingProj.task("Diamond Hands", "29/08/2021", "18:00h");
+    investingProj.renderProjectTitle("Investing");
+    investingProj.renderTask("Buy the dip!", "29/08/2021", "15:00h");
+    investingProj.renderTask("Tea time", "29/08/2021", "17:00h");
+    investingProj.renderTask("Diamond Hands", "29/08/2021", "18:00h");
 
-    codingProj.projectTitle("Coding");
-    codingProj.task("Study", "29/08/2021", "19:00h");
-    codingProj.task("Chill", "29/08/2021", "20:00h");
-    codingProj.task("Study", "29/08/2021", "20:15h");
+    codingProj.renderProjectTitle("Coding");
+    codingProj.renderTask("Study", "29/08/2021", "19:00h");
+    codingProj.renderTask("Chill", "29/08/2021", "20:00h");
+    codingProj.renderTask("Study", "29/08/2021", "20:15h");
 })();

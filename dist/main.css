@@ -212,6 +212,7 @@ html, #content {
     grid-template-columns: repeat(8, 1fr);
     height: auto;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 .sidebar-project-title {

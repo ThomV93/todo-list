@@ -10,7 +10,7 @@ const renderProject = (container) => {
 
     //------ Project DOM factory module -----
 
-    const projectTitle = (name) => {
+    const renderProjectTitle = (name) => {
         //title container
         let projectTitleContainer = document.createElement("div");
         projectTitleContainer.className = "project-title-container";
@@ -73,7 +73,7 @@ const renderProject = (container) => {
 
     //--------- Task DOM factory module ---------
 
-    const task = (name, date, time) => {
+    const renderTask = (name, date, time) => {
         //task container
         let taskContainer = document.createElement("div");
         taskContainer.className = "task";
@@ -190,7 +190,7 @@ const renderProject = (container) => {
     //append to main content container
     container.append(projectContainer);
 
-    return {projectTitle, task};
+    return {renderProjectTitle, renderTask};
 };
 
 export default renderProject;
