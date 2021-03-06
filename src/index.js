@@ -11,6 +11,7 @@ const todoApp = (() => {
     const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
     const projectDisplayContainer_div = document.getElementById("project-display-container");
     const sidebarProjectTitle_div = document.getElementsByClassName("sidebar-project-title");
+    const sidebarTitleAll_h2 = document.getElementById("sidebar-title-all");
 
     //project objects array
     let projectsArray = [];
@@ -53,10 +54,17 @@ const todoApp = (() => {
 
 
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
-    display().selectedProject(1, projectsArray, projectDisplayContainer_div);
+    //display().selectedProject(1, projectsArray, projectDisplayContainer_div);
 
     //display().renderAll(projectsArray, sidebarProjectContainer_div, projectDisplayContainer_div);
 
+
+    const displayAllEvent = () => {
+        //select sidebar All title
+        sidebarTitleAll_h2.addEventListener("click", () => {
+            display().allProjects(projectsArray, projectDisplayContainer_div);
+        });
+    };
 
     const sideProjectTitleEvent = () => {
         //html collection to array
@@ -71,5 +79,6 @@ const todoApp = (() => {
     };
 
     sideProjectTitleEvent();
+    displayAllEvent();
 
 })();

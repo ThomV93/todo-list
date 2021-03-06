@@ -113,7 +113,12 @@ html, #content {
 
 .user-titles {
     font-size: 18px;
-    margin-top: 1.5rem;
+    margin-top: 1.5rem;   
+}
+
+.user-titles:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #sidebar-home-icon {

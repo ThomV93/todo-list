@@ -18,7 +18,7 @@ const display = () => {
 
     //render side projects display
     const sideProjects = (arr, container) => {
-        //loop through project objects array
+        //loop through objects array
         for(let i = 0; i < arr.length; i++) {
             //create and append necessary containers
             let sideBarProj = renderSidebarProject(container);
@@ -52,9 +52,30 @@ const display = () => {
         };
     };
 
-    //render all projects and tasks
+    //render all projects
+    const allProjects = (arr, container) => {
+        //clean previous list
+        container.innerHTML = "";
+        //loop through objects array
+        for(let i = 0; i < arr.length; i++) {
+            //create and append necessary containers
+            let mainProj = renderProject(container);
+            //render project's titles and task creators
+            mainProj.renderProjectTitle(arr[i].name);
+
+            //loop through each task of the selected project
+            for(let j = 0; j < arr[i].taskList.length; j++) {
+                //select each task
+                let task = arr[i].taskList[j];
+                //render tasks
+                mainProj.renderTask(task.name, task.date, task.time, task.priority);
+            };
+        };
+    };
+
+    //render all projects and sideprojects
     const renderAll = (arr, sideContainer, container) => {
-        //loop through project objects array
+        //loop through objects array
         for(let i = 0; i < arr.length; i++) {
             //create and append necessary containers
             let sideBarProj = renderSidebarProject(sideContainer);
@@ -69,7 +90,7 @@ const display = () => {
                 let task = arr[i].taskList[j];
                 //render tasks
                 sideBarProj.renderSideTask(task.name);
-                mainProj.renderTask(task.name, task.date, task.time);
+                mainProj.renderTask(task.name, task.date, task.time, task.priority);
             };
         };
     };
@@ -78,6 +99,7 @@ const display = () => {
         loadPage,
         sideProjects,
         selectedProject,
+        allProjects,
         renderAll
     };
 };
