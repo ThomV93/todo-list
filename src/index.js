@@ -1,15 +1,11 @@
 //import necessary modules
 import display from "./display";
 import project from "./projectFactory";
-import renderSidebarProject from "./renderSidebarProject";
-import renderProject from "./renderProject";
 
 const todoApp = (() => {
 
-    const pageLoad = (() => {
-        //render basic display
-        display();
-    })();
+    //render basic page layout
+    display().loadPage();
 
     //cache DOM elements
     const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
@@ -38,69 +34,12 @@ const todoApp = (() => {
 
     projectsArray.push(coding);
 
-
-    const displaySideProjects = () => {
-        //loop through project objects array
-        for(let i = 0; i < projectsArray.length; i++) {
-            //create and append necessary containers
-            let sideBarProj = renderSidebarProject(sidebarProjectContainer_div);
-            //render project's titles
-            sideBarProj.renderSideProjectTitle(projectsArray[i].name);
-
-            //loop through each task of the selected project
-            for(let j = 0; j < projectsArray[i].taskList.length; j++) {
-                //select each task
-                let task = projectsArray[i].taskList[j];
-                //render tasks
-                sideBarProj.renderSideTask(task.name);
-            };
-        };
-    };
-
-    displaySideProjects();
+    
 
     
-    //render single project in the main display
-    const displayProject = (name) => {
-        //create and append container
-        let proj = renderProject(projectDisplayContainer_div);
-        proj.renderProjectTitle(name);
+    display().sideProjects(projectsArray, sidebarProjectContainer_div);
+    display().selectedProject(1, projectsArray, projectDisplayContainer_div);
 
-        //loop through each task of the project
-        for(let i = 0; i < projectsArray[1].taskList.length; i++) {
-            //select each task
-            let task = projectsArray[1].taskList[i];
-            //render tasks
-            proj.renderTask(task.name, task.date, task.time, task.priority);
-        };
-    };
-
-    displayProject("Coding");
-
-
-    //render all projects and tasks
-    const renderAll = () => {
-        //loop through project objects array
-        for(let i = 0; i < projectsArray.length; i++) {
-            //create and append necessary containers
-            let sideBarProj = renderSidebarProject(sidebarProjectContainer_div);
-            let mainProj = renderProject(projectDisplayContainer_div);
-            //render project's titles and task creators
-            sideBarProj.renderSideProjectTitle(projectsArray[i].name);
-            mainProj.renderProjectTitle(projectsArray[i].name);
-
-            //loop through each task of the selected project
-            for(let j = 0; j < projectsArray[i].taskList.length; j++) {
-                //select each task
-                let task = projectsArray[i].taskList[j];
-                //render tasks
-                sideBarProj.renderSideTask(task.name);
-                mainProj.renderTask(task.name, task.date, task.time);
-            };
-        };
-    };
-
-
-    //renderAll();
+    //display().renderAll(projectsArray, sidebarProjectContainer_div, projectDisplayContainer_div);
 
 })();
