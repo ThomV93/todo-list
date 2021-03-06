@@ -3,7 +3,12 @@ const project = name => {
 
     //task factory
     const task = (name, time, date, priority) => {
-        return {name, time, date, priority};
+        //notes storage
+        let notes = "";
+        //checkbox storage
+        let checkbox = [];
+
+        return {name, time, date, priority, notes, checkbox};
     };
 
     //add new task to project

@@ -10,9 +10,24 @@ const todoApp = (() => {
     //cache DOM elements
     const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
     const projectDisplayContainer_div = document.getElementById("project-display-container");
+    const sidebarProjectTitle_div = document.getElementsByClassName("sidebar-project-title");
 
     //project objects array
     let projectsArray = [];
+
+    let work = project("Work");
+
+    let workTask1 = work.task("Check Emails", "09:00h", "29/08/2021", "high");
+    let workTask2 = work.task("Send Emails", "10:30h", "29/08/2021", "regular");
+    let workTask3 = work.task("Create reports", "14:00h", "29/08/2021", "high");
+    let workTask4 = work.task("Open Tickets", "16:00h", "29/08/2021", "regular");
+    work.addTask(workTask1);
+    work.addTask(workTask2);
+    work.addTask(workTask3);
+    work.addTask(workTask4);
+
+    projectsArray.push(work);
+
 
     let investing = project("Investing");
 
@@ -22,6 +37,7 @@ const todoApp = (() => {
     investing.addTask(investingTask2);
 
     projectsArray.push(investing);
+
 
     let coding = project("Coding");
 
@@ -34,12 +50,26 @@ const todoApp = (() => {
 
     projectsArray.push(coding);
 
-    
 
-    
+
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
     display().selectedProject(1, projectsArray, projectDisplayContainer_div);
 
     //display().renderAll(projectsArray, sidebarProjectContainer_div, projectDisplayContainer_div);
+
+
+    const sideProjectTitleEvent = () => {
+        //html collection to array
+        let array = Array.from(sidebarProjectTitle_div);
+        //loop through each element
+        for(let i = 0; i < array.length; i++) {
+            //add event listener to each element
+            array[i].addEventListener("click", () => {
+                display().selectedProject(i, projectsArray, projectDisplayContainer_div);
+            });
+        };
+    };
+
+    sideProjectTitleEvent();
 
 })();

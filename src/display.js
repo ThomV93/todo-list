@@ -37,6 +37,8 @@ const display = () => {
 
     //render single project in the main display
     const selectedProject = (idx, arr, container) => {
+        //clean previous list
+        container.innerHTML = "";
         //create and append container
         let proj = renderProject(container);
         proj.renderProjectTitle(arr[idx].name);
