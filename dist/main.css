@@ -217,13 +217,30 @@ html, #content {
 
 .sidebar-project-title {
     font-family: "Montserrat", sans-serif;
-    margin: auto;
     font-size: 18px;
+    padding: 2px 0;
     margin: auto 5px;
+    background: linear-gradient(to right, #F26627, #F26627 50%, #000 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: all 275ms ease;
+    cursor: pointer;
+}
+
+.sidebar-project-title:hover {
+    background-position: 0 100%;
 }
 
 .sidebar-project-icon {
     margin: auto 5px;
+    transition: all 275ms ease;
+}
+
+.sidebar-project-icon:hover {
+    transform: rotate(90deg);
 }
 
 .sidebar-project-task-container {
@@ -407,7 +424,6 @@ html, #content {
 /*---   Task Expanded   ----*/
 
 .task-expanded {
-    display: none;
     padding: 1.2rem 0;
 }
 

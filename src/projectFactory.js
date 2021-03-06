@@ -3,6 +3,7 @@ const project = name => {
 
     //task factory
     const task = (name, time, date, priority) => {
+        priority = "regular";
         return {name, time, date, priority};
     };
 
