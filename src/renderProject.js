@@ -73,7 +73,7 @@ const renderProject = (container) => {
 
     //--------- Task DOM factory module ---------
 
-    const renderTask = (name, date, time) => {
+    const renderTask = (name, date, time, priority) => {
         //task container
         let taskContainer = document.createElement("div");
         taskContainer.className = "task";
@@ -96,7 +96,7 @@ const renderProject = (container) => {
         //task importance flag
         let taskFlag = document.createElement("img");
         taskFlag.className = "task-flag";
-        taskFlag.src = "icons/red-flag.svg";
+        taskFlag.src = priority === "regular" ? "icons/flag.svg" : "icons/red-flag.svg";
 
         //task date
         let taskDate = document.createElement("p");
