@@ -16,6 +16,13 @@ html, #content {
     background-color: #fff;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 /*---------------------   Navbar    -------------------------*/
 
 #navbar {
@@ -517,12 +524,13 @@ html, #content {
 }
 
 .editor-input-container > input {
+    font-family: "Open Sans", sans-serif;
     border-radius: 5px;
     border: none;
     height: auto;
-    padding: 6px 12px;
-    margin: 8px 0;
-    font-family: "Open Sans", sans-serif;
+    padding: 6px;
+    margin: 4px 0;
+    width: 120px
 }
 
 .editor-input-container > label {
@@ -551,18 +559,31 @@ html, #content {
 #editor-name-container {
     grid-column: 1/ 12;
     grid-row: 4/ 6;
+    width: 260px;
 }
 
 #editor-name {
-    width: 95%;
+    width: 100%;
 }
 
 #editor-flag {
-    grid-column: 14/ 16;
+    grid-column: 15/ 17;
     grid-row: 4/6;
     margin: auto auto 0 auto;
     height: auto;
     width: 68%;
+    padding: 5px;
+    border: 1.8px solid #949494;
+    border-radius: 50%;
+    transition: all 245ms ease;
+}
+
+#editor-flag:hover {
+    cursor: pointer;
+    padding: 5px;
+    border: 1.8px solid #f2704f;
+    box-shadow: 0 0 3px #f2704f;
+    border-radius: 50%;
 }
 
 #editor-time-container {
@@ -578,7 +599,7 @@ html, #content {
 }
 
 #editor-date-container > input {
-    width: 85%;
+    width: 94%;
 }
 
 #editor-notes-container {
@@ -587,9 +608,9 @@ html, #content {
 }
 
 #editor-notes-container > textarea {
-    height: 4em;
+    height: 5em;
     width: 100%;
-    padding: 6px 12px;
+    padding: 6px;
     box-sizing: border-box;
     border-radius: 5px;
     border: none;
