@@ -54,8 +54,6 @@ const todoApp = (() => {
 
 
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
-    //display().selectedProject(1, projectsArray, projectDisplayContainer_div);
-
     //display().renderAll(projectsArray, sidebarProjectContainer_div, projectDisplayContainer_div);
 
 
@@ -65,6 +63,8 @@ const todoApp = (() => {
             display().allProjects(projectsArray, projectDisplayContainer_div);
         });
     };
+
+    display().allProjects(projectsArray, projectDisplayContainer_div);
 
     const sideProjectTitleEvent = () => {
         //html collection to array
@@ -79,6 +79,6 @@ const todoApp = (() => {
     };
 
     sideProjectTitleEvent();
-    displayAllEvent();
+    //displayAllEvent();
 
 })();

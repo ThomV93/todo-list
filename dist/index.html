@@ -8,6 +8,32 @@
     <link rel="stylesheet" type="text/css" href="css-reset.css">
 </head>
 <body>
+    <div id="editor-container">
+        <div id="task-editor-container">
+            <div id="editor-title-container">
+                <h2 id="editor-title">New Task</h2>
+            </div>
+            <img id="editor-flag" src="icons/red-flag.svg">
+            <div id="editor-name-container" class="editor-input-container">
+                <label id="editor-label-name" for="task-editor-name">Title:</label>
+                <input type="text" id="editor-name">
+            </div>
+            <div id="editor-time-container" class="editor-input-container">
+                <label id="editor-label-time" for="task-editor-time">Time:</label>
+                <input type="time" id="editor-time">
+            </div>
+            <div id="editor-date-container" class="editor-input-container">
+                <label id="editor-label-date" for="task-editor-date">Date:</label>
+                <input type="date" id="editor-date">
+            </div>
+            <div id="editor-notes-container" class="editor-input-container">
+                <label id="editor-label-notes" for="editor-notes">Notes:</label>
+                <textarea type="text" id="editor-notes"></textarea>
+            </div>
+            <button id="editor-cancel-btn" type="button">Cancel</button>
+            <button id="editor-save-btn" type="button">Save</button>
+        </div>
+    </div>
     <div id="content">
     <script src="main.js"></script>
 </body>
