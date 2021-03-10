@@ -581,8 +581,8 @@ button:focus {
 #editor-flag:hover {
     cursor: pointer;
     padding: 5px;
-    border: 1.8px solid #f2704f;
-    box-shadow: 0 0 3px #f2704f;
+    border: 1.8px solid #ff0101;
+    box-shadow: 0 0 3px #ff0101;
     border-radius: 50%;
 }
 
@@ -623,6 +623,7 @@ button:focus {
     height: 45px;
     font-family: "Open Sans", sans-serif;
     font-size: 18px;
+    cursor: pointer;
 }
 
 #editor-cancel-btn {

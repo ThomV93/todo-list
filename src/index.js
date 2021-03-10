@@ -1,6 +1,7 @@
 //import necessary modules
 import display from "./display";
 import project from "./projectFactory";
+import taskEditor from "./taskEditor";
 
 const todoApp = (() => {
 
@@ -80,5 +81,7 @@ const todoApp = (() => {
 
     sideProjectTitleEvent();
     //displayAllEvent();
+
+    taskEditor(document.body);
 
 })();
