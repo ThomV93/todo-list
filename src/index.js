@@ -57,16 +57,16 @@ const todoApp = (() => {
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
     //display().renderAll(projectsArray, sidebarProjectContainer_div, projectDisplayContainer_div);
 
-
+    //click event to display all existing projects
     const displayAllEvent = () => {
         //select sidebar All title
         sidebarTitleAll_h2.addEventListener("click", () => {
             display().allProjects(projectsArray, projectDisplayContainer_div);
+            taskCreatorEvent();
         });
     };
 
-    display().allProjects(projectsArray, projectDisplayContainer_div);
-
+    //click event to display selected project
     const sideProjectTitleEvent = () => {
         //html collection to array
         let array = Array.from(sidebarProjectTitle_div);
@@ -74,14 +74,78 @@ const todoApp = (() => {
         for(let i = 0; i < array.length; i++) {
             //add event listener to each element
             array[i].addEventListener("click", () => {
-                display().selectedProject(i, projectsArray, projectDisplayContainer_div);
+                display().selectedProject(projectsArray[i], projectDisplayContainer_div);
+                taskCreatorEvent(projectsArray[i]);
             });
         };
     };
 
-    sideProjectTitleEvent();
-    //displayAllEvent();
+    //click event for the task creator button
+    const taskCreatorEvent = (selectedProj) => {
+        //select all task creators displayed
+        const taskCreator_div = document.querySelectorAll("[data-creator]");
 
-    taskEditor(document.body);
+        for(let i = 0; i < taskCreator_div.length; i ++) {
+            taskCreator_div[i].addEventListener("click", () => {
+                taskEditor(document.body);
+                taskCreatorSaveBtn(selectedProj);
+                taskCreatorCancelBtn();
+            });
+        };
+    };
+
+    //task creator form logic
+    const taskCreator = (proj) => {
+        //select each input element
+        const editorName = document.getElementById("editor-name");
+        const editorTime = document.getElementById("editor-time");
+        const editorDate = document.getElementById("editor-date");
+
+        //store user input
+        let taskName = editorName.value;
+        let taskTime = editorTime.value;
+        let taskDate = editorDate.value;
+
+        let newTask = proj.task(taskName, taskTime, taskDate, "high");
+        proj.addTask(newTask);
+        console.table(proj.taskList);
+    };
+
+    //task creator/ editor cancel button event
+    const taskCreatorCancelBtn = () => {
+        const cancelBtn = document.getElementById("editor-cancel-btn");
+
+        cancelBtn.addEventListener("click", () => {
+            document.body.removeChild(document.body.firstChild);
+        });
+    };
+
+    //task creator/ editor save button event
+    const taskCreatorSaveBtn = (selectedProj) => {
+        const saveBtn = document.getElementById("editor-save-btn");
+
+        saveBtn.addEventListener("click", () => {
+            taskCreator(selectedProj);
+            //display the updated project
+            display().selectedProject(selectedProj, projectDisplayContainer_div);
+            ////display the updated sidebar project and task list
+            display().sideProjects(projectsArray, sidebarProjectContainer_div);
+            //add back the sidebar projet's click event
+            sideProjectTitleEvent();
+            //add back the task creator click event
+            taskCreatorEvent(selectedProj);
+            //stop displaying the form
+            document.body.removeChild(document.body.firstChild);
+        });
+    };
+
+
+    sideProjectTitleEvent();
+    displayAllEvent();
+    
+    
+    
+    //display().allProjects(projectsArray, projectDisplayContainer_div);
+    //taskEditor(document.body);
 
 })();

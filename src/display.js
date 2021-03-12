@@ -18,6 +18,8 @@ const display = () => {
 
     //render side projects display
     const sideProjects = (arr, container) => {
+        //clean previous list
+        container.innerHTML = "";
         //loop through objects array
         for(let i = 0; i < arr.length; i++) {
             //create and append necessary containers
@@ -36,17 +38,17 @@ const display = () => {
     };
 
     //render single project in the main display
-    const selectedProject = (idx, arr, container) => {
+    const selectedProject = (arrPos, container) => {
         //clean previous list
         container.innerHTML = "";
         //create and append container
         let proj = renderProject(container);
-        proj.renderProjectTitle(arr[idx].name);
+        proj.renderProjectTitle(arrPos.name);
 
         //loop through each task of the project
-        for(let i = 0; i < arr[idx].taskList.length; i++) {
+        for(let i = 0; i < arrPos.taskList.length; i++) {
             //select each task
-            let task = arr[idx].taskList[i];
+            let task = arrPos.taskList[i];
             //render tasks
             proj.renderTask(task.name, task.date, task.time, task.priority);
         };

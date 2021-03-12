@@ -45,10 +45,11 @@ const renderProject = (container) => {
         //task style container
         let taskStyleContainer = document.createElement("div");
         taskStyleContainer.className = "task";
+        taskStyleContainer.dataset.creator = "y";
 
         //task creator container
         let taskCreatorContainer = document.createElement("div");
-        taskCreatorContainer.id = "task-creator-container";
+        taskCreatorContainer.id = "creator-container";
 
         //task creator img
         let taskCreatorImg = document.createElement("img");
@@ -68,6 +69,8 @@ const renderProject = (container) => {
 
         //append to main task container
         mainTaskContainer.append(taskStyleContainer);
+
+        return {projectTitle};
     };
 
 
