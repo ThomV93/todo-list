@@ -436,6 +436,11 @@ button:focus {
     margin: auto 8px auto auto;
 }
 
+.task-edit-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 .task-trash-icon {
     grid-column: 12;
     margin: auto auto auto 8px;

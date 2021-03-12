@@ -1,4 +1,4 @@
-const taskEditor = (container) => {
+const renderTaskEditor = (container) => {
 
     //main editor container
     let editorContainer = document.createElement("div");
@@ -141,4 +141,4 @@ const taskEditor = (container) => {
 
 };
 
-export default taskEditor;
+export default renderTaskEditor;

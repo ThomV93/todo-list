@@ -1,7 +1,7 @@
 //import necessary modules
 import display from "./display";
 import project from "./projectFactory";
-import taskEditor from "./taskEditor";
+import renderTaskEditor from "./renderTaskEditor";
 
 const todoApp = (() => {
 
@@ -22,10 +22,10 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00h", "29/08/2021", "high");
-    let workTask2 = work.task("Send Emails", "10:30h", "29/08/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00h", "29/08/2021", "high");
-    let workTask4 = work.task("Open Tickets", "16:00h", "29/08/2021", "regular");
+    let workTask1 = work.task("Check Emails", "09:00", "2021-08-29", "high");
+    let workTask2 = work.task("Send Emails", "10:30", "2021-08-29", "regular");
+    let workTask3 = work.task("Create reports", "14:00", "2021-08-29", "high");
+    let workTask4 = work.task("Open Tickets", "16:00", "2021-08-29", "regular");
     work.addTask(workTask1);
     work.addTask(workTask2);
     work.addTask(workTask3);
@@ -36,8 +36,8 @@ const todoApp = (() => {
 
     let investing = project("Investing");
 
-    let investingTask1 = investing.task("Tea Time", "15:00h", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00h", "29/08/2021");
+    let investingTask1 = investing.task("Tea Time", "15:00", "2021-08-29");
+    let investingTask2 = investing.task("Dinner", "18:00", "2021-08-29");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
 
@@ -46,16 +46,18 @@ const todoApp = (() => {
 
     let coding = project("Coding");
 
-    let codingTask1 = coding.task("Study", "19:00h", "29/08/2021", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30h", "29/08/2021", "high");
-    let codingTask3 = coding.task("Stretch back", "22:00h", "29/08/2021", "regular");
+    let codingTask1 = coding.task("Study", "19:00", "2021-08-29", "regular");
+    let codingTask2 = coding.task("Study MORE", "20:30", "2021-08-29", "high");
+    let codingTask3 = coding.task("Stretch back", "22:00", "2021-08-29", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
     coding.addTask(codingTask3);
 
     projectsArray.push(coding);
 
+
     // ----------- General ------------
+
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
         //display the updated project
@@ -66,12 +68,15 @@ const todoApp = (() => {
         sideProjectTitleEvent();
         //add back the task creator click event
         taskCreatorEvent(proj);
+        //add back the edit task event
+        editTaskEvent(proj);
         //add back the delete task event
         deleteTaskEvent(proj);
     };
 
 
     // -------- Sidebar Events Section -----------
+
 
     //click event to display all existing projects
     const displayAllEvent = () => {
@@ -84,14 +89,12 @@ const todoApp = (() => {
 
     //click event to display selected project
     const sideProjectTitleEvent = () => {
-        //html collection to array
-        let array = Array.from(sidebarProjectTitle_div);
-        //loop through each element
-        for(let i = 0; i < array.length; i++) {
+        for(let i = 0; i < sidebarProjectTitle_div.length; i++) {
             //add event listener to each element
-            array[i].addEventListener("click", () => {
+            sidebarProjectTitle_div[i].addEventListener("click", () => {
                 display().selectedProject(projectsArray[i], projectDisplayContainer_div);
                 taskCreatorEvent(projectsArray[i]);
+                editTaskEvent(projectsArray[i]);
                 deleteTaskEvent(projectsArray[i]);
             });
         };
@@ -108,7 +111,7 @@ const todoApp = (() => {
 
         for(let i = 0; i < taskCreator_div.length; i ++) {
             taskCreator_div[i].addEventListener("click", () => {
-                taskEditor(document.body);
+                renderTaskEditor(document.body);
                 taskCreatorSaveBtn(selectedProj);
                 taskCreatorCancelBtn();
             });
@@ -135,6 +138,7 @@ const todoApp = (() => {
 
     //task creator/ editor cancel button event
     const taskCreatorCancelBtn = () => {
+        //cache DOM element
         const cancelBtn = document.getElementById("editor-cancel-btn");
 
         cancelBtn.addEventListener("click", () => {
@@ -144,6 +148,7 @@ const todoApp = (() => {
 
     //task creator/ editor save button event
     const taskCreatorSaveBtn = (selectedProj) => {
+        //cache DOM element
         const saveBtn = document.getElementById("editor-save-btn");
 
         saveBtn.addEventListener("click", () => {
@@ -157,6 +162,58 @@ const todoApp = (() => {
 
 
     // ----------- Tasks Section -------------
+
+    const editTaskEvent = (selectedProj) => {
+        //cache all displayed
+        const taskEditIcon = document.getElementsByClassName("task-edit-icon");
+
+        for(let i = 0; i < taskEditIcon.length; i++) {
+            taskEditIcon[i].addEventListener("click", () => {
+                renderTaskEditor(document.body);
+                renderTaskEditorValues(selectedProj, i);
+                taskCreatorCancelBtn();
+                taskEditorSaveBtn(selectedProj, i);
+            });
+        };
+    };
+
+    //render current values when the editor is displayed
+    const renderTaskEditorValues = (proj, idx) => {
+        //select each input element
+        const editorName = document.getElementById("editor-name");
+        const editorTime = document.getElementById("editor-time");
+        const editorDate = document.getElementById("editor-date");
+
+        editorName.value = proj.taskList[idx].name;
+        editorTime.value = proj.taskList[idx].time;
+        editorDate.value = proj.taskList[idx].date;
+    };
+
+    const taskEditor = (proj, idx) => {
+        //select each input element
+        const editorName = document.getElementById("editor-name");
+        const editorTime = document.getElementById("editor-time");
+        const editorDate = document.getElementById("editor-date");
+
+        proj.taskList[idx].name = editorName.value;
+        proj.taskList[idx].time = editorTime.value;
+        proj.taskList[idx].date = editorDate.value;
+    };
+
+    //task creator/ editor save button event
+    const taskEditorSaveBtn = (selectedProj, idx) => {
+        //cache DOM element
+        const saveBtn = document.getElementById("editor-save-btn");
+
+        saveBtn.addEventListener("click", () => {
+            taskEditor(selectedProj, idx);
+            //update display and reintroduce necessary event listeners
+            updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            //stop displaying the form
+            document.body.removeChild(document.body.firstChild);
+        });
+    };
+
 
     const deleteTaskEvent = (selectedProj) => {
         //cache all displayed
@@ -179,12 +236,11 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // tasks can be edited
     // tasks can be expanded
+    // tasks can be crossed off
     // create add project form and functionalities
     // collapsable sidebar project list
     // extend sidebar projects title and icon hover effects to parent hover
-    // date and time format library
     // properly formated dates and times
     // searchbar
     // night mode
