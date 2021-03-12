@@ -207,6 +207,12 @@ button:focus {
     grid-column: 11;
     grid-row: 4;
     margin: auto;
+    cursor: pointer;
+    transition: all 275ms ease;
+}
+
+#sidebar-section-plus-icon:hover {
+    transform: rotate(90deg) scale(1.2);
 }
 
 #sidebar-projects-section {
@@ -357,7 +363,11 @@ button:focus {
     width: auto;
 }
 
-#task-creator-container {
+[data-creator] {
+    cursor: pointer;
+}
+
+#creator-container {
     display: flex;
     align-items: center;
     grid-column: 1/ 9;
