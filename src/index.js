@@ -14,6 +14,9 @@ const todoApp = (() => {
     const sidebarProjectTitle_div = document.getElementsByClassName("sidebar-project-title");
     const sidebarTitleAll_h2 = document.getElementById("sidebar-title-all");
 
+
+    // --------- DEMO Projects and Tasks -----------
+
     //project objects array
     let projectsArray = [];
 
@@ -52,10 +55,23 @@ const todoApp = (() => {
 
     projectsArray.push(coding);
 
+    // ----------- General ------------
+
+    const updateDisplay = (arr, proj, projContainer, sideContainer) => {
+        //display the updated project
+        display().selectedProject(proj, projContainer);
+        //display the updated sidebar project and task list
+        display().sideProjects(arr, sideContainer);
+        //add back the sidebar projet's click event
+        sideProjectTitleEvent();
+        //add back the task creator click event
+        taskCreatorEvent(proj);
+        //add back the delete task event
+        deleteTaskEvent(proj);
+    };
 
 
-    display().sideProjects(projectsArray, sidebarProjectContainer_div);
-    //display().renderAll(projectsArray, sidebarProjectContainer_div, projectDisplayContainer_div);
+    // -------- Sidebar Events Section -----------
 
     //click event to display all existing projects
     const displayAllEvent = () => {
@@ -76,9 +92,14 @@ const todoApp = (() => {
             array[i].addEventListener("click", () => {
                 display().selectedProject(projectsArray[i], projectDisplayContainer_div);
                 taskCreatorEvent(projectsArray[i]);
+                deleteTaskEvent(projectsArray[i]);
             });
         };
     };
+
+
+    // ---------- Task Creator ---------------
+
 
     //click event for the task creator button
     const taskCreatorEvent = (selectedProj) => {
@@ -106,9 +127,10 @@ const todoApp = (() => {
         let taskTime = editorTime.value;
         let taskDate = editorDate.value;
 
+        //create new task
         let newTask = proj.task(taskName, taskTime, taskDate, "high");
+        //add task to the project
         proj.addTask(newTask);
-        console.table(proj.taskList);
     };
 
     //task creator/ editor cancel button event
@@ -126,26 +148,51 @@ const todoApp = (() => {
 
         saveBtn.addEventListener("click", () => {
             taskCreator(selectedProj);
-            //display the updated project
-            display().selectedProject(selectedProj, projectDisplayContainer_div);
-            ////display the updated sidebar project and task list
-            display().sideProjects(projectsArray, sidebarProjectContainer_div);
-            //add back the sidebar projet's click event
-            sideProjectTitleEvent();
-            //add back the task creator click event
-            taskCreatorEvent(selectedProj);
+            //update display and reintroduce necessary event listeners
+            updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             //stop displaying the form
             document.body.removeChild(document.body.firstChild);
         });
     };
 
 
+    // ----------- Tasks Section -------------
+
+    const deleteTaskEvent = (selectedProj) => {
+        //cache all displayed
+        const taskTrashIcon = document.getElementsByClassName("task-trash-icon");
+
+        for(let i = 0; i < taskTrashIcon.length; i++) {
+            taskTrashIcon[i].addEventListener("click", () => {
+                selectedProj.deleteTask(i);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            });
+        };
+    };
+
+
+
+    display().sideProjects(projectsArray, sidebarProjectContainer_div);
     sideProjectTitleEvent();
     displayAllEvent();
-    
-    
-    
-    //display().allProjects(projectsArray, projectDisplayContainer_div);
-    //taskEditor(document.body);
+
+
+    // -------- To be done -------
+
+    // tasks can be edited
+    // tasks can be expanded
+    // create add project form and functionalities
+    // collapsable sidebar project list
+    // extend sidebar projects title and icon hover effects to parent hover
+    // date and time format library
+    // properly formated dates and times
+    // searchbar
+    // night mode
+    // trash section and functionalities
+    // home section displays tasks due to today
+    // display each section's value
+    // sidebar can be collapsed
+    // media queries for mobile
+    // create local storage
 
 })();

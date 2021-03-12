@@ -5,7 +5,7 @@ const navbar = (container) => {
 
     //Logo
     let logoImg = document.createElement("img");
-    logoImg.id = "logo";
+    logoImg.id = "list-icon";
     logoImg.src = "icons/list.svg";
 
     //searchbar container
