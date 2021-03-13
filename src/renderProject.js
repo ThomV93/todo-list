@@ -123,6 +123,7 @@ const renderProject = (container) => {
         let taskNotesContainer = document.createElement("div");
         taskNotesContainer.id = "notes-container";
         taskNotesContainer.className = "task-expanded";
+        taskNotesContainer.dataset.notes = "notes";
         taskNotesContainer.style.display = "none";
 
         //notes title
@@ -142,6 +143,7 @@ const renderProject = (container) => {
         let taskCheckboxContainer = document.createElement("div");
         taskCheckboxContainer.id = "checkbox-container";
         taskCheckboxContainer.className = "task-expanded";
+        taskCheckboxContainer.dataset.checkbox = "checkbox";
         taskCheckboxContainer.style.display = "none";
 
         //checkbox title

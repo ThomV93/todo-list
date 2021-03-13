@@ -72,6 +72,8 @@ const todoApp = (() => {
         editTaskEvent(proj);
         //add back the delete task event
         deleteTaskEvent(proj);
+        //add back the expand task event
+        expandTaskEvent(proj);
     };
 
 
@@ -96,6 +98,7 @@ const todoApp = (() => {
                 taskCreatorEvent(projectsArray[i]);
                 editTaskEvent(projectsArray[i]);
                 deleteTaskEvent(projectsArray[i]);
+                expandTaskEvent(projectsArray[i]);
             });
         };
     };
@@ -227,6 +230,30 @@ const todoApp = (() => {
         };
     };
 
+    //task expander logic
+    const expandTask = (notes, checkbox, idx) => {
+        if(notes[idx].style.display === "none") {
+            notes[idx].style.display = "block";
+            checkbox[idx].style.display = "block";
+        } else {
+            notes[idx].style.display = "none";
+            checkbox[idx].style.display = "none";
+        };
+    };
+
+    const expandTaskEvent = () => {
+        //cache all displayed
+        const taskName = document.getElementsByClassName("task-name");
+        const taskNotes = document.querySelectorAll("[data-notes]");
+        const taskCheckbox = document.querySelectorAll("[data-checkbox]");
+
+        for(let i = 0; i < taskName.length; i++) {
+            taskName[i].addEventListener("click", () => {
+                expandTask(taskNotes, taskCheckbox, i);
+            });
+        };
+    };
+
 
 
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
@@ -236,12 +263,11 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // tasks can be expanded
-    // tasks can be crossed off
     // create add project form and functionalities
     // collapsable sidebar project list
     // extend sidebar projects title and icon hover effects to parent hover
     // properly formated dates and times
+    // tasks can be crossed off
     // searchbar
     // night mode
     // trash section and functionalities

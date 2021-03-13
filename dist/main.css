@@ -419,6 +419,12 @@ button:focus {
 .task-name {
     grid-column: 3/ 9;
     margin: auto 10px;
+    z-index: 3;
+}
+
+.task-name:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .task-flag {
