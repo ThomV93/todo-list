@@ -76,7 +76,7 @@ const todoApp = (() => {
         //add back the expand task event
         expandTaskEvent();
         //cross off task
-        //crossTask();
+        crossTaskEvent();
     };
 
 
@@ -102,7 +102,7 @@ const todoApp = (() => {
                 editTaskEvent(projectsArray[i]);
                 deleteTaskEvent(projectsArray[i]);
                 expandTaskEvent();
-                //crossTask();
+                crossTaskEvent(projectsArray[i]);
             });
         };
     };
@@ -222,19 +222,35 @@ const todoApp = (() => {
 
     // ----------- Tasks Section -------------
 
-    const crossTaskEvent = () => {
+    const crossTaskEvent = (selectedProj) => {
         //cache task input element
         const taskInput = document.getElementsByClassName("task-checkbox-input");
 
         for(let i = 0; i < taskInput.length; i++) {
             taskInput[i].addEventListener("click", () => {
-                console.log(taskInput[i]);
+                crossTask(selectedProj, i);
             });
         };
     };
 
-    const crossTask = () => {
-        
+    const crossTask = (selectedProj, idx) => {
+        //cache DOM elements
+        const taskTime = document.getElementsByClassName("task-time");
+        const taskName = document.getElementsByClassName("task-name");
+        const taskDate = document.getElementsByClassName("task-date");
+        const taskFlag = document.getElementsByClassName("task-flag");
+
+        if(selectedProj.taskList[idx].isActive === false) {
+            selectedProj.taskList[idx].isActive = true;
+            taskTime[idx].style.textDecoration = "line-through";
+            taskName[idx].style.textDecoration = "line-through";
+            taskDate[idx].style.textDecoration = "line-through";
+        } else {
+            selectedProj.taskList[idx].isActive = false;
+            taskTime[idx].style.textDecoration = "";
+            taskName[idx].style.textDecoration = "";
+            taskDate[idx].style.textDecoration = "";
+        }
     };
 
     const editTaskEvent = (selectedProj) => {
@@ -337,9 +353,6 @@ const todoApp = (() => {
     sideProjectTitleEvent();
     displayAllEvent();
     projectCreatorEvent();
-    
-
-    //renderProjectEditor(document.body);
 
 
     // -------- To be done -------

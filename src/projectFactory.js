@@ -8,9 +8,9 @@ const project = name => {
         //checkbox storage
         let checkbox = [];
         //task status
-        let active = false;
+        let isActive = false;
 
-        return {name, time, date, priority, notes, checkbox, active};
+        return {name, time, date, priority, notes, checkbox, isActive};
     };
 
     //add new task to project
