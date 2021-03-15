@@ -74,7 +74,9 @@ const todoApp = (() => {
         //add back the delete task event
         deleteTaskEvent(proj);
         //add back the expand task event
-        expandTaskEvent(proj);
+        expandTaskEvent();
+        //cross off task
+        //crossTask();
     };
 
 
@@ -99,13 +101,16 @@ const todoApp = (() => {
                 taskCreatorEvent(projectsArray[i]);
                 editTaskEvent(projectsArray[i]);
                 deleteTaskEvent(projectsArray[i]);
-                expandTaskEvent(projectsArray[i]);
+                expandTaskEvent();
+                //crossTask();
             });
         };
     };
 
+
     // ---------- Project Creator ------------
 
+    
     const projectCreatorEvent = () => {
         //cache sidebar plus icon
         const sidebarPlusIcon = document.getElementById("sidebar-section-plus-icon");
@@ -113,7 +118,21 @@ const todoApp = (() => {
         sidebarPlusIcon.addEventListener("click", () => {
             renderProjectEditor(document.body);
             projectCreatorCancelBtn();
+            projectCreatorSaveBtn();
         });
+    };
+
+    //project creator form logic
+    const projectCreator = () => {
+        //select input element
+        const editorName = document.getElementById("editor-name");
+        //store user input
+        let projectName = editorName.value;
+
+        //create new project
+        let newProject = project(projectName)
+        //add project to array
+        projectsArray.push(newProject);
     };
 
     //task creator/ editor cancel button event
@@ -122,6 +141,20 @@ const todoApp = (() => {
         const projectCancelBtn = document.getElementById("project-editor-cancel-btn");
 
         projectCancelBtn.addEventListener("click", () => {
+            document.body.removeChild(document.body.firstChild);
+        });
+    };
+
+    //task creator/ editor save button event
+    const projectCreatorSaveBtn = () => {
+        //cache DOM element
+        const projectSaveBtn = document.getElementById("project-editor-save-btn");
+
+        projectSaveBtn.addEventListener("click", () => {
+            projectCreator();
+            //update display and reintroduce necessary event listeners
+            updateDisplay(projectsArray, projectsArray[projectsArray.length - 1], projectDisplayContainer_div, sidebarProjectContainer_div);
+            //stop displaying the form
             document.body.removeChild(document.body.firstChild);
         });
     };
@@ -188,6 +221,21 @@ const todoApp = (() => {
 
 
     // ----------- Tasks Section -------------
+
+    const crossTaskEvent = () => {
+        //cache task input element
+        const taskInput = document.getElementsByClassName("task-checkbox-input");
+
+        for(let i = 0; i < taskInput.length; i++) {
+            taskInput[i].addEventListener("click", () => {
+                console.log(taskInput[i]);
+            });
+        };
+    };
+
+    const crossTask = () => {
+        
+    };
 
     const editTaskEvent = (selectedProj) => {
         //cache all displayed
@@ -297,7 +345,6 @@ const todoApp = (() => {
     // -------- To be done -------
 
     // can choose and alter task priority
-    // create add project form and functionalities
     // collapsable sidebar project list
     // extend sidebar projects title and icon hover effects to parent hover
     // properly formated dates and times
