@@ -2,6 +2,7 @@
 import display from "./display";
 import project from "./projectFactory";
 import renderTaskEditor from "./renderTaskEditor";
+import renderProjectEditor from "./renderProjectEditor";
 
 const todoApp = (() => {
 
@@ -103,6 +104,28 @@ const todoApp = (() => {
         };
     };
 
+    // ---------- Project Creator ------------
+
+    const projectCreatorEvent = () => {
+        //cache sidebar plus icon
+        const sidebarPlusIcon = document.getElementById("sidebar-section-plus-icon");
+
+        sidebarPlusIcon.addEventListener("click", () => {
+            renderProjectEditor(document.body);
+            projectCreatorCancelBtn();
+        });
+    };
+
+    //task creator/ editor cancel button event
+    const projectCreatorCancelBtn = () => {
+        //cache DOM element
+        const projectCancelBtn = document.getElementById("project-editor-cancel-btn");
+
+        projectCancelBtn.addEventListener("click", () => {
+            document.body.removeChild(document.body.firstChild);
+        });
+    };
+
 
     // ---------- Task Creator ---------------
 
@@ -182,11 +205,17 @@ const todoApp = (() => {
 
     //render current values when the editor is displayed
     const renderTaskEditorValues = (proj, idx) => {
-        //select each input element
+        //cache task editor title
+        const editorTitle = document.getElementById("editor-title");
+        //cache each input element
         const editorName = document.getElementById("editor-name");
         const editorTime = document.getElementById("editor-time");
         const editorDate = document.getElementById("editor-date");
 
+        //alter form's title
+        editorTitle.innerHTML = "Edit Task";
+
+        //render values stored in the object
         editorName.value = proj.taskList[idx].name;
         editorTime.value = proj.taskList[idx].time;
         editorDate.value = proj.taskList[idx].date;
@@ -259,10 +288,15 @@ const todoApp = (() => {
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
     sideProjectTitleEvent();
     displayAllEvent();
+    projectCreatorEvent();
+    
+
+    //renderProjectEditor(document.body);
 
 
     // -------- To be done -------
 
+    // can choose and alter task priority
     // create add project form and functionalities
     // collapsable sidebar project list
     // extend sidebar projects title and icon hover effects to parent hover
