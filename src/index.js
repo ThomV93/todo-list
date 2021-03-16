@@ -3,6 +3,7 @@ import display from "./display";
 import project from "./projectFactory";
 import renderTaskEditor from "./renderTaskEditor";
 import renderProjectEditor from "./renderProjectEditor";
+import {format} from 'date-fns';
 
 const todoApp = (() => {
 
@@ -23,10 +24,10 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "2021-08-29", "high");
-    let workTask2 = work.task("Send Emails", "10:30", "2021-08-29", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "2021-08-29", "high");
-    let workTask4 = work.task("Open Tickets", "16:00", "2021-08-29", "regular");
+    let workTask1 = work.task("Check Emails", "09:00", "29/08/2021", "high");
+    let workTask2 = work.task("Send Emails", "10:30", "29/08/2021", "regular");
+    let workTask3 = work.task("Create reports", "14:00", "29/08/2021", "high");
+    let workTask4 = work.task("Open Tickets", "16:00", "29/08/2021", "regular");
     work.addTask(workTask1);
     work.addTask(workTask2);
     work.addTask(workTask3);
@@ -37,8 +38,8 @@ const todoApp = (() => {
 
     let investing = project("Investing");
 
-    let investingTask1 = investing.task("Tea Time", "15:00", "2021-08-29");
-    let investingTask2 = investing.task("Dinner", "18:00", "2021-08-29");
+    let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "29/08/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
 
@@ -47,9 +48,9 @@ const todoApp = (() => {
 
     let coding = project("Coding");
 
-    let codingTask1 = coding.task("Study", "19:00", "2021-08-29", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30", "2021-08-29", "high");
-    let codingTask3 = coding.task("Stretch back", "22:00", "2021-08-29", "regular");
+    let codingTask1 = coding.task("Study", "19:00", "29/08/2021", "regular");
+    let codingTask2 = coding.task("Study MORE", "20:30", "29/08/2021", "high");
+    let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
     coding.addTask(codingTask3);
@@ -177,6 +178,14 @@ const todoApp = (() => {
         };
     };
 
+    //format date to display
+    const formatDate = (date) => {
+        let dateObj = new Date(date);
+        let formatted = format(dateObj, "dd/MM/yyyy");
+
+        return formatted;
+    };
+
     //task creator form logic
     const taskCreator = (proj) => {
         //select each input element
@@ -187,7 +196,7 @@ const todoApp = (() => {
         //store user input
         let taskName = editorName.value;
         let taskTime = editorTime.value;
-        let taskDate = editorDate.value;
+        let taskDate = formatDate(editorDate.value);
 
         //create new task
         let newTask = proj.task(taskName, taskTime, taskDate, "high");
@@ -282,7 +291,7 @@ const todoApp = (() => {
         //render values stored in the object
         editorName.value = proj.taskList[idx].name;
         editorTime.value = proj.taskList[idx].time;
-        editorDate.value = proj.taskList[idx].date;
+        editorDate.value = proj.taskList[idx].date.split("/").reverse().join("-");
     };
 
     const taskEditor = (proj, idx) => {
@@ -293,7 +302,7 @@ const todoApp = (() => {
 
         proj.taskList[idx].name = editorName.value;
         proj.taskList[idx].time = editorTime.value;
-        proj.taskList[idx].date = editorDate.value;
+        proj.taskList[idx].date = formatDate(editorDate.value);
     };
 
     //task creator/ editor save button event
@@ -361,7 +370,6 @@ const todoApp = (() => {
     // collapsable sidebar project list
     // extend sidebar projects title and icon hover effects to parent hover
     // properly formated dates and times
-    // tasks can be crossed off
     // searchbar
     // night mode
     // trash section and functionalities
