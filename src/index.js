@@ -254,11 +254,13 @@ const todoApp = (() => {
             taskTime[idx].style.textDecoration = "line-through";
             taskName[idx].style.textDecoration = "line-through";
             taskDate[idx].style.textDecoration = "line-through";
+            taskFlag[idx].style.display = "none";
         } else {
             selectedProj.taskList[idx].isActive = false;
             taskTime[idx].style.textDecoration = "";
             taskName[idx].style.textDecoration = "";
             taskDate[idx].style.textDecoration = "";
+            taskFlag[idx].style.display = "block";
         }
     };
 
@@ -369,7 +371,6 @@ const todoApp = (() => {
     // can choose and alter task priority
     // collapsable sidebar project list
     // extend sidebar projects title and icon hover effects to parent hover
-    // properly formated dates and times
     // searchbar
     // night mode
     // trash section and functionalities
@@ -378,5 +379,6 @@ const todoApp = (() => {
     // sidebar can be collapsed
     // media queries for mobile
     // create local storage
+    // user can filter dates
 
 })();
