@@ -6,11 +6,19 @@ const project = name => {
         //notes storage
         let notes = "";
         //checkbox storage
-        let checkbox = [];
+        let subList = [];
         //task status
         let isActive = false;
 
-        return {name, time, date, priority, notes, checkbox, isActive};
+        return {
+            name,
+            time,
+            date,
+            priority,
+            notes,
+            subList,
+            isActive
+        };
     };
 
     //add new task to project

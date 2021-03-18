@@ -102,6 +102,7 @@ const todoApp = (() => {
     // -------- Sidebar Events Section -----------
 
     const collapseSideProjectsEvent = () => {
+        //cache DOM elements
         const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
         const sideProjectChevron = document.getElementById("sidebar-section-chevron-icon");
         //toggle boolean
@@ -236,7 +237,8 @@ const todoApp = (() => {
     const taskCreatorFlagEvent = () => {
         //cache DOM element
         const editorFlag = document.getElementById("editor-flag");
-        let toggle = false;
+        //toggle value is defined by the flag displayed
+        let toggle = editorFlag.src.indexOf("red-flag") != -1 ? true : false;
 
         editorFlag.addEventListener("click", () => {
             if (toggle === false) {
@@ -286,6 +288,7 @@ const todoApp = (() => {
         };
     };
 
+    //visual cross task logic
     const crossTask = (selectedProj, idx) => {
         //cache DOM elements
         const taskTime = document.getElementsByClassName("task-time");
@@ -316,6 +319,7 @@ const todoApp = (() => {
             taskEditIcon[i].addEventListener("click", () => {
                 renderTaskEditor(document.body);
                 renderTaskEditorValues(selectedProj, i);
+                taskCreatorFlagEvent();
                 taskCreatorCancelBtn();
                 taskEditorSaveBtn(selectedProj, i);
             });
@@ -335,6 +339,9 @@ const todoApp = (() => {
         //alter form's title
         editorTitle.innerHTML = "Edit Task";
 
+        //render correct flag
+        proj.taskList[idx].priority === "high" ? editorFlag.src = "icons/red-flag.svg" : editorFlag.src = "icons/flag.svg";
+
         //render values stored in the object
         editorName.value = proj.taskList[idx].name;
         editorTime.value = proj.taskList[idx].time;
@@ -346,10 +353,13 @@ const todoApp = (() => {
         const editorName = document.getElementById("editor-name");
         const editorTime = document.getElementById("editor-time");
         const editorDate = document.getElementById("editor-date");
+        const editorFlag = document.getElementById("editor-flag").src;
 
         proj.taskList[idx].name = editorName.value;
         proj.taskList[idx].time = editorTime.value;
         proj.taskList[idx].date = formatDate(editorDate.value);
+        proj.taskList[idx].priority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
+
     };
 
     //task creator/ editor save button event
@@ -414,16 +424,22 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
+    // task editor priority functionality
     // searchbar
-    // night mode
-    // trash section and functionalities
-    // home section displays tasks due to today
-    // display each section's value
-    // media queries for mobile
-    // create local storage
+    // dark mode
     // user can filter dates
     // notes must be saved when creating/ adding tasks
     // task sub-list
+    // trash section and functionalities
+    // home section displays tasks due to today
+    // all section
+    // display each section's value
+    // create local storage
     // smooth collapse effects
+    // media queries
+
+    // --------- Bugs ---------
+    
+    // when task already has red flag, click event fails the first time. Fix toggle logic?
 
 })();
