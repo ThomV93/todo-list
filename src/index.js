@@ -77,7 +77,7 @@ const todoApp = (() => {
         //add back the expand task event
         expandTaskEvent();
         //cross off task
-        crossTaskEvent();
+        crossTaskEvent(proj);
     };
 
 
@@ -257,7 +257,7 @@ const todoApp = (() => {
         const taskDate = document.getElementsByClassName("task-date");
         const taskFlag = document.getElementsByClassName("task-flag");
 
-        if(selectedProj.taskList[idx].isActive === false) {
+        if (selectedProj.taskList[idx].isActive === false) {
             selectedProj.taskList[idx].isActive = true;
             taskTime[idx].style.textDecoration = "line-through";
             taskName[idx].style.textDecoration = "line-through";
