@@ -13,8 +13,7 @@ const todoApp = (() => {
     //cache DOM elements
     const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
     const projectDisplayContainer_div = document.getElementById("project-display-container");
-    const sidebarProjectTitle_div = document.getElementsByClassName("sidebar-project-title");
-
+    const sidebarProjectTitleContainer_div = document.getElementsByClassName("sidebar-project-title-container");
 
     // --------- DEMO Projects and Tasks -----------
 
@@ -122,9 +121,9 @@ const todoApp = (() => {
 
     //click event to display selected project
     const sideProjectTitleEvent = () => {
-        for(let i = 0; i < sidebarProjectTitle_div.length; i++) {
+        for (let i = 0; i < sidebarProjectTitleContainer_div.length; i++) {
             //add event listener to each element
-            sidebarProjectTitle_div[i].addEventListener("click", () => {
+            sidebarProjectTitleContainer_div[i].addEventListener("click", () => {
                 display().selectedProject(projectsArray[i], projectDisplayContainer_div);
                 taskCreatorEvent(projectsArray[i]);
                 editTaskEvent(projectsArray[i]);
@@ -415,7 +414,6 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // extend sidebar projects title and icon hover effects to parent hover
     // searchbar
     // night mode
     // trash section and functionalities
@@ -426,5 +424,6 @@ const todoApp = (() => {
     // user can filter dates
     // notes must be saved when creating/ adding tasks
     // task sub-list
+    // smooth collapse effects
 
 })();
