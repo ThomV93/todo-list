@@ -14,8 +14,6 @@ const todoApp = (() => {
     const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
     const projectDisplayContainer_div = document.getElementById("project-display-container");
     const sidebarProjectTitle_div = document.getElementsByClassName("sidebar-project-title");
-    const listIcon_img = document.getElementById("list-icon");
-    const sidebar = document.getElementById("sidebar");
 
 
     // --------- DEMO Projects and Tasks -----------
@@ -84,6 +82,10 @@ const todoApp = (() => {
     // ----------Navbar Events Section ---------
 
     const collapseSidebarEvent = () => {
+        //cache DOM elements
+        const listIcon_img = document.getElementById("list-icon");
+        const sidebar = document.getElementById("sidebar");
+        //toggle boolean
         let toggle = false;
 
         listIcon_img.addEventListener("click", () => {
@@ -99,6 +101,24 @@ const todoApp = (() => {
     };
 
     // -------- Sidebar Events Section -----------
+
+    const collapseSideProjectsEvent = () => {
+        const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
+        const sideProjectChevron = document.getElementById("sidebar-section-chevron-icon");
+        //toggle boolean
+        let toggle = false;
+
+        sideProjectMainTitle.addEventListener("click", () => {
+            if (toggle === false) {
+                sideProjectChevron.style.transform = "rotate(0deg)";
+                sidebarProjectContainer_div.style.display = "none";
+            } else {
+                sideProjectChevron.style.transform = "rotate(90deg)";
+                sidebarProjectContainer_div.style.display = "grid";
+            }
+            toggle = !toggle;
+        });
+    };
 
     //click event to display selected project
     const sideProjectTitleEvent = () => {
@@ -388,13 +408,13 @@ const todoApp = (() => {
 
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
     collapseSidebarEvent();
+    collapseSideProjectsEvent();
     sideProjectTitleEvent();
     projectCreatorEvent();
 
 
     // -------- To be done -------
 
-    // collapsable sidebar project list
     // extend sidebar projects title and icon hover effects to parent hover
     // searchbar
     // night mode
@@ -405,5 +425,6 @@ const todoApp = (() => {
     // create local storage
     // user can filter dates
     // notes must be saved when creating/ adding tasks
+    // task sub-list
 
 })();

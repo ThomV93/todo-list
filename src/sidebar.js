@@ -87,6 +87,7 @@ const sidebar = (container) => {
 
     //sidebar projects section title
     let projectsSectionTitle = document.createElement("h1");
+    projectsSectionTitle.id = "sidebar-projects-section-title";
     projectsSectionTitle.className = "sidebar-section-title";
     projectsSectionTitle.innerHTML = "Projects";
 

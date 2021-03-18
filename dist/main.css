@@ -193,11 +193,16 @@ button:focus {
     grid-row: 4;
     margin: auto;
     transform: rotate(90deg);
+    transition: all 200ms ease;
 }
 
 #sidebar > h1 {
     grid-column: 3/ 10;
     grid-row: 4;
+}
+
+#sidebar-projects-section-title:hover {
+    cursor: pointer;
 }
 
 #sidebar-section-plus-icon {
