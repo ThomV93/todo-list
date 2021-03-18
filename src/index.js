@@ -83,16 +83,6 @@ const todoApp = (() => {
 
     // -------- Sidebar Events Section -----------
 
-
-    //click event to display all existing projects
-    const displayAllEvent = () => {
-        //select sidebar All title
-        sidebarTitleAll_h2.addEventListener("click", () => {
-            display().allProjects(projectsArray, projectDisplayContainer_div);
-            taskCreatorEvent();
-        });
-    };
-
     //click event to display selected project
     const sideProjectTitleEvent = () => {
         for(let i = 0; i < sidebarProjectTitle_div.length; i++) {
@@ -172,6 +162,7 @@ const todoApp = (() => {
         for(let i = 0; i < taskCreator_div.length; i ++) {
             taskCreator_div[i].addEventListener("click", () => {
                 renderTaskEditor(document.body);
+                taskCreatorFlagEvent();
                 taskCreatorSaveBtn(selectedProj);
                 taskCreatorCancelBtn();
             });
@@ -192,16 +183,33 @@ const todoApp = (() => {
         const editorName = document.getElementById("editor-name");
         const editorTime = document.getElementById("editor-time");
         const editorDate = document.getElementById("editor-date");
+        const editorFlag = document.getElementById("editor-flag").src;
 
         //store user input
         let taskName = editorName.value;
         let taskTime = editorTime.value;
         let taskDate = formatDate(editorDate.value);
+        let taskPriority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
 
         //create new task
-        let newTask = proj.task(taskName, taskTime, taskDate, "high");
+        let newTask = proj.task(taskName, taskTime, taskDate, taskPriority);
         //add task to the project
         proj.addTask(newTask);
+    };
+
+    const taskCreatorFlagEvent = () => {
+        //cache DOM element
+        const editorFlag = document.getElementById("editor-flag");
+        let toggle = false;
+
+        editorFlag.addEventListener("click", () => {
+            if (toggle === false) {
+                editorFlag.src = "icons/red-flag.svg";
+            } else {
+                editorFlag.src = "icons/flag.svg";
+            }
+            toggle = !toggle;
+        });
     };
 
     //task creator/ editor cancel button event
@@ -286,6 +294,7 @@ const todoApp = (() => {
         const editorName = document.getElementById("editor-name");
         const editorTime = document.getElementById("editor-time");
         const editorDate = document.getElementById("editor-date");
+        const editorFlag = document.getElementById("editor-flag");
 
         //alter form's title
         editorTitle.innerHTML = "Edit Task";
@@ -362,13 +371,11 @@ const todoApp = (() => {
 
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
     sideProjectTitleEvent();
-    displayAllEvent();
     projectCreatorEvent();
 
 
     // -------- To be done -------
 
-    // can choose and alter task priority
     // collapsable sidebar project list
     // extend sidebar projects title and icon hover effects to parent hover
     // searchbar
@@ -380,5 +387,8 @@ const todoApp = (() => {
     // media queries for mobile
     // create local storage
     // user can filter dates
+
+    // ---------- Bugs ---------
+    //cross task bug after creating / editing task
 
 })();

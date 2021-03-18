@@ -601,14 +601,6 @@ button:focus {
     transition: all 245ms ease;
 }
 
-#editor-flag:hover {
-    cursor: pointer;
-    padding: 5px;
-    border: 1.8px solid #ff0101;
-    box-shadow: 0 0 3px #ff0101;
-    border-radius: 50%;
-}
-
 #editor-time-container {
     grid-column: 1/ 7;
     grid-row: 6/ 9;

@@ -25,7 +25,7 @@ const renderTaskEditor = (container) => {
     //flag icon
     let editorFlag = document.createElement("img");
     editorFlag.id = "editor-flag";
-    editorFlag.src = "icons/red-flag.svg";
+    editorFlag.src = "icons/flag.svg";
 
 
 
