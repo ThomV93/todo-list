@@ -14,7 +14,8 @@ const todoApp = (() => {
     const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
     const projectDisplayContainer_div = document.getElementById("project-display-container");
     const sidebarProjectTitle_div = document.getElementsByClassName("sidebar-project-title");
-    const sidebarTitleAll_h2 = document.getElementById("sidebar-title-all");
+    const listIcon_img = document.getElementById("list-icon");
+    const sidebar = document.getElementById("sidebar");
 
 
     // --------- DEMO Projects and Tasks -----------
@@ -80,6 +81,22 @@ const todoApp = (() => {
         crossTaskEvent(proj);
     };
 
+    // ----------Navbar Events Section ---------
+
+    const collapseSidebarEvent = () => {
+        let toggle = false;
+
+        listIcon_img.addEventListener("click", () => {
+            if (toggle === false) {
+                sidebar.style.display = "none";
+                projectDisplayContainer_div.style.gridColumn = "1 / -1";
+            } else {
+                sidebar.style.display = "grid";
+                projectDisplayContainer_div.style.gridColumn = "4 / -1";
+            }
+            toggle = !toggle;
+        });
+    };
 
     // -------- Sidebar Events Section -----------
 
@@ -370,6 +387,7 @@ const todoApp = (() => {
 
 
     display().sideProjects(projectsArray, sidebarProjectContainer_div);
+    collapseSidebarEvent();
     sideProjectTitleEvent();
     projectCreatorEvent();
 
@@ -383,12 +401,9 @@ const todoApp = (() => {
     // trash section and functionalities
     // home section displays tasks due to today
     // display each section's value
-    // sidebar can be collapsed
     // media queries for mobile
     // create local storage
     // user can filter dates
-
-    // ---------- Bugs ---------
-    //cross task bug after creating / editing task
+    // notes must be saved when creating/ adding tasks
 
 })();
