@@ -8,17 +8,22 @@ import {format} from 'date-fns';
 const todoApp = (() => {
 
     //render basic page layout
-    display().loadPage();
-
-    //cache DOM elements
-    const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
-    const projectDisplayContainer_div = document.getElementById("project-display-container");
-    const sidebarProjectTitleContainer_div = document.getElementsByClassName("sidebar-project-title-container");
-
-    // --------- DEMO Projects and Tasks -----------
-
+    display().renderPage();
     //project objects array
     let projectsArray = [];
+
+    //cache DOM elements
+    const listIcon_img = document.getElementById("list-icon");
+    const sidebar = document.getElementById("sidebar");
+    const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
+    const sideProjectChevron = document.getElementById("sidebar-section-chevron-icon");
+    const sidebarPlusIcon = document.getElementById("sidebar-section-plus-icon");
+    const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
+    const sidebarProjectTitleContainer_div = document.getElementsByClassName("sidebar-project-title-container");
+    const projectDisplayContainer_div = document.getElementById("project-display-container");
+
+
+    // --------- DEMO Projects and Tasks -----------
 
     let work = project("Work");
 
@@ -56,8 +61,17 @@ const todoApp = (() => {
     projectsArray.push(coding);
 
 
-    // ----------- General ------------
+    // --------------------- General -------------------------
 
+
+    //initialize necessary functions when page is launched
+    const pageInit = () => {
+        display().sideProjects(projectsArray, sidebarProjectContainer_div);
+        collapseSidebarEvent();
+        collapseSideProjectsEvent();
+        sideProjectTitleEvent();
+        projectCreatorEvent();
+    };
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
         //display the updated project
@@ -78,44 +92,31 @@ const todoApp = (() => {
         crossTaskEvent(proj);
     };
 
-    // ----------Navbar Events Section ---------
+
+    // ---------------- Navbar Events Section ----------------
+
 
     const collapseSidebarEvent = () => {
-        //cache DOM elements
-        const listIcon_img = document.getElementById("list-icon");
-        const sidebar = document.getElementById("sidebar");
         //toggle boolean
         let toggle = false;
-
+        //click event to run function and invert toggle
         listIcon_img.addEventListener("click", () => {
-            if (toggle === false) {
-                sidebar.style.display = "none";
-                projectDisplayContainer_div.style.gridColumn = "1 / -1";
-            } else {
-                sidebar.style.display = "grid";
-                projectDisplayContainer_div.style.gridColumn = "4 / -1";
-            }
+            display().collapseSidebar(sidebar, projectDisplayContainer_div, toggle);
             toggle = !toggle;
         });
     };
 
-    // -------- Sidebar Events Section -----------
 
+    // --------------- Sidebar Events Section ------------------
+
+
+    //hide or display the projects and tasks displayed in the sidebar
     const collapseSideProjectsEvent = () => {
-        //cache DOM elements
-        const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
-        const sideProjectChevron = document.getElementById("sidebar-section-chevron-icon");
         //toggle boolean
         let toggle = false;
-
+        //click event to run function and invert toggle
         sideProjectMainTitle.addEventListener("click", () => {
-            if (toggle === false) {
-                sideProjectChevron.style.transform = "rotate(0deg)";
-                sidebarProjectContainer_div.style.display = "none";
-            } else {
-                sideProjectChevron.style.transform = "rotate(90deg)";
-                sidebarProjectContainer_div.style.display = "grid";
-            }
+            display().collapseSideProjects(sideProjectChevron, sidebarProjectContainer_div, toggle);
             toggle = !toggle;
         });
     };
@@ -136,13 +137,66 @@ const todoApp = (() => {
     };
 
 
+    // --------------- Tasks Events Section -------------------
+
+
+    //cross inactive tasks
+    const crossTaskEvent = (selectedProj) => {
+        //cache task input element
+        const taskInput = document.getElementsByClassName("task-checkbox-input");
+
+        for(let i = 0; i < taskInput.length; i++) {
+            taskInput[i].addEventListener("click", () => {
+                display().crossTask(selectedProj, i);
+            });
+        };
+    };
+
+    const editTaskEvent = (selectedProj) => {
+        //cache all displayed
+        const taskEditIcon = document.getElementsByClassName("task-edit-icon");
+
+        for(let i = 0; i < taskEditIcon.length; i++) {
+            taskEditIcon[i].addEventListener("click", () => {
+                renderTaskEditor(document.body);
+                renderTaskEditorValues(selectedProj, i);
+                taskCreatorFlagEvent();
+                taskCreatorCancelBtn();
+                taskEditorSaveBtnEvent(selectedProj, i);
+            });
+        };
+    };
+
+    const deleteTaskEvent = (selectedProj) => {
+        //cache all displayed
+        const taskTrashIcon = document.getElementsByClassName("task-trash-icon");
+
+        for(let i = 0; i < taskTrashIcon.length; i++) {
+            taskTrashIcon[i].addEventListener("click", () => {
+                selectedProj.deleteTask(i);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            });
+        };
+    };
+
+    const expandTaskEvent = () => {
+        //cache all displayed
+        const taskName = document.getElementsByClassName("task-name");
+        const taskNotes = document.querySelectorAll("[data-notes]");
+        const taskCheckbox = document.querySelectorAll("[data-checkbox]");
+
+        for(let i = 0; i < taskName.length; i++) {
+            taskName[i].addEventListener("click", () => {
+                display().expandTask(taskNotes, taskCheckbox, i);
+            });
+        };
+    };
+
+
     // ---------- Project Creator ------------
 
     
     const projectCreatorEvent = () => {
-        //cache sidebar plus icon
-        const sidebarPlusIcon = document.getElementById("sidebar-section-plus-icon");
-
         sidebarPlusIcon.addEventListener("click", () => {
             renderProjectEditor(document.body);
             projectCreatorCancelBtn();
@@ -167,9 +221,9 @@ const todoApp = (() => {
     const projectCreatorCancelBtn = () => {
         //cache DOM element
         const projectCancelBtn = document.getElementById("project-editor-cancel-btn");
-
+        //close the form on click
         projectCancelBtn.addEventListener("click", () => {
-            document.body.removeChild(document.body.firstChild);
+            closeFrom();
         });
     };
 
@@ -177,13 +231,13 @@ const todoApp = (() => {
     const projectCreatorSaveBtn = () => {
         //cache DOM element
         const projectSaveBtn = document.getElementById("project-editor-save-btn");
-
+        //run necessary functions on click
         projectSaveBtn.addEventListener("click", () => {
             projectCreator();
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, projectsArray[projectsArray.length - 1], projectDisplayContainer_div, sidebarProjectContainer_div);
             //stop displaying the form
-            document.body.removeChild(document.body.firstChild);
+            closeFrom();
         });
     };
 
@@ -192,7 +246,7 @@ const todoApp = (() => {
 
 
     //click event for the task creator button
-    const taskCreatorEvent = (selectedProj) => {
+    const taskCreatorEvent = selectedProj => {
         //select all task creators displayed
         const taskCreator_div = document.querySelectorAll("[data-creator]");
 
@@ -207,15 +261,19 @@ const todoApp = (() => {
     };
 
     //format date to display
-    const formatDate = (date) => {
+    const formatDate = date => {
         let dateObj = new Date(date);
         let formatted = format(dateObj, "dd/MM/yyyy");
 
         return formatted;
     };
 
+    const closeFrom = () => {
+        document.body.removeChild(document.body.firstChild);
+    };
+
     //task creator form logic
-    const taskCreator = (proj) => {
+    const taskCreator = proj => {
         //select each input element
         const editorName = document.getElementById("editor-name");
         const editorTime = document.getElementById("editor-time");
@@ -235,19 +293,23 @@ const todoApp = (() => {
     };
 
     const taskCreatorFlagEvent = () => {
-        //cache DOM element
+        //cache flag element
         const editorFlag = document.getElementById("editor-flag");
         //toggle value is defined by the flag displayed
         let toggle = editorFlag.src.indexOf("red-flag") != -1 ? true : false;
 
         editorFlag.addEventListener("click", () => {
-            if (toggle === false) {
-                editorFlag.src = "icons/red-flag.svg";
-            } else {
-                editorFlag.src = "icons/flag.svg";
-            }
+            taskCreatorFlag(editorFlag, toggle);
             toggle = !toggle;
         });
+    };
+
+    const taskCreatorFlag = (flag, bool) => {
+        if (bool === false) {
+            flag.src = "icons/red-flag.svg";
+        } else {
+            flag.src = "icons/flag.svg";
+        }
     };
 
     //task creator/ editor cancel button event
@@ -256,7 +318,7 @@ const todoApp = (() => {
         const cancelBtn = document.getElementById("editor-cancel-btn");
 
         cancelBtn.addEventListener("click", () => {
-            document.body.removeChild(document.body.firstChild);
+            closeFrom();
         });
     };
 
@@ -267,64 +329,14 @@ const todoApp = (() => {
 
         saveBtn.addEventListener("click", () => {
             taskCreator(selectedProj);
-            //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-            //stop displaying the form
-            document.body.removeChild(document.body.firstChild);
+            closeFrom();
         });
     };
 
 
-    // ----------- Tasks Section -------------
+    // --------------- Task editor ---------------
 
-    const crossTaskEvent = (selectedProj) => {
-        //cache task input element
-        const taskInput = document.getElementsByClassName("task-checkbox-input");
-
-        for(let i = 0; i < taskInput.length; i++) {
-            taskInput[i].addEventListener("click", () => {
-                crossTask(selectedProj, i);
-            });
-        };
-    };
-
-    //visual cross task logic
-    const crossTask = (selectedProj, idx) => {
-        //cache DOM elements
-        const taskTime = document.getElementsByClassName("task-time");
-        const taskName = document.getElementsByClassName("task-name");
-        const taskDate = document.getElementsByClassName("task-date");
-        const taskFlag = document.getElementsByClassName("task-flag");
-
-        if (selectedProj.taskList[idx].isActive === false) {
-            selectedProj.taskList[idx].isActive = true;
-            taskTime[idx].style.textDecoration = "line-through";
-            taskName[idx].style.textDecoration = "line-through";
-            taskDate[idx].style.textDecoration = "line-through";
-            taskFlag[idx].style.display = "none";
-        } else {
-            selectedProj.taskList[idx].isActive = false;
-            taskTime[idx].style.textDecoration = "";
-            taskName[idx].style.textDecoration = "";
-            taskDate[idx].style.textDecoration = "";
-            taskFlag[idx].style.display = "block";
-        }
-    };
-
-    const editTaskEvent = (selectedProj) => {
-        //cache all displayed
-        const taskEditIcon = document.getElementsByClassName("task-edit-icon");
-
-        for(let i = 0; i < taskEditIcon.length; i++) {
-            taskEditIcon[i].addEventListener("click", () => {
-                renderTaskEditor(document.body);
-                renderTaskEditorValues(selectedProj, i);
-                taskCreatorFlagEvent();
-                taskCreatorCancelBtn();
-                taskEditorSaveBtn(selectedProj, i);
-            });
-        };
-    };
 
     //render current values when the editor is displayed
     const renderTaskEditorValues = (proj, idx) => {
@@ -363,7 +375,7 @@ const todoApp = (() => {
     };
 
     //task creator/ editor save button event
-    const taskEditorSaveBtn = (selectedProj, idx) => {
+    const taskEditorSaveBtnEvent = (selectedProj, idx) => {
         //cache DOM element
         const saveBtn = document.getElementById("editor-save-btn");
 
@@ -372,59 +384,17 @@ const todoApp = (() => {
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             //stop displaying the form
-            document.body.removeChild(document.body.firstChild);
+            closeFrom();
         });
     };
+    
 
+    pageInit();
 
-    const deleteTaskEvent = (selectedProj) => {
-        //cache all displayed
-        const taskTrashIcon = document.getElementsByClassName("task-trash-icon");
-
-        for(let i = 0; i < taskTrashIcon.length; i++) {
-            taskTrashIcon[i].addEventListener("click", () => {
-                selectedProj.deleteTask(i);
-                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-            });
-        };
-    };
-
-    //task expander logic
-    const expandTask = (notes, checkbox, idx) => {
-        if(notes[idx].style.display === "none") {
-            notes[idx].style.display = "block";
-            checkbox[idx].style.display = "block";
-        } else {
-            notes[idx].style.display = "none";
-            checkbox[idx].style.display = "none";
-        };
-    };
-
-    const expandTaskEvent = () => {
-        //cache all displayed
-        const taskName = document.getElementsByClassName("task-name");
-        const taskNotes = document.querySelectorAll("[data-notes]");
-        const taskCheckbox = document.querySelectorAll("[data-checkbox]");
-
-        for(let i = 0; i < taskName.length; i++) {
-            taskName[i].addEventListener("click", () => {
-                expandTask(taskNotes, taskCheckbox, i);
-            });
-        };
-    };
-
-
-
-    display().sideProjects(projectsArray, sidebarProjectContainer_div);
-    collapseSidebarEvent();
-    collapseSideProjectsEvent();
-    sideProjectTitleEvent();
-    projectCreatorEvent();
 
 
     // -------- To be done -------
 
-    // task editor priority functionality
     // searchbar
     // dark mode
     // user can filter dates
@@ -437,9 +407,5 @@ const todoApp = (() => {
     // create local storage
     // smooth collapse effects
     // media queries
-
-    // --------- Bugs ---------
-    
-    // when task already has red flag, click event fails the first time. Fix toggle logic?
 
 })();

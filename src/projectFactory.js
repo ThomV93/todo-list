@@ -8,7 +8,7 @@ const project = name => {
         //checkbox storage
         let subList = [];
         //task status
-        let isActive = false;
+        let isActive = true;
 
         return {
             name,

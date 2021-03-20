@@ -1,4 +1,4 @@
-const projectContainer = (container) => {
+const renderProjectContainer = (container) => {
     //main container
     let projectDisplayContainer = document.createElement("div");
     projectDisplayContainer.id = "project-display-container";
@@ -7,4 +7,4 @@ const projectContainer = (container) => {
     container.append(projectDisplayContainer);
 };
 
-export default projectContainer;
+export default renderProjectContainer;

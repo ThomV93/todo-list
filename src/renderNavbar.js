@@ -1,4 +1,4 @@
-const navbar = (container) => {
+const renderNavbar = (container) => {
     //main container
     let navContainer = document.createElement("div");
     navContainer.id = "navbar";
@@ -42,4 +42,4 @@ const navbar = (container) => {
     container.append(navContainer);
 };
 
-export default navbar;
+export default renderNavbar;

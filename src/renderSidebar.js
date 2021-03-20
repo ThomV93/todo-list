@@ -1,4 +1,4 @@
-const sidebar = (container) => {
+const renderSidebar = (container) => {
     //main sidebar container
     let sidebarContainer = document.createElement("div");
     sidebarContainer.id = "sidebar";
@@ -133,4 +133,4 @@ const sidebar = (container) => {
 
 };
 
-export default sidebar;
+export default renderSidebar;

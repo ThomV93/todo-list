@@ -1,19 +1,19 @@
-import navbar from "./navbar";
-import sidebar from "./sidebar";
-import projectContainer from "./projectContainer";
+import renderNavbar from "./renderNavbar";
+import renderSidebar from "./renderSidebar";
+import renderProjectContainer from "./renderProjectContainer";
 import renderSidebarProject from "./renderSidebarProject";
 import renderProject from "./renderProject";
 
 const display = () => {
 
     //render default display
-    const loadPage = () => {
+    const renderPage = () => {
         //cache main container DOM element
         const contentContainer_div = document.getElementById("content");
         //run default display modules
-        navbar(contentContainer_div);
-        sidebar(contentContainer_div);
-        projectContainer(contentContainer_div);
+        renderNavbar(contentContainer_div);
+        renderSidebar(contentContainer_div);
+        renderProjectContainer(contentContainer_div);
     };
 
     //render side projects display
@@ -54,27 +54,6 @@ const display = () => {
         };
     };
 
-    //render all projects
-    const allProjects = (arr, container) => {
-        //clean previous list
-        container.innerHTML = "";
-        //loop through objects array
-        for(let i = 0; i < arr.length; i++) {
-            //create and append necessary containers
-            let mainProj = renderProject(container);
-            //render project's titles and task creators
-            mainProj.renderProjectTitle(arr[i].name);
-
-            //loop through each task of the selected project
-            for(let j = 0; j < arr[i].taskList.length; j++) {
-                //select each task
-                let task = arr[i].taskList[j];
-                //render tasks
-                mainProj.renderTask(task.name, task.date, task.time, task.priority);
-            };
-        };
-    };
-
     //render all projects and sideprojects
     const renderAll = (arr, sideContainer, container) => {
         //loop through objects array
@@ -97,12 +76,73 @@ const display = () => {
         };
     };
 
+    //hide or display sidebar
+    const collapseSidebar = (sidebar, projDisplay, bool) => {
+        if (bool === false) {
+            //hide sidebar
+            sidebar.style.display = "none";
+            //center projects and tasks
+            projDisplay.style.gridColumn = "1 / -1";
+        } else {
+            sidebar.style.display = "grid";
+            projDisplay.style.gridColumn = "4 / -1";
+        };
+    };
+
+    //hide or display the projects and tasks displayed in the sidebar
+    const collapseSideProjects = (chevron, container, bool) => {
+        if (bool === false) {
+            chevron.style.transform = "rotate(0deg)";
+            container.style.display = "none";
+        } else {
+            chevron.style.transform = "rotate(90deg)";
+            container.style.display = "grid";
+        };
+    };
+
+    //visually cross inactive task
+    const crossTask = (selectedProj, idx) => {
+        //cache DOM elements
+        const taskTime = document.getElementsByClassName("task-time");
+        const taskName = document.getElementsByClassName("task-name");
+        const taskDate = document.getElementsByClassName("task-date");
+        const taskFlag = document.getElementsByClassName("task-flag");
+
+        if (selectedProj.taskList[idx].isActive === true) {
+            selectedProj.taskList[idx].isActive = false;
+            taskTime[idx].style.textDecoration = "line-through";
+            taskName[idx].style.textDecoration = "line-through";
+            taskDate[idx].style.textDecoration = "line-through";
+            taskFlag[idx].style.display = "none";
+        } else {
+            selectedProj.taskList[idx].isActive = true;
+            taskTime[idx].style.textDecoration = "";
+            taskName[idx].style.textDecoration = "";
+            taskDate[idx].style.textDecoration = "";
+            taskFlag[idx].style.display = "block";
+        }
+    };
+
+    //visually expand task
+    const expandTask = (notes, checkbox, idx) => {
+        if(notes[idx].style.display === "none") {
+            notes[idx].style.display = "block";
+            checkbox[idx].style.display = "block";
+        } else {
+            notes[idx].style.display = "none";
+            checkbox[idx].style.display = "none";
+        };
+    };
+
     return {
-        loadPage,
+        renderPage,
         sideProjects,
         selectedProject,
-        allProjects,
-        renderAll
+        renderAll,
+        collapseSidebar,
+        collapseSideProjects,
+        crossTask,
+        expandTask
     };
 };
 
