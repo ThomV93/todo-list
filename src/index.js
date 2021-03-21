@@ -193,7 +193,7 @@ const todoApp = (() => {
     };
 
 
-    // ---------- Project Creator ------------
+    // ---------------- Project Creator --------------------
 
     
     const projectCreatorEvent = () => {
@@ -242,7 +242,7 @@ const todoApp = (() => {
     };
 
 
-    // ---------- Task Creator ---------------
+    // -------------------- Task Creator -------------------------
 
 
     //click event for the task creator button
@@ -292,6 +292,7 @@ const todoApp = (() => {
         proj.addTask(newTask);
     };
 
+    //user can switch between task priority by clicking on flag
     const taskCreatorFlagEvent = () => {
         //cache flag element
         const editorFlag = document.getElementById("editor-flag");
@@ -305,11 +306,8 @@ const todoApp = (() => {
     };
 
     const taskCreatorFlag = (flag, bool) => {
-        if (bool === false) {
-            flag.src = "icons/red-flag.svg";
-        } else {
-            flag.src = "icons/flag.svg";
-        }
+        //display correct flag
+        bool === false ? flag.src = "icons/red-flag.svg" : flag.src = "icons/flag.svg";
     };
 
     //task creator/ editor cancel button event
@@ -335,7 +333,7 @@ const todoApp = (() => {
     };
 
 
-    // --------------- Task editor ---------------
+    // --------------------- Task editor -----------------------
 
 
     //render current values when the editor is displayed
@@ -387,7 +385,7 @@ const todoApp = (() => {
             closeFrom();
         });
     };
-    
+
 
     pageInit();
 
