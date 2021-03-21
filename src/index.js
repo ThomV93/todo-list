@@ -87,7 +87,7 @@ const todoApp = (() => {
         //add back the delete task event
         deleteTaskEvent(proj);
         //add back the expand task event
-        expandTaskEvent();
+        expandTaskEvent(proj);
         //cross off task
         crossTaskEvent(proj);
     };
@@ -130,7 +130,7 @@ const todoApp = (() => {
                 taskCreatorEvent(projectsArray[i]);
                 editTaskEvent(projectsArray[i]);
                 deleteTaskEvent(projectsArray[i]);
-                expandTaskEvent();
+                expandTaskEvent(projectsArray[i]);
                 crossTaskEvent(projectsArray[i]);
             });
         };
@@ -141,7 +141,7 @@ const todoApp = (() => {
 
 
     //cross inactive tasks
-    const crossTaskEvent = (selectedProj) => {
+    const crossTaskEvent = selectedProj => {
         //cache task input element
         const taskInput = document.getElementsByClassName("task-checkbox-input");
 
@@ -152,7 +152,7 @@ const todoApp = (() => {
         };
     };
 
-    const editTaskEvent = (selectedProj) => {
+    const editTaskEvent = selectedProj => {
         //cache all displayed
         const taskEditIcon = document.getElementsByClassName("task-edit-icon");
 
@@ -167,7 +167,7 @@ const todoApp = (() => {
         };
     };
 
-    const deleteTaskEvent = (selectedProj) => {
+    const deleteTaskEvent = selectedProj => {
         //cache all displayed
         const taskTrashIcon = document.getElementsByClassName("task-trash-icon");
 
@@ -179,15 +179,22 @@ const todoApp = (() => {
         };
     };
 
-    const expandTaskEvent = () => {
+    const renderNotes = (selectedProj, notes, idx) => {
+        //display notes stored in the object
+        notes[idx].innerHTML = selectedProj.taskList[idx].notes;
+    };
+
+    const expandTaskEvent = selectedProj => {
         //cache all displayed
         const taskName = document.getElementsByClassName("task-name");
-        const taskNotes = document.querySelectorAll("[data-notes]");
-        const taskCheckbox = document.querySelectorAll("[data-checkbox]");
+        const taskNotes = document.getElementsByClassName("task-notes");
+        const taskNotesContainer = document.querySelectorAll("[data-notes]");
+        const taskCheckboxContainer = document.querySelectorAll("[data-checkbox]");
 
         for(let i = 0; i < taskName.length; i++) {
             taskName[i].addEventListener("click", () => {
-                display().expandTask(taskNotes, taskCheckbox, i);
+                renderNotes(selectedProj, taskNotes, i);
+                display().expandTask(taskNotesContainer, taskCheckboxContainer, i);
             });
         };
     };
@@ -279,15 +286,19 @@ const todoApp = (() => {
         const editorTime = document.getElementById("editor-time");
         const editorDate = document.getElementById("editor-date");
         const editorFlag = document.getElementById("editor-flag").src;
+        const editorNotes = document.getElementById("editor-notes");
 
         //store user input
         let taskName = editorName.value;
         let taskTime = editorTime.value;
         let taskDate = formatDate(editorDate.value);
         let taskPriority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
+        let taskNotes = editorNotes.value;
 
         //create new task
         let newTask = proj.task(taskName, taskTime, taskDate, taskPriority);
+        //add task notes
+        newTask.notes = taskNotes;
         //add task to the project
         proj.addTask(newTask);
     };
@@ -345,6 +356,7 @@ const todoApp = (() => {
         const editorTime = document.getElementById("editor-time");
         const editorDate = document.getElementById("editor-date");
         const editorFlag = document.getElementById("editor-flag");
+        const editorNotes = document.getElementById("editor-notes");
 
         //alter form's title
         editorTitle.innerHTML = "Edit Task";
@@ -356,6 +368,7 @@ const todoApp = (() => {
         editorName.value = proj.taskList[idx].name;
         editorTime.value = proj.taskList[idx].time;
         editorDate.value = proj.taskList[idx].date.split("/").reverse().join("-");
+        editorNotes.value = proj.taskList[idx].notes;
     };
 
     const taskEditor = (proj, idx) => {
@@ -364,12 +377,13 @@ const todoApp = (() => {
         const editorTime = document.getElementById("editor-time");
         const editorDate = document.getElementById("editor-date");
         const editorFlag = document.getElementById("editor-flag").src;
+        const editorNotes = document.getElementById("editor-notes");
 
         proj.taskList[idx].name = editorName.value;
         proj.taskList[idx].time = editorTime.value;
         proj.taskList[idx].date = formatDate(editorDate.value);
         proj.taskList[idx].priority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
-
+        proj.taskList[idx].notes = editorNotes.value;
     };
 
     //task creator/ editor save button event
@@ -393,17 +407,18 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // searchbar
-    // dark mode
+    // crossed tasks are also crossed in the sidebar
     // user can filter dates
-    // notes must be saved when creating/ adding tasks
     // task sub-list
     // trash section and functionalities
     // home section displays tasks due to today
+    // smooth collapse effects
     // all section
+    // searchbar
+    // dark mode
+    // notes altered outside of the forms need to be stored
     // display each section's value
     // create local storage
-    // smooth collapse effects
     // media queries
 
 })();

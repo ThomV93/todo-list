@@ -133,6 +133,7 @@ const renderProject = (container) => {
 
         //notes text area
         let notesTextArea = document.createElement("textarea");
+        notesTextArea.className = "task-notes";
         notesTextArea.innerHTML = "";
 
         //append elements to container
