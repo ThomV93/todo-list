@@ -25,7 +25,7 @@ const renderSidebarProject = (container) => {
         sidebarProject.append(sideProjectTitleContainer);
     };
     
-    const renderSideTask = (name) => {
+    const renderSideTask = (name, status) => {
         //Task container
         let taskContainer = document.createElement("div");
         taskContainer.className = "sidebar-project-task-container";
@@ -34,11 +34,17 @@ const renderSidebarProject = (container) => {
         let taskCheckInput = document.createElement("input");
         taskCheckInput.className = "sidebar-task-input";
         taskCheckInput.type = "checkbox";
+        taskCheckInput.name = name;
     
         //Task label
         let taskCheckLabel = document.createElement("label");
         taskCheckLabel.className = "sidebar-task-label";
-        taskCheckLabel.innerHTML = name.toString();
+        taskCheckLabel.innerHTML = name;
+
+        if (status === false) {
+            taskCheckInput.checked = true;
+            taskCheckLabel.style.textDecoration = "line-through";
+        };
     
         //Append elements to container
         taskContainer.append(taskCheckInput, taskCheckLabel);

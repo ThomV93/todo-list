@@ -76,7 +76,7 @@ const renderProject = (container) => {
 
     //--------- Task DOM factory module ---------
 
-    const renderTask = (name, date, time, priority) => {
+    const renderTask = (name, date, time, priority, status) => {
         //task container
         let taskContainer = document.createElement("div");
         taskContainer.className = "task";
@@ -105,6 +105,14 @@ const renderProject = (container) => {
         let taskDate = document.createElement("p");
         taskDate.className = "task-date";
         taskDate.innerHTML = date;
+
+        if (status === false) {
+            taskCheckboxInput.checked = true;
+            taskTime.style.textDecoration = "line-through";
+            taskName.style.textDecoration = "line-through";
+            taskDate.style.textDecoration = "line-through";
+            taskFlag.style.display = "none";
+        };
 
         //task edit icon
         let taskEditIcon = document.createElement("img");

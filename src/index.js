@@ -71,6 +71,7 @@ const todoApp = (() => {
         collapseSideProjectsEvent();
         sideProjectTitleEvent();
         projectCreatorEvent();
+        //crossSideTaskEvent();
     };
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
@@ -136,6 +137,30 @@ const todoApp = (() => {
         };
     };
 
+    // const getSelectedTask = name => {
+    //     for(let i = 0; i < projectsArray.length; i++) {
+    //         return projectsArray[i].findTask(name);
+    //     };
+    // };
+
+    // const getParentIdx = name => {
+    //     return projectsArray.findIndex(proj => proj.name === name);
+    // };
+
+    // const crossSideTaskEvent = () => {
+    //     //cache input element
+    //     const sideTaskInput = document.getElementsByClassName("sidebar-task-input");
+
+    //     for(let i = 0; i < sideTaskInput.length; i++) {
+    //         sideTaskInput[i].addEventListener("click", () => {
+    //             let selectedTask = getSelectedTask(sideTaskInput[i].name);
+    //             let projIdx = getParentIdx(selectedTask.parentName);
+    //             display().crossSideTask(selectedTask);
+    //             updateDisplay(projectsArray, projectsArray[projIdx], projectDisplayContainer_div, sidebarProjectContainer_div);
+    //         });
+    //     };
+    // };
+
 
     // --------------- Tasks Events Section -------------------
 
@@ -148,6 +173,7 @@ const todoApp = (() => {
         for(let i = 0; i < taskInput.length; i++) {
             taskInput[i].addEventListener("click", () => {
                 display().crossTask(selectedProj, i);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             });
         };
     };
@@ -407,7 +433,8 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // crossed tasks are also crossed in the sidebar
+    // add button like the form btn to edit projects
+    // tasks can be crossed in the sidebar as well
     // user can filter dates
     // task sub-list
     // trash section and functionalities
@@ -416,7 +443,7 @@ const todoApp = (() => {
     // all section
     // searchbar
     // dark mode
-    // notes altered outside of the forms need to be stored
+    // notes altered outside of the forms need to be saved
     // display each section's value
     // create local storage
     // media queries

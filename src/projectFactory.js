@@ -1,5 +1,6 @@
 const project = name => {
     let taskList = [];
+    let projectName = name;
 
     //task factory
     const task = (name, time, date, priority) => {
@@ -9,6 +10,8 @@ const project = name => {
         let subList = [];
         //task status
         let isActive = true;
+        //parent name
+        let parentName = projectName;
 
         return {
             name,
@@ -17,15 +20,19 @@ const project = name => {
             priority,
             notes,
             subList,
-            isActive
+            isActive,
+            parentName
         };
     };
 
     //add new task to project
     const addTask = task => taskList.push(task);
 
-    //find text index in the array by it's name
+    //find task index in the array by it's name
     const findTaskIdx = taskName => taskList.findIndex(task => task.name === taskName);
+
+    //find task in the array
+    const findTask = taskName => taskList.find(task => task.name === taskName);
 
     //delete task from project
     const deleteTask = idx => taskList.splice(idx, 1);
@@ -36,6 +43,7 @@ const project = name => {
         task,
         addTask,
         findTaskIdx,
+        findTask,
         deleteTask
     };
 };

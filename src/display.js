@@ -32,7 +32,7 @@ const display = () => {
                 //select each task
                 let task = arr[i].taskList[j];
                 //render tasks
-                sideBarProj.renderSideTask(task.name);
+                sideBarProj.renderSideTask(task.name, task.isActive);
             };
         };
     };
@@ -50,7 +50,7 @@ const display = () => {
             //select each task
             let task = arrPos.taskList[i];
             //render tasks
-            proj.renderTask(task.name, task.date, task.time, task.priority);
+            proj.renderTask(task.name, task.date, task.time, task.priority, task.isActive);
         };
     };
 
@@ -71,7 +71,7 @@ const display = () => {
                 let task = arr[i].taskList[j];
                 //render tasks
                 sideBarProj.renderSideTask(task.name);
-                mainProj.renderTask(task.name, task.date, task.time, task.priority);
+                mainProj.renderTask(task.name, task.date, task.time, task.priority, task.isActive);
             };
         };
     };
@@ -100,27 +100,14 @@ const display = () => {
         };
     };
 
+    const crossSideTask = selectedTask => {
+        selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
+    };
+
     //visually cross inactive task
     const crossTask = (selectedProj, idx) => {
-        //cache DOM elements
-        const taskTime = document.getElementsByClassName("task-time");
-        const taskName = document.getElementsByClassName("task-name");
-        const taskDate = document.getElementsByClassName("task-date");
-        const taskFlag = document.getElementsByClassName("task-flag");
-
-        if (selectedProj.taskList[idx].isActive === true) {
-            selectedProj.taskList[idx].isActive = false;
-            taskTime[idx].style.textDecoration = "line-through";
-            taskName[idx].style.textDecoration = "line-through";
-            taskDate[idx].style.textDecoration = "line-through";
-            taskFlag[idx].style.display = "none";
-        } else {
-            selectedProj.taskList[idx].isActive = true;
-            taskTime[idx].style.textDecoration = "";
-            taskName[idx].style.textDecoration = "";
-            taskDate[idx].style.textDecoration = "";
-            taskFlag[idx].style.display = "block";
-        }
+        let selectedTask = selectedProj.taskList[idx];
+        selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
     };
 
     //visually expand task
@@ -141,6 +128,7 @@ const display = () => {
         renderAll,
         collapseSidebar,
         collapseSideProjects,
+        //crossSideTask,
         crossTask,
         expandTask
     };
