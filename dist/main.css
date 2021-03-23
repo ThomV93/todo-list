@@ -166,19 +166,19 @@ button:focus {
     color: var(--dark-grey);
 }
 
-#sidebar-all-icon {
+#sidebar-today-icon {
     grid-row: 5;
     grid-column: 1;
     margin: auto 5px;
 }
 
-#sidebar-title-all {
+#sidebar-title-today {
     grid-row: 5;
     grid-column: 2/ 10;
     margin: auto 5px;
 }
 
-#sidebar-value-all {
+#sidebar-value-today {
     grid-row: 5;
     grid-column: 11;
     margin: auto 0;
@@ -353,7 +353,7 @@ button:focus {
 
 .project-title-container {
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     width: 100%;
     height: auto;
     margin-bottom: 10px;
@@ -368,15 +368,35 @@ button:focus {
     margin: auto 0;
 }
 
-.project-date {
-    font-size: 24px;
-    grid-column: 13;
+.project-date-container {
+    display: flex;
+    align-items: center;
+    grid-column: 10/11;
     margin: auto;
 }
 
-.project-date-filter {
-    grid-column: 14;
-    margin: auto 0;
+.project-date {
+    font-size: 24px;
+}
+
+.project-edit-icon {
+    grid-column: 11;
+    margin: auto 8px auto auto;
+}
+
+.project-edit-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.project-trash-icon {
+    grid-column: 12;
+    margin: auto auto auto 8px;
+}
+
+.project-trash-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 /*----   Tasks    ----*/

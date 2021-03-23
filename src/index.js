@@ -202,7 +202,7 @@ const todoApp = (() => {
     //order task dates on click
     const sortProjectDatesEvent = selectedProj => {
         //cache DOM elements
-        const projectDateFilters = document.getElementsByClassName("project-date");
+        const projectDateFilters = document.getElementsByClassName("project-date-container");
         //loop through HTML collection
         for(let i = 0; i < projectDateFilters.length; i++) {
             projectDateFilters[i].addEventListener("click", () => {
@@ -476,18 +476,18 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // task sub-list
+    // home section displays all projects
+    // today section displays tasks due to today
     // trash section and functionalities
-    // home section displays tasks due to today
-    // all section
     // searchbar
+    // task sub-list
     // display each section's value
     // notes altered outside of the forms need to be saved
     // create local storage
     
     // ---- CSS -----
 
-    // project have edited and deleted icon
+    // project have edit and delet icon
     // dark mode
     // media queries
     // smooth collapse effects

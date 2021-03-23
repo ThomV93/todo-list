@@ -31,21 +31,21 @@ const renderSidebar = (container) => {
     sidebarValueHome.id = "sidebar-value-home";
     sidebarValueHome.innerHTML = "0";
 
-    //sidebar ALL icon
-    let sidebarAllIcon = document.createElement("img");
-    sidebarAllIcon.id = "sidebar-all-icon";
-    sidebarAllIcon.src = "icons/calendar.svg";
+    //sidebar Today icon
+    let sidebarTodayIcon = document.createElement("img");
+    sidebarTodayIcon.id = "sidebar-today-icon";
+    sidebarTodayIcon.src = "icons/calendar.svg";
 
-    //sidebar ALL title
-    let sidebarTitleAll = document.createElement("h2");
-    sidebarTitleAll.id = "sidebar-title-all";
-    sidebarTitleAll.className = "user-titles";
-    sidebarTitleAll.innerHTML = "All";
+    //sidebar Today title
+    let sidebarTitleToday = document.createElement("h2");
+    sidebarTitleToday.id = "sidebar-title-today";
+    sidebarTitleToday.className = "user-titles";
+    sidebarTitleToday.innerHTML = "Today";
 
-    //sidebar ALL value
-    let sidebarValueAll = document.createElement("p");
-    sidebarValueAll.id = "sidebar-value-all";
-    sidebarValueAll.innerHTML = "0";
+    //sidebar Today value
+    let sidebarValueToday = document.createElement("p");
+    sidebarValueToday.id = "sidebar-value-today";
+    sidebarValueToday.innerHTML = "0";
 
     //sidebar TRASH icon
     let sidebarTrashIcon = document.createElement("img");
@@ -70,9 +70,9 @@ const renderSidebar = (container) => {
         sidebarHomeIcon,
         sidebarTitleHome,
         sidebarValueHome,
-        sidebarAllIcon,
-        sidebarTitleAll,
-        sidebarValueAll,
+        sidebarTodayIcon,
+        sidebarTitleToday,
+        sidebarValueToday,
         sidebarTrashIcon,
         sidebarTitleTrash,
         sidebarValueTrash

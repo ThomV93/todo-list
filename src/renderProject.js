@@ -1,3 +1,5 @@
+import project from "./projectFactory";
+
 const renderProject = (container) => {
     //main project container
     let projectContainer = document.createElement("div");
@@ -20,6 +22,10 @@ const renderProject = (container) => {
         projectTitle.className = "project-title";
         projectTitle.innerHTML = name;
 
+        //date container
+        let ProjectDateContainer = document.createElement("div");
+        ProjectDateContainer.className = "project-date-container";
+
         //date filter
         let projectDate = document.createElement("h3");
         projectDate.className = "project-date";
@@ -30,11 +36,25 @@ const renderProject = (container) => {
         projectDateFilter.className = "project-date-filter";
         projectDateFilter.src = "icons/chevrons-down.svg";
 
+        //project edit icon
+        let projectEditIcon = document.createElement("img");
+        projectEditIcon.className = "project-edit-icon";
+        projectEditIcon.src = "icons/edit-3.svg";
+
+        //project trash icon
+        let projectTrashIcon = document.createElement("img");
+        projectTrashIcon.className = "project-trash-icon";
+        projectTrashIcon.src = "icons/trash-2.svg";
+
+        //append date elements to container
+        ProjectDateContainer.append(projectDate, projectDateFilter);
+
         //append elements to title container
         projectTitleContainer.append(
             projectTitle,
-            projectDate,
-            projectDateFilter
+            ProjectDateContainer,
+            projectEditIcon,
+            projectTrashIcon
         );
         
         //append to main project container
