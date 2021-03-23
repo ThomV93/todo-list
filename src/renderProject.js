@@ -24,7 +24,7 @@ const renderProject = (container) => {
 
         //date container
         let ProjectDateContainer = document.createElement("div");
-        ProjectDateContainer.className = "project-date-container";
+        ProjectDateContainer.id = "project-date-container";
 
         //date filter
         let projectDate = document.createElement("h3");

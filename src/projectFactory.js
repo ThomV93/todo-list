@@ -1,6 +1,10 @@
 const project = name => {
+    //array to store child tasks
     let taskList = [];
+    //store project name
     let projectName = name;
+    //toggle boolean for sorting dates
+    let dateSort = false;
 
     //task factory
     const task = (name, time, date, priority) => {
@@ -44,6 +48,7 @@ const project = name => {
     return {
         name,
         taskList,
+        dateSort,
         task,
         addTask,
         findTaskIdx,

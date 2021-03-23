@@ -126,8 +126,12 @@ const todoApp = (() => {
     };
 
     //sort project task list by date
-    const sortDates = (selectedProj) => {
-        selectedProj.taskList.sort((a, b) => a.date - b.date);
+    const sortDates = (selectedProj, bool) => {
+        if(bool === false) {
+            selectedProj.taskList.sort((a, b) => a.date - b.date);
+        } else {
+            selectedProj.taskList.sort((a, b) => b.date - a.date);
+        };
     };
 
 
@@ -202,14 +206,13 @@ const todoApp = (() => {
     //order task dates on click
     const sortProjectDatesEvent = selectedProj => {
         //cache DOM elements
-        const projectDateFilters = document.getElementsByClassName("project-date-container");
-        //loop through HTML collection
-        for(let i = 0; i < projectDateFilters.length; i++) {
-            projectDateFilters[i].addEventListener("click", () => {
-                sortDates(selectedProj);
-                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-            });
-        };
+        const projectDateFilter = document.getElementById("project-date-container");
+        //add click event to element
+        projectDateFilter.addEventListener("click", () => {
+            sortDates(selectedProj, selectedProj.dateSort);
+            updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            selectedProj.dateSort = !selectedProj.dateSort; 
+        });
     };
 
 

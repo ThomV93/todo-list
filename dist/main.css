@@ -368,11 +368,12 @@ button:focus {
     margin: auto 0;
 }
 
-.project-date-container {
+#project-date-container {
     display: flex;
     align-items: center;
     grid-column: 10/11;
     margin: auto;
+    cursor: pointer;
 }
 
 .project-date {
