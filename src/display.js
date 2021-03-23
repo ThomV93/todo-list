@@ -100,16 +100,6 @@ const display = () => {
         };
     };
 
-    const crossSideTask = selectedTask => {
-        selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
-    };
-
-    //visually cross inactive task
-    const crossTask = (selectedProj, idx) => {
-        let selectedTask = selectedProj.taskList[idx];
-        selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
-    };
-
     //visually expand task
     const expandTask = (notes, checkbox, idx) => {
         if(notes[idx].style.display === "none") {
@@ -128,8 +118,6 @@ const display = () => {
         renderAll,
         collapseSidebar,
         collapseSideProjects,
-        //crossSideTask,
-        crossTask,
         expandTask
     };
 };

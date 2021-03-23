@@ -71,7 +71,7 @@ const todoApp = (() => {
         collapseSideProjectsEvent();
         sideProjectTitleEvent();
         projectCreatorEvent();
-        //crossSideTaskEvent();
+        crossSideTaskEvent();
     };
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
@@ -91,6 +91,34 @@ const todoApp = (() => {
         expandTaskEvent(proj);
         //cross off task
         crossTaskEvent(proj);
+        //cross off sidetask
+        crossSideTaskEvent();
+    };
+
+
+    // -------------------- Aux Functions ---------------------
+
+
+    const crossSideTask = selectedTask => {
+        selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
+    };
+
+    //visually cross inactive task
+    const crossTask = (selectedProj, idx) => {
+        let selectedTask = selectedProj.taskList[idx];
+        selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
+    };
+
+    const getTaskObj = name => {
+        for(let i = 0; i < projectsArray.length; i++) {
+            if (projectsArray[i].findTask(name) !== undefined) {
+                return projectsArray[i].findTask(name);
+            };
+        };
+    };
+
+    const getParentIdx = name => {
+        return projectsArray.findIndex(proj => proj.name === name);
     };
 
 
@@ -137,29 +165,25 @@ const todoApp = (() => {
         };
     };
 
-    // const getSelectedTask = name => {
-    //     for(let i = 0; i < projectsArray.length; i++) {
-    //         return projectsArray[i].findTask(name);
-    //     };
-    // };
-
-    // const getParentIdx = name => {
-    //     return projectsArray.findIndex(proj => proj.name === name);
-    // };
-
-    // const crossSideTaskEvent = () => {
-    //     //cache input element
-    //     const sideTaskInput = document.getElementsByClassName("sidebar-task-input");
-
-    //     for(let i = 0; i < sideTaskInput.length; i++) {
-    //         sideTaskInput[i].addEventListener("click", () => {
-    //             let selectedTask = getSelectedTask(sideTaskInput[i].name);
-    //             let projIdx = getParentIdx(selectedTask.parentName);
-    //             display().crossSideTask(selectedTask);
-    //             updateDisplay(projectsArray, projectsArray[projIdx], projectDisplayContainer_div, sidebarProjectContainer_div);
-    //         });
-    //     };
-    // };
+    //click event to cross sidebar task
+    const crossSideTaskEvent = () => {
+        //cache input element
+        const sideTaskInput = document.getElementsByClassName("sidebar-task-input");
+        //HTML collection to array
+        const sideTaskArray = Array.from(sideTaskInput);
+        //loop through each element of the array
+        for(let i = 0; i < sideTaskArray.length; i++) {
+            sideTaskArray[i].addEventListener("click", () => {
+                //get task based on the name of the DOM element
+                let selectedTask = getTaskObj(sideTaskArray[i].name);
+                //get index of parent to update display accordingly
+                let projIdx = getParentIdx(selectedTask.parentName);
+                //toggle task status
+                crossSideTask(selectedTask);
+                updateDisplay(projectsArray, projectsArray[projIdx], projectDisplayContainer_div, sidebarProjectContainer_div);
+            });
+        };
+    };
 
 
     // --------------- Tasks Events Section -------------------
@@ -172,7 +196,7 @@ const todoApp = (() => {
 
         for(let i = 0; i < taskInput.length; i++) {
             taskInput[i].addEventListener("click", () => {
-                display().crossTask(selectedProj, i);
+                crossTask(selectedProj, i);
                 updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             });
         };
@@ -434,7 +458,6 @@ const todoApp = (() => {
     // -------- To be done -------
 
     // add button like the form btn to edit projects
-    // tasks can be crossed in the sidebar as well
     // user can filter dates
     // task sub-list
     // trash section and functionalities
