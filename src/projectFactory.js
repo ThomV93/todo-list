@@ -4,6 +4,10 @@ const project = name => {
 
     //task factory
     const task = (name, time, date, priority) => {
+        //format date string to yyyy-MM-dd
+        let treatedDate = date.split("/").reverse().join("-");
+        //date string to date obj
+        date = new Date(treatedDate);
         //notes storage
         let notes = "";
         //checkbox storage

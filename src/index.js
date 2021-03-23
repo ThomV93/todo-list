@@ -27,10 +27,10 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "29/08/2021", "high");
-    let workTask2 = work.task("Send Emails", "10:30", "29/08/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "29/08/2021", "high");
-    let workTask4 = work.task("Open Tickets", "16:00", "29/08/2021", "regular");
+    let workTask1 = work.task("Check Emails", "09:00", "23/02/2021", "high");
+    let workTask2 = work.task("Send Emails", "10:30", "21/01/2021", "regular");
+    let workTask3 = work.task("Create reports", "14:00", "14/04/2021", "high");
+    let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     work.addTask(workTask1);
     work.addTask(workTask2);
     work.addTask(workTask3);
@@ -42,7 +42,7 @@ const todoApp = (() => {
     let investing = project("Investing");
 
     let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00", "29/08/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "01/02/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
 
@@ -81,6 +81,8 @@ const todoApp = (() => {
         display().sideProjects(arr, sideContainer);
         //add back the sidebar projet's click event
         sideProjectTitleEvent();
+        //sort tasks by date
+        sortProjectDatesEvent(proj);
         //add back the task creator click event
         taskCreatorEvent(proj);
         //add back the edit task event
@@ -98,17 +100,18 @@ const todoApp = (() => {
 
     // -------------------- Aux Functions ---------------------
 
-
+    //cross inactive sidetask
     const crossSideTask = selectedTask => {
         selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
     };
 
-    //visually cross inactive task
+    //cross inactive task
     const crossTask = (selectedProj, idx) => {
         let selectedTask = selectedProj.taskList[idx];
         selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
     };
 
+    //retrieve task obejct by name
     const getTaskObj = name => {
         for(let i = 0; i < projectsArray.length; i++) {
             if (projectsArray[i].findTask(name) !== undefined) {
@@ -117,8 +120,14 @@ const todoApp = (() => {
         };
     };
 
+    //get project index by name
     const getParentIdx = name => {
         return projectsArray.findIndex(proj => proj.name === name);
+    };
+
+    //sort project task list by date
+    const sortDates = (selectedProj) => {
+        selectedProj.taskList.sort((a, b) => a.date - b.date);
     };
 
 
@@ -156,6 +165,7 @@ const todoApp = (() => {
             //add event listener to each element
             sidebarProjectTitleContainer_div[i].addEventListener("click", () => {
                 display().selectedProject(projectsArray[i], projectDisplayContainer_div);
+                sortProjectDatesEvent(projectsArray[i]);
                 taskCreatorEvent(projectsArray[i]);
                 editTaskEvent(projectsArray[i]);
                 deleteTaskEvent(projectsArray[i]);
@@ -181,6 +191,23 @@ const todoApp = (() => {
                 //toggle task status
                 crossSideTask(selectedTask);
                 updateDisplay(projectsArray, projectsArray[projIdx], projectDisplayContainer_div, sidebarProjectContainer_div);
+            });
+        };
+    };
+
+
+    // --------------- Projects Events Section ----------------
+
+
+    //order task dates on click
+    const sortProjectDatesEvent = selectedProj => {
+        //cache DOM elements
+        const projectDateFilters = document.getElementsByClassName("project-date");
+        //loop through HTML collection
+        for(let i = 0; i < projectDateFilters.length; i++) {
+            projectDateFilters[i].addEventListener("click", () => {
+                sortDates(selectedProj);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             });
         };
     };
@@ -317,14 +344,6 @@ const todoApp = (() => {
         };
     };
 
-    //format date to display
-    const formatDate = date => {
-        let dateObj = new Date(date);
-        let formatted = format(dateObj, "dd/MM/yyyy");
-
-        return formatted;
-    };
-
     const closeFrom = () => {
         document.body.removeChild(document.body.firstChild);
     };
@@ -341,7 +360,7 @@ const todoApp = (() => {
         //store user input
         let taskName = editorName.value;
         let taskTime = editorTime.value;
-        let taskDate = formatDate(editorDate.value);
+        let taskDate = editorDate.value;
         let taskPriority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
         let taskNotes = editorNotes.value;
 
@@ -417,7 +436,7 @@ const todoApp = (() => {
         //render values stored in the object
         editorName.value = proj.taskList[idx].name;
         editorTime.value = proj.taskList[idx].time;
-        editorDate.value = proj.taskList[idx].date.split("/").reverse().join("-");
+        editorDate.value = format(proj.taskList[idx].date, "yyyy-MM-dd");
         editorNotes.value = proj.taskList[idx].notes;
     };
 
@@ -431,7 +450,7 @@ const todoApp = (() => {
 
         proj.taskList[idx].name = editorName.value;
         proj.taskList[idx].time = editorTime.value;
-        proj.taskList[idx].date = formatDate(editorDate.value);
+        proj.taskList[idx].date = new Date(editorDate.value);
         proj.taskList[idx].priority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
         proj.taskList[idx].notes = editorNotes.value;
     };
@@ -457,18 +476,20 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // add button like the form btn to edit projects
-    // user can filter dates
     // task sub-list
     // trash section and functionalities
     // home section displays tasks due to today
-    // smooth collapse effects
     // all section
     // searchbar
-    // dark mode
-    // notes altered outside of the forms need to be saved
     // display each section's value
+    // notes altered outside of the forms need to be saved
     // create local storage
+    
+    // ---- CSS -----
+
+    // project have edited and deleted icon
+    // dark mode
     // media queries
+    // smooth collapse effects
 
 })();

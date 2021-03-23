@@ -3,6 +3,7 @@ import renderSidebar from "./renderSidebar";
 import renderProjectContainer from "./renderProjectContainer";
 import renderSidebarProject from "./renderSidebarProject";
 import renderProject from "./renderProject";
+import {format} from 'date-fns';
 
 const display = () => {
 
@@ -50,7 +51,7 @@ const display = () => {
             //select each task
             let task = arrPos.taskList[i];
             //render tasks
-            proj.renderTask(task.name, task.date, task.time, task.priority, task.isActive);
+            proj.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.isActive);
         };
     };
 
@@ -109,6 +110,12 @@ const display = () => {
             notes[idx].style.display = "none";
             checkbox[idx].style.display = "none";
         };
+    };
+
+    //format date to display
+    const formatDate = date => {
+        let formatted = format(date, "dd/MM/yyyy");
+        return formatted;
     };
 
     return {
