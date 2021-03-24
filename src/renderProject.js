@@ -39,11 +39,13 @@ const renderProject = (container) => {
         //project edit icon
         let projectEditIcon = document.createElement("img");
         projectEditIcon.className = "project-edit-icon";
+        projectEditIcon.id = "proj-edit-icon";
         projectEditIcon.src = "icons/edit-3.svg";
 
         //project trash icon
         let projectTrashIcon = document.createElement("img");
         projectTrashIcon.className = "project-trash-icon";
+        projectTrashIcon.id = "proj-trash-icon";
         projectTrashIcon.src = "icons/trash-2.svg";
 
         //append date elements to container

@@ -83,6 +83,8 @@ const todoApp = (() => {
         sideProjectTitleEvent();
         //sort tasks by date
         sortProjectDatesEvent(proj);
+        //edit project
+        editProjectEvent(proj);
         //add back the task creator click event
         taskCreatorEvent(proj);
         //add back the edit task event
@@ -170,6 +172,7 @@ const todoApp = (() => {
             sidebarProjectTitleContainer_div[i].addEventListener("click", () => {
                 display().selectedProject(projectsArray[i], projectDisplayContainer_div);
                 sortProjectDatesEvent(projectsArray[i]);
+                editProjectEvent(projectsArray[i]);
                 taskCreatorEvent(projectsArray[i]);
                 editTaskEvent(projectsArray[i]);
                 deleteTaskEvent(projectsArray[i]);
@@ -211,7 +214,20 @@ const todoApp = (() => {
         projectDateFilter.addEventListener("click", () => {
             sortDates(selectedProj, selectedProj.dateSort);
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            //toggle boolean value
             selectedProj.dateSort = !selectedProj.dateSort; 
+        });
+    };
+
+    const editProjectEvent = selectedProj => {
+        //cache DOM element
+        const projEditIcon = document.getElementById("proj-edit-icon");
+        //add click event to element
+        projEditIcon.addEventListener("click", () => {
+            renderProjectEditor(document.body);
+            renderProjectEditorValues(selectedProj);
+            projectCreatorCancelBtnEvent();
+            projectEditorSaveBtnEvent(selectedProj);
         });
     };
 
@@ -286,8 +302,8 @@ const todoApp = (() => {
     const projectCreatorEvent = () => {
         sidebarPlusIcon.addEventListener("click", () => {
             renderProjectEditor(document.body);
-            projectCreatorCancelBtn();
-            projectCreatorSaveBtn();
+            projectCreatorCancelBtnEvent();
+            projectCreatorSaveBtnEvent();
         });
     };
 
@@ -305,7 +321,7 @@ const todoApp = (() => {
     };
 
     //task creator/ editor cancel button event
-    const projectCreatorCancelBtn = () => {
+    const projectCreatorCancelBtnEvent = () => {
         //cache DOM element
         const projectCancelBtn = document.getElementById("project-editor-cancel-btn");
         //close the form on click
@@ -315,7 +331,7 @@ const todoApp = (() => {
     };
 
     //task creator/ editor save button event
-    const projectCreatorSaveBtn = () => {
+    const projectCreatorSaveBtnEvent = () => {
         //cache DOM element
         const projectSaveBtn = document.getElementById("project-editor-save-btn");
         //run necessary functions on click
@@ -323,6 +339,40 @@ const todoApp = (() => {
             projectCreator();
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, projectsArray[projectsArray.length - 1], projectDisplayContainer_div, sidebarProjectContainer_div);
+            //stop displaying the form
+            closeFrom();
+        });
+    };
+
+
+    // ------------------- Project Editor -----------------------
+
+
+    const renderProjectEditorValues = selectedProj => {
+        //cache DOM elements
+        const editorTitle = document.getElementById("editor-title");
+        const editorName = document.getElementById("editor-name");
+        //alter form's title
+        editorTitle.innerHTML = "Edit Project";
+        //render value stored in the object
+        editorName.value = selectedProj.name;
+    };
+
+    const projectEditor = selectedProj => {
+        //select each input element
+        const editorName = document.getElementById("editor-name");
+        //store new value in the object
+        selectedProj.name = editorName.value;
+    };
+
+    const projectEditorSaveBtnEvent = selectedProj => {
+        //cache DOM element
+        const projectSaveBtn = document.getElementById("project-editor-save-btn");
+        //run necessary functions on click
+        projectSaveBtn.addEventListener("click", () => {
+            projectEditor(selectedProj);
+            //update display and reintroduce necessary event listeners
+            updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             //stop displaying the form
             closeFrom();
         });
@@ -490,7 +540,6 @@ const todoApp = (() => {
     
     // ---- CSS -----
 
-    // project have edit and delet icon
     // dark mode
     // media queries
     // smooth collapse effects
