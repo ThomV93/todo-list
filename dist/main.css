@@ -109,10 +109,12 @@ button:focus {
 }
 
 #sun-icon {
-    height: 35px;
-    width: auto;
     grid-column: 11;
     margin: auto 5px auto auto;
+}
+
+#sun-icon:hover {
+    cursor: pointer;
 }
 
 #more-vertical-icon {

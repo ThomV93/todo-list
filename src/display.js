@@ -90,6 +90,16 @@ const display = () => {
         };
     };
 
+    const changeTheme = (icon, bool) => {
+        if (bool === false) {
+            icon.src = "icons/moon.svg";
+            document.documentElement.dataset.theme = "dark"
+        } else {
+            icon.src = "icons/sun.svg";
+            document.documentElement.dataset.theme = "light"
+        };
+    };
+
     //hide or display the projects and tasks displayed in the sidebar
     const collapseSideProjects = (chevron, container, bool) => {
         if (bool === false) {
@@ -124,6 +134,7 @@ const display = () => {
         selectedProject,
         renderAll,
         collapseSidebar,
+        changeTheme,
         collapseSideProjects,
         expandTask
     };

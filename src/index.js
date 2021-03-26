@@ -13,6 +13,7 @@ const todoApp = (() => {
     let projectsArray = [];
 
     //cache DOM elements
+    const sunIcon_img = document.getElementById("sun-icon");
     const listIcon_img = document.getElementById("list-icon");
     const sidebar = document.getElementById("sidebar");
     const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
@@ -72,6 +73,7 @@ const todoApp = (() => {
         sideProjectTitleEvent();
         projectCreatorEvent();
         crossSideTaskEvent();
+        changeThemeEvent();
     };
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
@@ -146,6 +148,16 @@ const todoApp = (() => {
         //click event to run function and invert toggle
         listIcon_img.addEventListener("click", () => {
             display().collapseSidebar(sidebar, projectDisplayContainer_div, toggle);
+            toggle = !toggle;
+        });
+    };
+
+    const changeThemeEvent = () => {
+        //toggle boolean
+        let toggle = false;
+        //click event to run function and invert toggle
+        sunIcon_img.addEventListener("click", () => {
+            display().changeTheme(sunIcon_img, toggle);
             toggle = !toggle;
         });
     };
