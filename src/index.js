@@ -11,11 +11,14 @@ const todoApp = (() => {
     display().renderPage();
     //project objects array
     let projectsArray = [];
+    //today project object
+    let todayProj = project("Today");
 
     //cache DOM elements
     const sunIcon_img = document.getElementById("sun-icon");
     const listIcon_img = document.getElementById("list-icon");
     const sidebar = document.getElementById("sidebar");
+    const sidebarTodayTitle = document.getElementById("sidebar-title-today");
     const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
     const sideProjectChevron = document.getElementById("sidebar-section-chevron-icon");
     const sidebarPlusIcon = document.getElementById("sidebar-section-plus-icon");
@@ -28,9 +31,9 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "23/02/2021", "high");
+    let workTask1 = work.task("Check Emails", "09:00", "26/03/2021", "high");
     let workTask2 = work.task("Send Emails", "10:30", "21/01/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "14/04/2021", "high");
+    let workTask3 = work.task("Create reports", "14:00", "26/03/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     work.addTask(workTask1);
     work.addTask(workTask2);
@@ -43,7 +46,7 @@ const todoApp = (() => {
     let investing = project("Investing");
 
     let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00", "01/02/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "26/03/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
 
@@ -53,7 +56,7 @@ const todoApp = (() => {
     let coding = project("Coding");
 
     let codingTask1 = coding.task("Study", "19:00", "29/08/2021", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30", "29/08/2021", "high");
+    let codingTask2 = coding.task("Study MORE", "20:30", "26/03/2021", "high");
     let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
@@ -74,6 +77,8 @@ const todoApp = (() => {
         projectCreatorEvent();
         crossSideTaskEvent();
         changeThemeEvent();
+        checkIfToday();
+        todaySectionEvent();
     };
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
@@ -138,6 +143,28 @@ const todoApp = (() => {
         };
     };
 
+    //find tasks with today's date and push to today project object
+    const checkIfToday = () => {
+        //get today's date
+        let today = format(new Date(), "yyyy/MM/dd");
+        //loop through projects array
+        for(let i = 0; i < projectsArray.length; i++) {
+            let project = projectsArray[i];
+            //loop through each task
+            for(let j = 0; j < project.taskList.length; j++) {
+                let task = project.taskList[j];
+                //format task date to match today's date
+                let formattedDate = format(task.date, "yyyy/MM/dd");
+                //if task is due today, add to today project object
+                if(formattedDate === today) {
+                    let todayTask = task;
+                    todayProj.addTask(todayTask);
+                };
+
+            };
+        };
+    };
+
 
     // ---------------- Navbar Events Section ----------------
 
@@ -174,6 +201,12 @@ const todoApp = (() => {
         sideProjectMainTitle.addEventListener("click", () => {
             display().collapseSideProjects(sideProjectChevron, sidebarProjectContainer_div, toggle);
             toggle = !toggle;
+        });
+    };
+
+    const todaySectionEvent = () => {
+        sidebarTodayTitle.addEventListener("click", () => {
+            updateDisplay(projectsArray, todayProj, projectDisplayContainer_div, sidebarProjectContainer_div);
         });
     };
 
@@ -541,9 +574,9 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // home section displays user numbers. Num of tasks/projects..
     // today section displays tasks due to today
     // trash section and functionalities
+    // home section displays user numbers. Num of tasks/projects..
     // searchbar
     // task sub-list
     // display each section's value
@@ -552,7 +585,6 @@ const todoApp = (() => {
     
     // ---- CSS -----
 
-    // dark mode
     // media queries
     // smooth collapse effects
 
