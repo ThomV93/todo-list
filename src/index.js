@@ -529,7 +529,7 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // home section displays all projects
+    // home section displays user numbers. Num of tasks/projects..
     // today section displays tasks due to today
     // trash section and functionalities
     // searchbar

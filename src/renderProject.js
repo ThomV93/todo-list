@@ -1,6 +1,4 @@
-import project from "./projectFactory";
-
-const renderProject = (container) => {
+const renderProject = container => {
     //main project container
     let projectContainer = document.createElement("div");
     projectContainer.className = "project";
@@ -12,7 +10,7 @@ const renderProject = (container) => {
 
     //------ Project DOM factory module -----
 
-    const renderProjectTitle = (name) => {
+    const renderProjectTitle = name => {
         //title container
         let projectTitleContainer = document.createElement("div");
         projectTitleContainer.className = "project-title-container";

@@ -6,12 +6,27 @@
 }
 
 html[data-theme="light"] {
+    --nav-orange: #f2704f;
     --orange: #f2704f;
     --light-grey: #fafafa;
     --grey: #dedede;
     --hover-grey: #ececec;
     --dark-grey: #949494;
+    --white: #fff;
+    --black: #000;
     --translucent-black: rgba(0, 0, 0, 0.8);
+}
+
+html[data-theme="dark"] {
+    --nav-orange: #242a2e;
+    --orange: #fff;
+    --light-grey: #2e373c;
+    --grey: #949da5;
+    --hover-grey: #242a2e;
+    --dark-grey: #949494;
+    --white: #121212;
+    --black: #fff;
+    --translucent-black: rgba(255, 255, 255, 0.8);
 }
 
 body, #content {
@@ -44,7 +59,7 @@ button:focus {
     grid-template-columns: repeat(12, 1fr);
     grid-column: 1/ -1;
     grid-row: 1;
-    background-color: var(--orange);
+    background-color: var(--nav-orange);
     padding: 0.5rem 2rem;
     box-sizing: border-box;
     z-index: 1;
@@ -139,7 +154,8 @@ button:focus {
 
 .user-titles {
     font-size: 18px;
-    margin-top: 1.5rem;   
+    margin-top: 1.5rem;
+    color: var(--black);
 }
 
 .user-titles:hover {
@@ -312,6 +328,7 @@ button:focus {
     grid-column: 3/ -1;
     margin: auto 3px;
     font-size: 16px;
+    color: var(--black);
 }
 
 .sidebar-task-title {
@@ -345,6 +362,7 @@ button:focus {
     grid-row: 2/ -1;
     overflow: scroll;
     background-color: var(--white);
+    color: var(--black);
 }
 
 .project {
@@ -360,6 +378,7 @@ button:focus {
     color: #18191a;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
+    color: var(--black);
 }
 
 .project-title {
