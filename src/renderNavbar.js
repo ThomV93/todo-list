@@ -27,13 +27,13 @@ const renderNavbar = (container) => {
 
     //plus sign icon
     let plusIcon = document.createElement("img");
-    plusIcon.id = "plus-icon";
-    plusIcon.src = "icons/plus.svg";
+    plusIcon.id = "sun-icon";
+    plusIcon.src = "icons/sun.svg";
 
     //settings icon
     let settingsIcon = document.createElement("img");
-    settingsIcon.id = "settings-icon";
-    settingsIcon.src = "icons/settings.svg";
+    settingsIcon.id = "more-vertical-icon";
+    settingsIcon.src = "icons/more-vertical.svg";
 
     //append all to main container
     navContainer.append(logoImg, searchContainer, plusIcon, settingsIcon);

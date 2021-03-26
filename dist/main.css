@@ -108,14 +108,14 @@ button:focus {
     width: auto;
 }
 
-#plus-icon {
+#sun-icon {
     height: 35px;
     width: auto;
     grid-column: 11;
     margin: auto 5px auto auto;
 }
 
-#settings-icon {
+#more-vertical-icon {
     grid-column: 12;
     margin: auto 2px;
 }
