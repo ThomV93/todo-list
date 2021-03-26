@@ -92,11 +92,11 @@ const display = () => {
 
     const changeTheme = (icon, bool) => {
         if (bool === false) {
-            icon.src = "icons/sun.svg";
-            document.documentElement.dataset.theme = "light"
-        } else {
             icon.src = "icons/moon.svg";
             document.documentElement.dataset.theme = "dark"
+        } else {
+            icon.src = "icons/sun.svg";
+            document.documentElement.dataset.theme = "light"
         };
     };
 
