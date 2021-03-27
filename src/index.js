@@ -31,9 +31,9 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "26/03/2021", "high");
+    let workTask1 = work.task("Check Emails", "09:00", "27/03/2021", "high");
     let workTask2 = work.task("Send Emails", "10:30", "21/01/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "26/03/2021", "high");
+    let workTask3 = work.task("Create reports", "14:00", "27/03/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     work.addTask(workTask1);
     work.addTask(workTask2);
@@ -46,9 +46,11 @@ const todoApp = (() => {
     let investing = project("Investing");
 
     let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00", "26/03/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "27/03/2021");
+    let investingTask3 = investing.task("Test", "18:00", "27/03/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
+    investing.addTask(investingTask3);
 
     projectsArray.push(investing);
 
@@ -56,7 +58,7 @@ const todoApp = (() => {
     let coding = project("Coding");
 
     let codingTask1 = coding.task("Study", "19:00", "29/08/2021", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30", "26/03/2021", "high");
+    let codingTask2 = coding.task("Study MORE", "20:30", "27/03/2021", "high");
     let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
@@ -77,7 +79,7 @@ const todoApp = (() => {
         projectCreatorEvent();
         crossSideTaskEvent();
         changeThemeEvent();
-        checkIfToday();
+        checkForToday();
         todaySectionEvent();
     };
 
@@ -144,7 +146,7 @@ const todoApp = (() => {
     };
 
     //find tasks with today's date and push to today project object
-    const checkIfToday = () => {
+    const checkForToday = () => {
         //get today's date
         let today = format(new Date(), "yyyy/MM/dd");
         //loop through projects array
@@ -162,6 +164,16 @@ const todoApp = (() => {
                 };
 
             };
+        };
+    };
+
+    //check if task is due today and push to today project object
+    const checkIfToday = (date, task) => {
+        let todayDate = format(new Date(), "yyyy/MM/dd");
+        let formattedDate = format(date, "yyyy/MM/dd");
+
+        if(todayDate === formattedDate){
+            todayProj.addTask(task);
         };
     };
 
@@ -468,6 +480,8 @@ const todoApp = (() => {
         newTask.notes = taskNotes;
         //add task to the project
         proj.addTask(newTask);
+        //check if the task is due today and add to today's section as well
+        checkIfToday(newTask.date, newTask);
     };
 
     //user can switch between task priority by clicking on flag
@@ -551,6 +565,9 @@ const todoApp = (() => {
         proj.taskList[idx].date = new Date(editorDate.value);
         proj.taskList[idx].priority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
         proj.taskList[idx].notes = editorNotes.value;
+
+        //check if the task is due today and add to today's section as well
+        checkIfToday(proj.taskList[idx].date, proj.taskList[idx]);
     };
 
     //task creator/ editor save button event
