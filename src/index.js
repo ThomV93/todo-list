@@ -74,13 +74,13 @@ const todoApp = (() => {
     const pageInit = () => {
         display().sideProjects(projectsArray, sidebarProjectContainer_div);
         collapseSidebarEvent();
+        changeThemeEvent();
+        todaySectionEvent();
+        checkForToday(projectsArray);
         collapseSideProjectsEvent();
         sideProjectTitleEvent();
         projectCreatorEvent();
         crossSideTaskEvent();
-        changeThemeEvent();
-        checkForToday();
-        todaySectionEvent();
     };
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
@@ -146,12 +146,12 @@ const todoApp = (() => {
     };
 
     //find tasks with today's date and push to today project object
-    const checkForToday = () => {
+    const checkForToday = arr => {
         //get today's date
         let today = format(new Date(), "yyyy/MM/dd");
         //loop through projects array
-        for(let i = 0; i < projectsArray.length; i++) {
-            let project = projectsArray[i];
+        for(let i = 0; i < arr.length; i++) {
+            let project = arr[i];
             //loop through each task
             for(let j = 0; j < project.taskList.length; j++) {
                 let task = project.taskList[j];
@@ -346,8 +346,8 @@ const todoApp = (() => {
 
         for(let i = 0; i < taskName.length; i++) {
             taskName[i].addEventListener("click", () => {
-                renderNotes(selectedProj, taskNotes, i);
                 display().expandTask(taskNotesContainer, taskCheckboxContainer, i);
+                renderNotes(selectedProj, taskNotes, i);
             });
         };
     };

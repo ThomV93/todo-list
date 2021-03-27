@@ -81,11 +81,11 @@ const display = () => {
     const collapseSidebar = (sidebar, projDisplay, bool) => {
         if (bool === false) {
             //hide sidebar
-            sidebar.style.display = "none";
+            sidebar.style.transform = "translateX(-450px)";
             //center projects and tasks
             projDisplay.style.gridColumn = "1 / -1";
         } else {
-            sidebar.style.display = "grid";
+            sidebar.style.transform = "translateX(0)";
             projDisplay.style.gridColumn = "4 / -1";
         };
     };
@@ -104,21 +104,44 @@ const display = () => {
     const collapseSideProjects = (chevron, container, bool) => {
         if (bool === false) {
             chevron.style.transform = "rotate(0deg)";
-            container.style.display = "none";
+            container.style.visibility = "hidden";
+            container.style.opacity = "0";
+            container.style.transition = "visibility 0s linear 400ms, opacity 400ms";
         } else {
             chevron.style.transform = "rotate(90deg)";
-            container.style.display = "grid";
+            container.style.visibility = "visible";
+            container.style.opacity = "1";
+            container.style.transition = "visibility 0s linear 0s, opacity 400ms";
         };
     };
 
+    // //visually expand task
+    // const expandTask = (notes, checkbox, idx) => {
+    //     if(notes[idx].style.display === "none") {
+    //         notes[idx].style.display = "block";
+    //         checkbox[idx].style.display = "block";
+    //     } else {
+    //         notes[idx].style.display = "none";
+    //         checkbox[idx].style.display = "none";
+    //     };
+    // };
+
     //visually expand task
-    const expandTask = (notes, checkbox, idx) => {
-        if(notes[idx].style.display === "none") {
-            notes[idx].style.display = "block";
-            checkbox[idx].style.display = "block";
+    const expandTask = (notesContainer, checkContainer, idx) => {
+        if(notesContainer[idx].style.position === "absolute") {
+            //apply on notes container
+            notesContainer[idx].style.position = "static";
+            notesContainer[idx].style.visibility = "visible";
+            //apply on checkbox container
+            checkContainer[idx].style.position = "static";
+            checkContainer[idx].style.visibility = "visible";
         } else {
-            notes[idx].style.display = "none";
-            checkbox[idx].style.display = "none";
+            //apply on notes container
+            notesContainer[idx].style.visibility = "hidden";
+            notesContainer[idx].style.position = "absolute";
+            //apply on checkbox container
+            checkContainer[idx].style.visibility = "hidden";
+            checkContainer[idx].style.position = "absolute";
         };
     };
 
