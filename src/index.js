@@ -2,6 +2,7 @@
 import display from "./display";
 import project from "./projectFactory";
 import projectForm from "./projectForm";
+import taskForm from "./taskForm";
 import renderTaskForm from "./renderTaskForm";
 import renderProjectForm from "./renderProjectForm";
 import {format} from 'date-fns';
@@ -243,9 +244,9 @@ const todoApp = (() => {
         for(let i = 0; i < taskEditIcon.length; i++) {
             taskEditIcon[i].addEventListener("click", () => {
                 renderTaskForm(document.body);
-                renderTaskEditorValues(selectedProj, i);
+                taskForm().displayStoredValues(selectedProj, i);
                 taskCreatorFlagEvent();
-                taskCreatorCancelBtn();
+                taskCreatorCancelBtnEvent();
                 taskEditorSaveBtnEvent(selectedProj, i);
             });
         };
@@ -328,7 +329,7 @@ const todoApp = (() => {
     };
 
 
-    // -------------------- Task Creator -------------------------
+    // -------------------- Task Form Events -------------------------
 
 
     //click event for the task creator button
@@ -340,46 +341,10 @@ const todoApp = (() => {
             taskCreator_div[i].addEventListener("click", () => {
                 renderTaskForm(document.body);
                 taskCreatorFlagEvent();
-                taskCreatorSaveBtn(selectedProj);
-                taskCreatorCancelBtn();
+                taskCreatorSaveBtnEvent(selectedProj);
+                taskCreatorCancelBtnEvent();
             });
         };
-    };
-
-    //check if task is due today and push to today project object
-    const checkIfToday = (date, task) => {
-        let todayDate = format(new Date(), "yyyy/MM/dd");
-        let formattedDate = format(date, "yyyy/MM/dd");
-
-        if(todayDate === formattedDate){
-            todayProj.addTask(task);
-        };
-    };
-
-    //task creator form logic
-    const taskCreator = proj => {
-        //select each input element
-        const formName = document.getElementById("form-name");
-        const formTime = document.getElementById("form-time");
-        const formDate = document.getElementById("form-date");
-        const formFlag = document.getElementById("form-flag").src;
-        const formNotes = document.getElementById("form-notes");
-
-        //store user input
-        let taskName = formName.value;
-        let taskTime = formTime.value;
-        let taskDate = formDate.value;
-        let taskPriority = formFlag.indexOf("red-flag") != -1 ? "high" : "regular";
-        let taskNotes = formNotes.value;
-
-        //create new task
-        let newTask = proj.task(taskName, taskTime, taskDate, taskPriority);
-        //add task notes
-        newTask.notes = taskNotes;
-        //add task to the project
-        proj.addTask(newTask);
-        //check if the task is due today and add to today's section as well
-        checkIfToday(newTask.date, newTask);
     };
 
     //user can switch between task priority by clicking on flag
@@ -390,82 +355,31 @@ const todoApp = (() => {
         let toggle = formFlag.src.indexOf("red-flag") != -1 ? true : false;
 
         formFlag.addEventListener("click", () => {
-            taskCreatorFlag(formFlag, toggle);
+            taskForm().displayCorrectFlag(formFlag, toggle);
             toggle = !toggle;
         });
     };
 
-    const taskCreatorFlag = (flag, bool) => {
-        //display correct flag
-        bool === false ? flag.src = "icons/red-flag.svg" : flag.src = "icons/flag.svg";
-    };
-
     //task form cancel button event
-    const taskCreatorCancelBtn = () => {
+    const taskCreatorCancelBtnEvent = () => {
         //cache DOM element
         const cancelBtn = document.getElementById("form-cancel-btn");
 
         cancelBtn.addEventListener("click", () => {
-            closeFrom();
+            taskForm().close();
         });
     };
 
     //task form save button event
-    const taskCreatorSaveBtn = (selectedProj) => {
+    const taskCreatorSaveBtnEvent = (selectedProj) => {
         //cache DOM element
         const saveBtn = document.getElementById("form-save-btn");
 
         saveBtn.addEventListener("click", () => {
-            taskCreator(selectedProj);
+            taskForm().creator(selectedProj, todayProj);
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-            closeFrom();
+            taskForm().close();
         });
-    };
-
-
-    // --------------------- Task editor -----------------------
-
-
-    //render current values when the editor is displayed
-    const renderTaskEditorValues = (proj, idx) => {
-        //cache task form title
-        const formTitle = document.getElementById("form-title");
-        //cache each input element
-        const formName = document.getElementById("form-name");
-        const formTime = document.getElementById("form-time");
-        const formDate = document.getElementById("form-date");
-        const formFlag = document.getElementById("form-flag");
-        const formNotes = document.getElementById("form-notes");
-
-        //alter form's title
-        formTitle.innerHTML = "Edit Task";
-
-        //render correct flag
-        proj.taskList[idx].priority === "high" ? formFlag.src = "icons/red-flag.svg" : formFlag.src = "icons/flag.svg";
-
-        //render values stored in the object
-        formName.value = proj.taskList[idx].name;
-        formTime.value = proj.taskList[idx].time;
-        formDate.value = format(proj.taskList[idx].date, "yyyy-MM-dd");
-        formNotes.value = proj.taskList[idx].notes;
-    };
-
-    const taskEditor = (proj, idx) => {
-        //select each input element
-        const formName = document.getElementById("form-name");
-        const formTime = document.getElementById("form-time");
-        const formDate = document.getElementById("form-date");
-        const formFlag = document.getElementById("form-flag").src;
-        const formNotes = document.getElementById("form-notes");
-
-        proj.taskList[idx].name = formName.value;
-        proj.taskList[idx].time = formTime.value;
-        proj.taskList[idx].date = new Date(formDate.value);
-        proj.taskList[idx].priority = formFlag.indexOf("red-flag") != -1 ? "high" : "regular";
-        proj.taskList[idx].notes = formNotes.value;
-
-        //check if the task is due today and add to today's section as well
-        checkIfToday(proj.taskList[idx].date, proj.taskList[idx]);
     };
 
     //task editor save button event
@@ -474,11 +388,11 @@ const todoApp = (() => {
         const saveBtn = document.getElementById("form-save-btn");
 
         saveBtn.addEventListener("click", () => {
-            taskEditor(selectedProj, idx);
+            taskForm().editor(selectedProj, idx, todayProj);
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             //stop displaying the form
-            closeFrom();
+            taskForm().close();
         });
     };
 

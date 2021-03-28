@@ -15,16 +15,18 @@ const projectForm = () => {
         array.push(newProject);
     };
 
+    //display stored values in the editor
     const displayStoredValues = selectedProj => {
         //cache DOM elements
         const formTitle = document.getElementById("form-title");
         const formName = document.getElementById("form-name");
         //alter form's title
         formTitle.innerHTML = "Edit Project";
-        //render value stored in the object
+        //display value stored in the object
         formName.value = selectedProj.name;
     };
 
+    //editor section
     const editor = selectedProj => {
         //select each input element
         const formName = document.getElementById("form-name");
@@ -32,6 +34,7 @@ const projectForm = () => {
         selectedProj.name = formName.value;
     };
 
+    //close form
     const close = () => {
         document.body.removeChild(document.body.firstChild);
     };
