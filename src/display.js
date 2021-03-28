@@ -115,6 +115,11 @@ const display = () => {
         };
     };
 
+    const renderNotes = (selectedProj, notes, idx) => {
+        //display notes stored in the object
+        notes[idx].innerHTML = selectedProj.taskList[idx].notes;
+    };
+
     //visually expand task
     const expandTask = (notesContainer, checkContainer, idx) => {
         if(notesContainer[idx].style.position === "absolute") {
@@ -148,6 +153,7 @@ const display = () => {
         collapseSidebar,
         changeTheme,
         collapseSideProjects,
+        renderNotes,
         expandTask
     };
 };

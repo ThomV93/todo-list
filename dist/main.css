@@ -7,8 +7,8 @@ html[data-theme="light"] {
     --grey: #dedede;
     --hover-grey: #ececec;
     --dark-grey: #949494;
-    --white: #fafafa;
-    --black: #000;
+    --off-white: #fafafa;
+    --black: #121212;
     --translucent-black: rgba(0, 0, 0, 0.8);
 }
 
@@ -17,9 +17,9 @@ html[data-theme="dark"] {
     --orange: #f2704f;
     --light-grey: #242a2e;
     --grey: #949da5;
-    --hover-grey: #242a2e;
+    --hover-grey: #313639;
     --dark-grey: #949494;
-    --white: #242a2e;
+    --off-white: #242a2e;
     --black: #fafafa;
     --translucent-black: rgba(255, 255, 255, 0.8);
 }
@@ -37,7 +37,7 @@ body, #content {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
     overflow: auto;
-    background-color: var(--white);
+    background-color: var(--off-white);
 }
 
 input:focus,
@@ -86,11 +86,11 @@ button:focus {
     color: var(--black);
     padding: 8px 12px 8px 10px;
     border: none;
-    background-color: var(--white);
+    background-color: var(--off-white);
 }
 
 ::-webkit-input-placeholder {
-    color: var(--white);
+    color: var(--off-white);
     font-size: 14px;
 }
 
@@ -359,7 +359,7 @@ button:focus {
     grid-column: 4/ -1;
     grid-row: 2/ -1;
     overflow: scroll;
-    background-color: var(--white);
+    background-color: var(--off-white);
     color: var(--black);
 }
 
@@ -549,6 +549,8 @@ button:focus {
     resize: none;
     padding: 0.2rem 0.8rem;
     font-family: "Open Sans", sans-serif;
+    background-color: var(--off-white);
+    color: var(--black);
 }
 
 #checkbox-container {
@@ -719,7 +721,7 @@ button:focus {
     grid-column: 1/ -1;
     grid-row: 15/ -1;
     background-color: var(--orange);
-    color: var(--white);
+    color: var(--off-white);
 }
 
 
@@ -767,7 +769,7 @@ button:focus {
     grid-column: 1/ -1;
     grid-row: 14/ -1;
     background-color: var(--orange);
-    color: var(--white);
+    color: var(--off-white);
 }
 
 #project-editor-name-container {

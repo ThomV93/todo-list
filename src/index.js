@@ -35,6 +35,7 @@ const todoApp = (() => {
     let workTask2 = work.task("Send Emails", "10:30", "21/01/2021", "regular");
     let workTask3 = work.task("Create reports", "14:00", "27/03/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
+    workTask2.notes = "Hello Notes";
     work.addTask(workTask1);
     work.addTask(workTask2);
     work.addTask(workTask3);
@@ -109,7 +110,8 @@ const todoApp = (() => {
     };
 
 
-    // -------------------- Aux Functions ---------------------
+    // -------------------- projectsArray Aux Functions ---------------------
+
 
     //retrieve task obejct from any project by name
     const getTaskObj = name => {
@@ -144,16 +146,6 @@ const todoApp = (() => {
                 };
 
             };
-        };
-    };
-
-    //check if task is due today and push to today project object
-    const checkIfToday = (date, task) => {
-        let todayDate = format(new Date(), "yyyy/MM/dd");
-        let formattedDate = format(date, "yyyy/MM/dd");
-
-        if(todayDate === formattedDate){
-            todayProj.addTask(task);
         };
     };
 
@@ -311,11 +303,6 @@ const todoApp = (() => {
         };
     };
 
-    const renderNotes = (selectedProj, notes, idx) => {
-        //display notes stored in the object
-        notes[idx].innerHTML = selectedProj.taskList[idx].notes;
-    };
-
     const expandTaskEvent = selectedProj => {
         //cache all displayed
         const taskName = document.getElementsByClassName("task-name");
@@ -326,7 +313,7 @@ const todoApp = (() => {
         for(let i = 0; i < taskName.length; i++) {
             taskName[i].addEventListener("click", () => {
                 display().expandTask(taskNotesContainer, taskCheckboxContainer, i);
-                renderNotes(selectedProj, taskNotes, i);
+                display().renderNotes(selectedProj, taskNotes, i);
             });
         };
     };
@@ -435,6 +422,16 @@ const todoApp = (() => {
 
     const closeFrom = () => {
         document.body.removeChild(document.body.firstChild);
+    };
+
+    //check if task is due today and push to today project object
+    const checkIfToday = (date, task) => {
+        let todayDate = format(new Date(), "yyyy/MM/dd");
+        let formattedDate = format(date, "yyyy/MM/dd");
+
+        if(todayDate === formattedDate){
+            todayProj.addTask(task);
+        };
     };
 
     //task creator form logic
