@@ -1,6 +1,7 @@
 //import necessary modules
 import display from "./display";
 import project from "./projectFactory";
+import projectForm from "./projectForm";
 import renderTaskForm from "./renderTaskForm";
 import renderProjectForm from "./renderProjectForm";
 import {format} from 'date-fns';
@@ -192,7 +193,7 @@ const todoApp = (() => {
     };
 
 
-    // --------------- Projects Events Section ----------------
+    // --------------- Project Events Section ----------------
 
 
     //order task dates on click
@@ -212,14 +213,14 @@ const todoApp = (() => {
         //add click event to element
         projEditIcon.addEventListener("click", () => {
             renderProjectForm(document.body);
-            renderProjectEditorValues(selectedProj);
+            projectForm().displayStoredValues(selectedProj);
             projectCreatorCancelBtnEvent();
             projectEditorSaveBtnEvent(selectedProj);
         });
     };
 
 
-    // --------------- Tasks Events Section -------------------
+    // --------------- Task Events Section -------------------
 
 
     //cross inactive tasks
@@ -278,7 +279,7 @@ const todoApp = (() => {
     };
 
 
-    // ---------------- Project Creator --------------------
+    // ---------------- Project Form Events --------------------
 
     
     const projectCreatorEvent = () => {
@@ -289,26 +290,13 @@ const todoApp = (() => {
         });
     };
 
-    //project creator form logic
-    const projectCreator = () => {
-        //select input element
-        const formName = document.getElementById("form-name");
-        //store user input
-        let projectName = formName.value;
-
-        //create new project
-        let newProject = project(projectName)
-        //add project to array
-        projectsArray.push(newProject);
-    };
-
     //task form cancel button event
     const projectCreatorCancelBtnEvent = () => {
         //cache DOM element
         const projectCancelBtn = document.getElementById("project-form-cancel-btn");
         //close the form on click
         projectCancelBtn.addEventListener("click", () => {
-            closeFrom();
+            projectForm().close();
         });
     };
 
@@ -318,33 +306,12 @@ const todoApp = (() => {
         const projectSaveBtn = document.getElementById("project-form-save-btn");
         //run necessary functions on click
         projectSaveBtn.addEventListener("click", () => {
-            projectCreator();
+            projectForm().creator(projectsArray);
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, projectsArray[projectsArray.length - 1], projectDisplayContainer_div, sidebarProjectContainer_div);
             //stop displaying the form
-            closeFrom();
+            projectForm().close();
         });
-    };
-
-
-    // ------------------- Project Editor -----------------------
-
-
-    const renderProjectEditorValues = selectedProj => {
-        //cache DOM elements
-        const formTitle = document.getElementById("form-title");
-        const formName = document.getElementById("form-name");
-        //alter form's title
-        formTitle.innerHTML = "Edit Project";
-        //render value stored in the object
-        formName.value = selectedProj.name;
-    };
-
-    const projectEditor = selectedProj => {
-        //select each input element
-        const formName = document.getElementById("form-name");
-        //store new value in the object
-        selectedProj.name = formName.value;
     };
 
     const projectEditorSaveBtnEvent = selectedProj => {
@@ -352,11 +319,11 @@ const todoApp = (() => {
         const projectSaveBtn = document.getElementById("project-form-save-btn");
         //run necessary functions on click
         projectSaveBtn.addEventListener("click", () => {
-            projectEditor(selectedProj);
+            projectForm().editor(selectedProj);
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             //stop displaying the form
-            closeFrom();
+            projectForm().close();
         });
     };
 
@@ -377,10 +344,6 @@ const todoApp = (() => {
                 taskCreatorCancelBtn();
             });
         };
-    };
-
-    const closeFrom = () => {
-        document.body.removeChild(document.body.firstChild);
     };
 
     //check if task is due today and push to today project object
@@ -576,7 +539,5 @@ const todoApp = (() => {
     // ---- CSS -----
 
     // media queries
-    // improve collapse
-    // improve dark mode
 
 })();
