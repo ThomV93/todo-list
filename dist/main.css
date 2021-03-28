@@ -587,9 +587,9 @@ button:focus {
     background-color: var(--orange);
 }
 
-/* -----------  Task editor ------------- */
+/* -----------  Task form ------------- */
 
-#editor-container {
+#form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -601,7 +601,7 @@ button:focus {
     background-color: var(--translucent-black);
 }
 
-#task-editor-container {
+#task-form-container {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
@@ -613,7 +613,7 @@ button:focus {
     box-sizing: border-box;
 }
 
-.editor-input-container > input {
+.form-input-container > input {
     font-family: "Open Sans", sans-serif;
     border-radius: 5px;
     border: none;
@@ -623,12 +623,12 @@ button:focus {
     width: 120px
 }
 
-.editor-input-container > label {
+.form-input-container > label {
     font-family: "Montserrat", sans-serif;
     font-size: 18px;
 } 
 
-#editor-title-container {
+#form-title-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -639,24 +639,24 @@ button:focus {
     border-bottom: 1.8px solid var(--dark-grey);
 }
 
-#editor-title {
+#form-title {
     font-family: "Montserrat", sans-serif;
     font-size: 28px;
     font-weight: bold;
     color: var(--orange);
 }
 
-#editor-name-container {
+#form-name-container {
     grid-column: 1/ 12;
     grid-row: 4/ 6;
     width: 260px;
 }
 
-#editor-name {
+#form-name {
     width: 100%;
 }
 
-#editor-flag {
+#form-flag {
     grid-column: 15/ 17;
     grid-row: 4/6;
     margin: auto auto 0 auto;
@@ -668,32 +668,32 @@ button:focus {
     transition: all 245ms ease;
 }
 
-#editor-flag:hover {
+#form-flag:hover {
     cursor: pointer;
 }
 
-#editor-time-container {
+#form-time-container {
     grid-column: 1/ 7;
     grid-row: 6/ 9;
     margin: auto;
 }
 
-#editor-date-container {
+#form-date-container {
     grid-column: 8/ -1;
     grid-row: 6/ 9;
     margin: auto;
 }
 
-#editor-date-container > input {
+#form-date-container > input {
     width: 94%;
 }
 
-#editor-notes-container {
+#form-notes-container {
     grid-column: 1/ -1;
     grid-row: 9/ 12;
 }
 
-#editor-notes-container > textarea {
+#form-notes-container > textarea {
     height: 5em;
     width: 100%;
     padding: 6px;
@@ -703,7 +703,7 @@ button:focus {
     margin: 8px 0;
 }
 
-#task-editor-container > button {
+#task-form-container > button {
     border-radius: 15px;
     border: none;
     height: 45px;
@@ -712,12 +712,12 @@ button:focus {
     cursor: pointer;
 }
 
-#editor-cancel-btn {
+#form-cancel-btn {
     grid-column: 1/ -1;
     grid-row: 13/ 15;
 }
 
-#editor-save-btn {
+#form-save-btn {
     grid-column: 1/ -1;
     grid-row: 15/ -1;
     background-color: var(--orange);
@@ -725,10 +725,10 @@ button:focus {
 }
 
 
-/* -----------  Project editor ------------- */
+/* -----------  Project form ------------- */
 
 
-#project-editor-container {
+#project-form-container {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
@@ -740,7 +740,7 @@ button:focus {
     box-sizing: border-box;
 }
 
-#project-editor-title-container {
+#project-form-title-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -751,7 +751,7 @@ button:focus {
     border-bottom: 1.8px solid var(--dark-grey);
 }
 
-#project-editor-container > button {
+#project-form-container > button {
     border-radius: 15px;
     border: none;
     height: 45px;
@@ -760,19 +760,19 @@ button:focus {
     cursor: pointer;
 }
 
-#project-editor-cancel-btn {
+#project-form-cancel-btn {
     grid-column: 1/ -1;
     grid-row: 12;
 }
 
-#project-editor-save-btn {
+#project-form-save-btn {
     grid-column: 1/ -1;
     grid-row: 14/ -1;
     background-color: var(--orange);
     color: var(--off-white);
 }
 
-#project-editor-name-container {
+#project-form-name-container {
     grid-column: 1/ -1;
     grid-row: 7/ 8;
     width: 95%;

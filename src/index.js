@@ -1,8 +1,8 @@
 //import necessary modules
 import display from "./display";
 import project from "./projectFactory";
-import renderTaskEditor from "./renderTaskEditor";
-import renderProjectEditor from "./renderProjectEditor";
+import renderTaskForm from "./renderTaskForm";
+import renderProjectForm from "./renderProjectForm";
 import {format} from 'date-fns';
 
 const todoApp = (() => {
@@ -28,6 +28,7 @@ const todoApp = (() => {
 
 
     // --------- DEMO Projects and Tasks -----------
+
 
     let work = project("Work");
 
@@ -66,48 +67,6 @@ const todoApp = (() => {
     coding.addTask(codingTask3);
 
     projectsArray.push(coding);
-
-
-    // --------------------- General -------------------------
-
-
-    //initialize necessary functions when page is launched
-    const pageInit = () => {
-        display().sideProjects(projectsArray, sidebarProjectContainer_div);
-        collapseSidebarEvent();
-        changeThemeEvent();
-        todaySectionEvent();
-        checkForToday(projectsArray);
-        collapseSideProjectsEvent();
-        sideProjectTitleEvent();
-        projectCreatorEvent();
-        crossSideTaskEvent();
-    };
-
-    const updateDisplay = (arr, proj, projContainer, sideContainer) => {
-        //display the updated project
-        display().selectedProject(proj, projContainer);
-        //display the updated sidebar project and task list
-        display().sideProjects(arr, sideContainer);
-        //add back the sidebar projet's click event
-        sideProjectTitleEvent();
-        //sort tasks by date
-        sortProjectDatesEvent(proj);
-        //edit project
-        editProjectEvent(proj);
-        //add back the task creator click event
-        taskCreatorEvent(proj);
-        //add back the edit task event
-        editTaskEvent(proj);
-        //add back the delete task event
-        deleteTaskEvent(proj);
-        //add back the expand task event
-        expandTaskEvent(proj);
-        //cross off task
-        crossTaskEvent(proj);
-        //cross off sidetask
-        crossSideTaskEvent();
-    };
 
 
     // -------------------- projectsArray Aux Functions ---------------------
@@ -252,7 +211,7 @@ const todoApp = (() => {
         const projEditIcon = document.getElementById("proj-edit-icon");
         //add click event to element
         projEditIcon.addEventListener("click", () => {
-            renderProjectEditor(document.body);
+            renderProjectForm(document.body);
             renderProjectEditorValues(selectedProj);
             projectCreatorCancelBtnEvent();
             projectEditorSaveBtnEvent(selectedProj);
@@ -282,7 +241,7 @@ const todoApp = (() => {
 
         for(let i = 0; i < taskEditIcon.length; i++) {
             taskEditIcon[i].addEventListener("click", () => {
-                renderTaskEditor(document.body);
+                renderTaskForm(document.body);
                 renderTaskEditorValues(selectedProj, i);
                 taskCreatorFlagEvent();
                 taskCreatorCancelBtn();
@@ -324,7 +283,7 @@ const todoApp = (() => {
     
     const projectCreatorEvent = () => {
         sidebarPlusIcon.addEventListener("click", () => {
-            renderProjectEditor(document.body);
+            renderProjectForm(document.body);
             projectCreatorCancelBtnEvent();
             projectCreatorSaveBtnEvent();
         });
@@ -333,9 +292,9 @@ const todoApp = (() => {
     //project creator form logic
     const projectCreator = () => {
         //select input element
-        const editorName = document.getElementById("editor-name");
+        const formName = document.getElementById("form-name");
         //store user input
-        let projectName = editorName.value;
+        let projectName = formName.value;
 
         //create new project
         let newProject = project(projectName)
@@ -343,20 +302,20 @@ const todoApp = (() => {
         projectsArray.push(newProject);
     };
 
-    //task creator/ editor cancel button event
+    //task form cancel button event
     const projectCreatorCancelBtnEvent = () => {
         //cache DOM element
-        const projectCancelBtn = document.getElementById("project-editor-cancel-btn");
+        const projectCancelBtn = document.getElementById("project-form-cancel-btn");
         //close the form on click
         projectCancelBtn.addEventListener("click", () => {
             closeFrom();
         });
     };
 
-    //task creator/ editor save button event
+    //task form save button event
     const projectCreatorSaveBtnEvent = () => {
         //cache DOM element
-        const projectSaveBtn = document.getElementById("project-editor-save-btn");
+        const projectSaveBtn = document.getElementById("project-form-save-btn");
         //run necessary functions on click
         projectSaveBtn.addEventListener("click", () => {
             projectCreator();
@@ -373,24 +332,24 @@ const todoApp = (() => {
 
     const renderProjectEditorValues = selectedProj => {
         //cache DOM elements
-        const editorTitle = document.getElementById("editor-title");
-        const editorName = document.getElementById("editor-name");
+        const formTitle = document.getElementById("form-title");
+        const formName = document.getElementById("form-name");
         //alter form's title
-        editorTitle.innerHTML = "Edit Project";
+        formTitle.innerHTML = "Edit Project";
         //render value stored in the object
-        editorName.value = selectedProj.name;
+        formName.value = selectedProj.name;
     };
 
     const projectEditor = selectedProj => {
         //select each input element
-        const editorName = document.getElementById("editor-name");
+        const formName = document.getElementById("form-name");
         //store new value in the object
-        selectedProj.name = editorName.value;
+        selectedProj.name = formName.value;
     };
 
     const projectEditorSaveBtnEvent = selectedProj => {
         //cache DOM element
-        const projectSaveBtn = document.getElementById("project-editor-save-btn");
+        const projectSaveBtn = document.getElementById("project-form-save-btn");
         //run necessary functions on click
         projectSaveBtn.addEventListener("click", () => {
             projectEditor(selectedProj);
@@ -412,7 +371,7 @@ const todoApp = (() => {
 
         for(let i = 0; i < taskCreator_div.length; i ++) {
             taskCreator_div[i].addEventListener("click", () => {
-                renderTaskEditor(document.body);
+                renderTaskForm(document.body);
                 taskCreatorFlagEvent();
                 taskCreatorSaveBtn(selectedProj);
                 taskCreatorCancelBtn();
@@ -437,18 +396,18 @@ const todoApp = (() => {
     //task creator form logic
     const taskCreator = proj => {
         //select each input element
-        const editorName = document.getElementById("editor-name");
-        const editorTime = document.getElementById("editor-time");
-        const editorDate = document.getElementById("editor-date");
-        const editorFlag = document.getElementById("editor-flag").src;
-        const editorNotes = document.getElementById("editor-notes");
+        const formName = document.getElementById("form-name");
+        const formTime = document.getElementById("form-time");
+        const formDate = document.getElementById("form-date");
+        const formFlag = document.getElementById("form-flag").src;
+        const formNotes = document.getElementById("form-notes");
 
         //store user input
-        let taskName = editorName.value;
-        let taskTime = editorTime.value;
-        let taskDate = editorDate.value;
-        let taskPriority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
-        let taskNotes = editorNotes.value;
+        let taskName = formName.value;
+        let taskTime = formTime.value;
+        let taskDate = formDate.value;
+        let taskPriority = formFlag.indexOf("red-flag") != -1 ? "high" : "regular";
+        let taskNotes = formNotes.value;
 
         //create new task
         let newTask = proj.task(taskName, taskTime, taskDate, taskPriority);
@@ -463,12 +422,12 @@ const todoApp = (() => {
     //user can switch between task priority by clicking on flag
     const taskCreatorFlagEvent = () => {
         //cache flag element
-        const editorFlag = document.getElementById("editor-flag");
+        const formFlag = document.getElementById("form-flag");
         //toggle value is defined by the flag displayed
-        let toggle = editorFlag.src.indexOf("red-flag") != -1 ? true : false;
+        let toggle = formFlag.src.indexOf("red-flag") != -1 ? true : false;
 
-        editorFlag.addEventListener("click", () => {
-            taskCreatorFlag(editorFlag, toggle);
+        formFlag.addEventListener("click", () => {
+            taskCreatorFlag(formFlag, toggle);
             toggle = !toggle;
         });
     };
@@ -478,20 +437,20 @@ const todoApp = (() => {
         bool === false ? flag.src = "icons/red-flag.svg" : flag.src = "icons/flag.svg";
     };
 
-    //task creator/ editor cancel button event
+    //task form cancel button event
     const taskCreatorCancelBtn = () => {
         //cache DOM element
-        const cancelBtn = document.getElementById("editor-cancel-btn");
+        const cancelBtn = document.getElementById("form-cancel-btn");
 
         cancelBtn.addEventListener("click", () => {
             closeFrom();
         });
     };
 
-    //task creator/ editor save button event
+    //task form save button event
     const taskCreatorSaveBtn = (selectedProj) => {
         //cache DOM element
-        const saveBtn = document.getElementById("editor-save-btn");
+        const saveBtn = document.getElementById("form-save-btn");
 
         saveBtn.addEventListener("click", () => {
             taskCreator(selectedProj);
@@ -506,50 +465,50 @@ const todoApp = (() => {
 
     //render current values when the editor is displayed
     const renderTaskEditorValues = (proj, idx) => {
-        //cache task editor title
-        const editorTitle = document.getElementById("editor-title");
+        //cache task form title
+        const formTitle = document.getElementById("form-title");
         //cache each input element
-        const editorName = document.getElementById("editor-name");
-        const editorTime = document.getElementById("editor-time");
-        const editorDate = document.getElementById("editor-date");
-        const editorFlag = document.getElementById("editor-flag");
-        const editorNotes = document.getElementById("editor-notes");
+        const formName = document.getElementById("form-name");
+        const formTime = document.getElementById("form-time");
+        const formDate = document.getElementById("form-date");
+        const formFlag = document.getElementById("form-flag");
+        const formNotes = document.getElementById("form-notes");
 
         //alter form's title
-        editorTitle.innerHTML = "Edit Task";
+        formTitle.innerHTML = "Edit Task";
 
         //render correct flag
-        proj.taskList[idx].priority === "high" ? editorFlag.src = "icons/red-flag.svg" : editorFlag.src = "icons/flag.svg";
+        proj.taskList[idx].priority === "high" ? formFlag.src = "icons/red-flag.svg" : formFlag.src = "icons/flag.svg";
 
         //render values stored in the object
-        editorName.value = proj.taskList[idx].name;
-        editorTime.value = proj.taskList[idx].time;
-        editorDate.value = format(proj.taskList[idx].date, "yyyy-MM-dd");
-        editorNotes.value = proj.taskList[idx].notes;
+        formName.value = proj.taskList[idx].name;
+        formTime.value = proj.taskList[idx].time;
+        formDate.value = format(proj.taskList[idx].date, "yyyy-MM-dd");
+        formNotes.value = proj.taskList[idx].notes;
     };
 
     const taskEditor = (proj, idx) => {
         //select each input element
-        const editorName = document.getElementById("editor-name");
-        const editorTime = document.getElementById("editor-time");
-        const editorDate = document.getElementById("editor-date");
-        const editorFlag = document.getElementById("editor-flag").src;
-        const editorNotes = document.getElementById("editor-notes");
+        const formName = document.getElementById("form-name");
+        const formTime = document.getElementById("form-time");
+        const formDate = document.getElementById("form-date");
+        const formFlag = document.getElementById("form-flag").src;
+        const formNotes = document.getElementById("form-notes");
 
-        proj.taskList[idx].name = editorName.value;
-        proj.taskList[idx].time = editorTime.value;
-        proj.taskList[idx].date = new Date(editorDate.value);
-        proj.taskList[idx].priority = editorFlag.indexOf("red-flag") != -1 ? "high" : "regular";
-        proj.taskList[idx].notes = editorNotes.value;
+        proj.taskList[idx].name = formName.value;
+        proj.taskList[idx].time = formTime.value;
+        proj.taskList[idx].date = new Date(formDate.value);
+        proj.taskList[idx].priority = formFlag.indexOf("red-flag") != -1 ? "high" : "regular";
+        proj.taskList[idx].notes = formNotes.value;
 
         //check if the task is due today and add to today's section as well
         checkIfToday(proj.taskList[idx].date, proj.taskList[idx]);
     };
 
-    //task creator/ editor save button event
+    //task editor save button event
     const taskEditorSaveBtnEvent = (selectedProj, idx) => {
         //cache DOM element
-        const saveBtn = document.getElementById("editor-save-btn");
+        const saveBtn = document.getElementById("form-save-btn");
 
         saveBtn.addEventListener("click", () => {
             taskEditor(selectedProj, idx);
@@ -561,7 +520,46 @@ const todoApp = (() => {
     };
 
 
-    pageInit();
+    // --------------------- General -------------------------
+
+
+    const updateDisplay = (arr, proj, projContainer, sideContainer) => {
+        //display the updated project
+        display().selectedProject(proj, projContainer);
+        //display the updated sidebar project and task list
+        display().sideProjects(arr, sideContainer);
+        //add back the sidebar projet's click event
+        sideProjectTitleEvent();
+        //sort tasks by date
+        sortProjectDatesEvent(proj);
+        //edit project
+        editProjectEvent(proj);
+        //add back the task creator click event
+        taskCreatorEvent(proj);
+        //add back the edit task event
+        editTaskEvent(proj);
+        //add back the delete task event
+        deleteTaskEvent(proj);
+        //add back the expand task event
+        expandTaskEvent(proj);
+        //cross off task
+        crossTaskEvent(proj);
+        //cross off sidetask
+        crossSideTaskEvent();
+    };
+
+    //initialize necessary functions when page is launched
+    const pageInit = (() => {
+        display().sideProjects(projectsArray, sidebarProjectContainer_div);
+        collapseSidebarEvent();
+        changeThemeEvent();
+        todaySectionEvent();
+        checkForToday(projectsArray);
+        collapseSideProjectsEvent();
+        sideProjectTitleEvent();
+        projectCreatorEvent();
+        crossSideTaskEvent();
+    })();
 
 
 
