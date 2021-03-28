@@ -111,18 +111,7 @@ const todoApp = (() => {
 
     // -------------------- Aux Functions ---------------------
 
-    //cross inactive sidetask
-    const crossSideTask = selectedTask => {
-        selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
-    };
-
-    //cross inactive task
-    const crossTask = (selectedProj, idx) => {
-        let selectedTask = selectedProj.taskList[idx];
-        selectedTask.isActive === true ? selectedTask.isActive = false : selectedTask.isActive = true;
-    };
-
-    //retrieve task obejct by name
+    //retrieve task obejct from any project by name
     const getTaskObj = name => {
         for(let i = 0; i < projectsArray.length; i++) {
             if (projectsArray[i].findTask(name) !== undefined) {
@@ -134,15 +123,6 @@ const todoApp = (() => {
     //get project index by name
     const getParentIdx = name => {
         return projectsArray.findIndex(proj => proj.name === name);
-    };
-
-    //sort project task list by date
-    const sortDates = (selectedProj, bool) => {
-        if(bool === false) {
-            selectedProj.taskList.sort((a, b) => a.date - b.date);
-        } else {
-            selectedProj.taskList.sort((a, b) => b.date - a.date);
-        };
     };
 
     //find tasks with today's date and push to today project object
@@ -253,7 +233,8 @@ const todoApp = (() => {
                 //get index of parent to update display accordingly
                 let projIdx = getParentIdx(selectedTask.parentName);
                 //toggle task status
-                crossSideTask(selectedTask);
+                projectsArray[projIdx].toggleTaskStatus(selectedTask);
+    
                 updateDisplay(projectsArray, projectsArray[projIdx], projectDisplayContainer_div, sidebarProjectContainer_div);
             });
         };
@@ -269,10 +250,8 @@ const todoApp = (() => {
         const projectDateFilter = document.getElementById("project-date-container");
         //add click event to element
         projectDateFilter.addEventListener("click", () => {
-            sortDates(selectedProj, selectedProj.dateSort);
+            selectedProj.sortDates();
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-            //toggle boolean value
-            selectedProj.dateSort = !selectedProj.dateSort; 
         });
     };
 
@@ -299,7 +278,7 @@ const todoApp = (() => {
 
         for(let i = 0; i < taskInput.length; i++) {
             taskInput[i].addEventListener("click", () => {
-                crossTask(selectedProj, i);
+                selectedProj.toggleTaskStatus(selectedProj.taskList[i]);
                 updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             });
         };
@@ -602,6 +581,7 @@ const todoApp = (() => {
     // ---- CSS -----
 
     // media queries
-    // smooth collapse effects
+    // improve collapse
+    // improve dark mode
 
 })();

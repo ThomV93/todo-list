@@ -36,6 +36,9 @@ const project = name => {
     //add new task to project
     const addTask = task => taskList.push(task);
 
+    //toggle task status
+    const toggleTaskStatus = task => task.isActive === true ? task.isActive = false : task.isActive = true;
+
     //find task index in the array by it's name
     const findTaskIdx = taskName => taskList.findIndex(task => task.name === taskName);
 
@@ -45,12 +48,21 @@ const project = name => {
     //delete task from project
     const deleteTask = idx => taskList.splice(idx, 1);
 
+    //sort task list by date
+    const sortDates = () => {
+        dateSort === false ? taskList.sort((a, b) => a.date - b.date) : taskList.sort((a, b) => b.date - a.date);
+        //toggle boolean value
+        dateSort = !dateSort;
+    };
+
     return {
         name,
         taskList,
         dateSort,
         task,
         addTask,
+        toggleTaskStatus,
+        sortDates,
         findTaskIdx,
         findTask,
         deleteTask

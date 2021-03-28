@@ -115,17 +115,6 @@ const display = () => {
         };
     };
 
-    // //visually expand task
-    // const expandTask = (notes, checkbox, idx) => {
-    //     if(notes[idx].style.display === "none") {
-    //         notes[idx].style.display = "block";
-    //         checkbox[idx].style.display = "block";
-    //     } else {
-    //         notes[idx].style.display = "none";
-    //         checkbox[idx].style.display = "none";
-    //     };
-    // };
-
     //visually expand task
     const expandTask = (notesContainer, checkContainer, idx) => {
         if(notesContainer[idx].style.position === "absolute") {
