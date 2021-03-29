@@ -1,11 +1,13 @@
 import project from "./projectFactory";
 
 const projectForm = () => {
+    
+    //cache DOM elements
+    const formTitle = document.getElementById("form-title");
+    const formName = document.getElementById("form-name");
 
     //creator section
     const creator = array => {
-        //select input element
-        const formName = document.getElementById("form-name");
         //store user input
         let projectName = formName.value;
 
@@ -17,9 +19,6 @@ const projectForm = () => {
 
     //display stored values in the editor
     const displayStoredValues = selectedProj => {
-        //cache DOM elements
-        const formTitle = document.getElementById("form-title");
-        const formName = document.getElementById("form-name");
         //alter form's title
         formTitle.innerHTML = "Edit Project";
         //display value stored in the object
@@ -28,8 +27,6 @@ const projectForm = () => {
 
     //editor section
     const editor = selectedProj => {
-        //select each input element
-        const formName = document.getElementById("form-name");
         //store new value in the object
         selectedProj.name = formName.value;
     };

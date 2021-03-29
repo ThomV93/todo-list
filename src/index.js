@@ -151,7 +151,7 @@ const todoApp = (() => {
 
     const todaySectionEvent = () => {
         sidebarTodayTitle.addEventListener("click", () => {
-            updateDisplay(projectsArray, todayProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            displayMainProj(todayProj, projectDisplayContainer_div);
         });
     };
 
@@ -423,6 +423,12 @@ const todoApp = (() => {
         crossTaskEvent(proj);
         //cross off sidetask
         crossSideTaskEvent();
+    };
+
+    const displayMainProj = (proj, projContainer) => {
+        display().selectedProject(proj, projContainer);
+        expandTaskEvent(proj);
+        crossTaskEvent(proj);
     };
 
     //initialize necessary functions when page is launched

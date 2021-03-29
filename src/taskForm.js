@@ -2,6 +2,14 @@ import {format} from 'date-fns';
 
 const taskForm = () => {
 
+    //cache each input element
+    const formName = document.getElementById("form-name");
+    const formTime = document.getElementById("form-time");
+    const formDate = document.getElementById("form-date");
+    const formFlag = document.getElementById("form-flag");
+    const formNotes = document.getElementById("form-notes");
+
+    
     // ----------- Aux Functions Section -----------------
 
 
@@ -31,18 +39,11 @@ const taskForm = () => {
 
 
     const creator = (selectedProj, todayObj) => {
-        //select each input element
-        const formName = document.getElementById("form-name");
-        const formTime = document.getElementById("form-time");
-        const formDate = document.getElementById("form-date");
-        const formFlag = document.getElementById("form-flag").src;
-        const formNotes = document.getElementById("form-notes");
-
         //store user input
         let taskName = formName.value;
         let taskTime = formTime.value;
         let taskDate = formDate.value;
-        let taskPriority = formFlag.indexOf("red-flag") != -1 ? "high" : "regular";
+        let taskPriority = formFlag.src.indexOf("red-flag") != -1 ? "high" : "regular";
         let taskNotes = formNotes.value;
 
         //create new task
@@ -63,12 +64,6 @@ const taskForm = () => {
     const displayStoredValues = (selectedProj, idx) => {
         //cache task form title
         const formTitle = document.getElementById("form-title");
-        //cache each input element
-        const formName = document.getElementById("form-name");
-        const formTime = document.getElementById("form-time");
-        const formDate = document.getElementById("form-date");
-        const formFlag = document.getElementById("form-flag");
-        const formNotes = document.getElementById("form-notes");
 
         //alter form's title
         formTitle.innerHTML = "Edit Task";
@@ -84,19 +79,14 @@ const taskForm = () => {
     };
 
     const editor = (selectedProj, idx, todayObj) => {
-        //select each input element
-        const formName = document.getElementById("form-name");
-        const formTime = document.getElementById("form-time");
-        const formDate = document.getElementById("form-date");
-        const formFlag = document.getElementById("form-flag").src;
-        const formNotes = document.getElementById("form-notes");
-
+        //get selected task
         let selectedTask = selectedProj.taskList[idx];
-
+        
+        //store new values
         selectedTask.name = formName.value;
         selectedTask.time = formTime.value;
         selectedTask.date = new Date(formDate.value);
-        selectedTask.priority = formFlag.indexOf("red-flag") != -1 ? "high" : "regular";
+        selectedTask.priority = formFlag.src.indexOf("red-flag") != -1 ? "high" : "regular";
         selectedTask.notes = formNotes.value;
 
         //check if the task is due today and add to today's section as well
