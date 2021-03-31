@@ -1,5 +1,6 @@
 //import necessary modules
 import display from "./display";
+import searchbar from "./searchbar";
 import project from "./projectFactory";
 import projectForm from "./projectForm";
 import taskForm from "./taskForm";
@@ -19,6 +20,7 @@ const todoApp = (() => {
     //cache DOM elements
     const sunIcon_img = document.getElementById("sun-icon");
     const listIcon_img = document.getElementById("list-icon");
+    const searchbar_input = document.getElementById("searchbar");
     const sidebar = document.getElementById("sidebar");
     const sidebarTodayTitle = document.getElementById("sidebar-title-today");
     const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
@@ -124,6 +126,14 @@ const todoApp = (() => {
         });
     };
 
+    //input event listener
+    const searchbarEvent = selectedProj => {
+        const taskCollection = document.getElementsByClassName("task");
+        searchbar_input.addEventListener("input", () => {
+            searchbar(selectedProj, taskCollection, searchbar_input);
+        });
+    };
+
     const changeThemeEvent = () => {
         //toggle boolean
         let toggle = false;
@@ -168,6 +178,7 @@ const todoApp = (() => {
                 deleteTaskEvent(projectsArray[i]);
                 expandTaskEvent(projectsArray[i]);
                 crossTaskEvent(projectsArray[i]);
+                searchbarEvent(projectsArray[i]);
             });
         };
     };
@@ -424,6 +435,8 @@ const todoApp = (() => {
         display().sideProjects(arr, sideContainer);
         //add back the sidebar projet's click event
         sideProjectTitleEvent();
+        //search through selected project
+        //searchbarEvent(proj);
         //add back the task creator click event
         taskCreatorEvent(proj);
         //add back the edit task event
@@ -466,5 +479,8 @@ const todoApp = (() => {
     // ---- CSS -----
 
     // media queries
+
+    // ---- Bugs ----
+    // edited task get duplicated in the today section
 
 })();
