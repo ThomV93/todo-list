@@ -34,9 +34,9 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "27/03/2021", "high");
+    let workTask1 = work.task("Check Emails", "09:00", "31/03/2021", "high");
     let workTask2 = work.task("Send Emails", "10:30", "21/01/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "27/03/2021", "high");
+    let workTask3 = work.task("Create reports", "14:00", "31/03/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     workTask2.notes = "Hello Notes";
     work.addTask(workTask1);
@@ -50,8 +50,8 @@ const todoApp = (() => {
     let investing = project("Investing");
 
     let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00", "27/03/2021");
-    let investingTask3 = investing.task("Test", "18:00", "27/03/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "31/03/2021");
+    let investingTask3 = investing.task("Test", "18:00", "31/03/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
     investing.addTask(investingTask3);
@@ -62,7 +62,7 @@ const todoApp = (() => {
     let coding = project("Coding");
 
     let codingTask1 = coding.task("Study", "19:00", "29/08/2021", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30", "27/03/2021", "high");
+    let codingTask2 = coding.task("Study MORE", "20:30", "31/03/2021", "high");
     let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
@@ -151,7 +151,7 @@ const todoApp = (() => {
 
     const todaySectionEvent = () => {
         sidebarTodayTitle.addEventListener("click", () => {
-            displayMainProj(todayProj, projectDisplayContainer_div);
+            updateDisplay(projectsArray, todayProj, projectDisplayContainer_div, sidebarProjectContainer_div);
         });
     };
 
@@ -399,18 +399,31 @@ const todoApp = (() => {
 
     // --------------------- General -------------------------
 
+    const displayController = (proj, projContainer) => {
+        switch(proj.name) {
+            case "Today":
+                display().todayProject(proj, projContainer);
+                break;
+            case "Trash":
+                console.log("Trash");
+                break;
+            default:
+                display().selectedProject(proj, projContainer);
+                //sort tasks by date
+                sortProjectDatesEvent(proj);
+                //edit project
+                editProjectEvent(proj);
+                break;
+        };
+    };
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
         //display the updated project
-        display().selectedProject(proj, projContainer);
+        displayController(proj, projContainer);
         //display the updated sidebar project and task list
         display().sideProjects(arr, sideContainer);
         //add back the sidebar projet's click event
         sideProjectTitleEvent();
-        //sort tasks by date
-        sortProjectDatesEvent(proj);
-        //edit project
-        editProjectEvent(proj);
         //add back the task creator click event
         taskCreatorEvent(proj);
         //add back the edit task event
@@ -423,12 +436,6 @@ const todoApp = (() => {
         crossTaskEvent(proj);
         //cross off sidetask
         crossSideTaskEvent();
-    };
-
-    const displayMainProj = (proj, projContainer) => {
-        display().selectedProject(proj, projContainer);
-        expandTaskEvent(proj);
-        crossTaskEvent(proj);
     };
 
     //initialize necessary functions when page is launched

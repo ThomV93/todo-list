@@ -8,7 +8,7 @@ const renderProject = container => {
     mainTaskContainer.className = "task-container";
 
 
-    //------ Project DOM factory module -----
+    // ------ Project DOM factory module -----
 
     const renderProjectTitle = name => {
         //title container
@@ -89,12 +89,67 @@ const renderProject = container => {
 
         //append to main task container
         mainTaskContainer.append(taskStyleContainer);
+    };
 
-        return {projectTitle};
+    // --------- Today project section ----------
+
+    const renderTodayProjectTitle = name => {
+        //title container
+        let projectTitleContainer = document.createElement("div");
+        projectTitleContainer.className = "project-title-container";
+
+        //project title
+        let projectTitle = document.createElement("h3");
+        projectTitle.id = "today-title";
+        projectTitle.className = "project-title";
+        projectTitle.innerHTML = name;
+
+        //project trash icon
+        let projectTrashIcon = document.createElement("img");
+        projectTrashIcon.className = "project-trash-icon";
+        projectTrashIcon.id = "proj-trash-icon";
+        projectTrashIcon.src = "icons/trash-2.svg";
+
+        //append elements to title container
+        projectTitleContainer.append(projectTitle, projectTrashIcon);
+        
+        //append to main project container
+        projectContainer.prepend(projectTitleContainer);
+
+        //--------- Task DOM creator section -----------
+
+        //task style container
+        let taskStyleContainer = document.createElement("div");
+        taskStyleContainer.className = "task";
+        taskStyleContainer.dataset.creator = "y";
+
+        //task creator container
+        let taskCreatorContainer = document.createElement("div");
+        taskCreatorContainer.id = "creator-container";
+
+        //task creator img
+        let taskCreatorImg = document.createElement("img");
+        taskCreatorImg.id = "task-creator-img";
+        taskCreatorImg.src = "icons/plus-2.svg";
+
+        //task creator text
+        let taskCreatorText = document.createElement("p");
+        taskCreatorText.id = "task-creator-text";
+        taskCreatorText.innerHTML = "Add task due today";
+
+        //append elements to creator container
+        taskCreatorContainer.append(taskCreatorImg, taskCreatorText);
+
+        //append to task style container
+        taskStyleContainer.append(taskCreatorContainer);
+
+        //append to main task container
+        mainTaskContainer.append(taskStyleContainer);
     };
 
 
-    //--------- Task DOM factory module ---------
+
+    // --------- Task DOM factory module ---------
 
     const renderTask = (name, date, time, priority, status) => {
         //task container
@@ -228,7 +283,11 @@ const renderProject = container => {
     //append to main content container
     container.append(projectContainer);
 
-    return {renderProjectTitle, renderTask};
+    return {
+        renderProjectTitle,
+        renderTodayProjectTitle,
+        renderTask
+    };
 };
 
 export default renderProject;

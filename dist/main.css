@@ -385,6 +385,12 @@ button:focus {
     color: var(--off-black);
 }
 
+#today-title {
+    font-size: 35px;
+    font-weight: 400;
+    color: var(--orange);
+}
+
 #project-date-container {
     display: flex;
     align-items: center;
