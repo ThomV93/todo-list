@@ -435,8 +435,6 @@ const todoApp = (() => {
         display().sideProjects(arr, sideContainer);
         //add back the sidebar projet's click event
         sideProjectTitleEvent();
-        //search through selected project
-        //searchbarEvent(proj);
         //add back the task creator click event
         taskCreatorEvent(proj);
         //add back the edit task event
@@ -470,17 +468,18 @@ const todoApp = (() => {
 
     // trash section and functionalities
     // home section displays user numbers. Num of tasks/projects..
-    // searchbar
     // task sub-list
     // display each section's value
     // notes altered outside of the forms need to be saved
     // create local storage
+    // credit section
     
     // ---- CSS -----
 
     // media queries
 
     // ---- Bugs ----
+    // deleted tasks are not deleted in the today object
     // edited task get duplicated in the today section
 
 })();
