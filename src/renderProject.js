@@ -91,96 +91,6 @@ const renderProject = container => {
         mainTaskContainer.append(taskStyleContainer);
     };
 
-    // --------- Today project section ----------
-
-    const renderTodayProjectTitle = name => {
-        //title container
-        let projectTitleContainer = document.createElement("div");
-        projectTitleContainer.className = "project-title-container";
-
-        //project title
-        let projectTitle = document.createElement("h3");
-        projectTitle.id = "today-title";
-        projectTitle.className = "project-title";
-        projectTitle.innerHTML = name;
-
-        //project trash icon
-        let projectTrashIcon = document.createElement("img");
-        projectTrashIcon.className = "project-trash-icon";
-        projectTrashIcon.id = "proj-trash-icon";
-        projectTrashIcon.src = "icons/trash-2.svg";
-
-        //append elements to title container
-        projectTitleContainer.append(projectTitle, projectTrashIcon);
-        
-        //append to main project container
-        projectContainer.prepend(projectTitleContainer);
-
-        //--------- Task DOM creator section -----------
-
-        //task style container
-        let taskStyleContainer = document.createElement("div");
-        taskStyleContainer.className = "task";
-        taskStyleContainer.dataset.creator = "y";
-
-        //task creator container
-        let taskCreatorContainer = document.createElement("div");
-        taskCreatorContainer.id = "creator-container";
-
-        //task creator img
-        let taskCreatorImg = document.createElement("img");
-        taskCreatorImg.id = "task-creator-img";
-        taskCreatorImg.src = "icons/plus-2.svg";
-
-        //task creator text
-        let taskCreatorText = document.createElement("p");
-        taskCreatorText.id = "task-creator-text";
-        taskCreatorText.innerHTML = "Add task due today";
-
-        //append elements to creator container
-        taskCreatorContainer.append(taskCreatorImg, taskCreatorText);
-
-        //append to task style container
-        taskStyleContainer.append(taskCreatorContainer);
-
-        //append to main task container
-        mainTaskContainer.append(taskStyleContainer);
-    };
-
-    // --------- Trash project section ----------
-
-    const renderTrashProjectTitle = name => {
-        //title container
-        let projectTitleContainer = document.createElement("div");
-        projectTitleContainer.className = "project-title-container";
-
-        //project title
-        let projectTitle = document.createElement("h3");
-        projectTitle.id = "trash-title";
-        projectTitle.className = "project-title";
-        projectTitle.innerHTML = name;
-
-        //project recover icon
-        let projectRecoverIcon = document.createElement("img");
-        projectRecoverIcon.className = "project-recover-icon";
-        projectRecoverIcon.id = "proj-recover-icon";
-        projectRecoverIcon.src = "icons/recover.svg";
-
-        //project trash icon
-        let projectTrashIcon = document.createElement("img");
-        projectTrashIcon.className = "project-trash-icon";
-        projectTrashIcon.id = "proj-trash-icon";
-        projectTrashIcon.src = "icons/trash.svg";
-
-        //append elements to title container
-        projectTitleContainer.append(projectTitle, projectRecoverIcon, projectTrashIcon);
-        
-        //append to main project container
-        projectContainer.prepend(projectTitleContainer);
-    };
-
-
-
     // --------- Task DOM factory module ---------
 
     const renderTask = (name, date, time, priority, status) => {
@@ -310,6 +220,98 @@ const renderProject = container => {
         mainTaskContainer.append(taskContainer);
     };
 
+
+    // --------- Today project section ----------
+
+
+    const renderTodayProjectTitle = name => {
+        //title container
+        let projectTitleContainer = document.createElement("div");
+        projectTitleContainer.className = "project-title-container";
+
+        //project title
+        let projectTitle = document.createElement("h3");
+        projectTitle.id = "today-title";
+        projectTitle.className = "project-title";
+        projectTitle.innerHTML = name;
+
+        //project trash icon
+        let projectTrashIcon = document.createElement("img");
+        projectTrashIcon.className = "project-trash-icon";
+        projectTrashIcon.id = "proj-trash-icon";
+        projectTrashIcon.src = "icons/trash-2.svg";
+
+        //append elements to title container
+        projectTitleContainer.append(projectTitle, projectTrashIcon);
+        
+        //append to main project container
+        projectContainer.prepend(projectTitleContainer);
+
+        //--------- Task DOM creator section -----------
+
+        //task style container
+        let taskStyleContainer = document.createElement("div");
+        taskStyleContainer.className = "task";
+        taskStyleContainer.dataset.creator = "y";
+
+        //task creator container
+        let taskCreatorContainer = document.createElement("div");
+        taskCreatorContainer.id = "creator-container";
+
+        //task creator img
+        let taskCreatorImg = document.createElement("img");
+        taskCreatorImg.id = "task-creator-img";
+        taskCreatorImg.src = "icons/plus-2.svg";
+
+        //task creator text
+        let taskCreatorText = document.createElement("p");
+        taskCreatorText.id = "task-creator-text";
+        taskCreatorText.innerHTML = "Add task due today";
+
+        //append elements to creator container
+        taskCreatorContainer.append(taskCreatorImg, taskCreatorText);
+
+        //append to task style container
+        taskStyleContainer.append(taskCreatorContainer);
+
+        //append to main task container
+        mainTaskContainer.append(taskStyleContainer);
+    };
+
+
+    // --------- Trash project section ----------
+
+
+    const renderTrashProjectTitle = name => {
+        //title container
+        let projectTitleContainer = document.createElement("div");
+        projectTitleContainer.className = "project-title-container";
+
+        //project title
+        let projectTitle = document.createElement("h3");
+        projectTitle.id = "trash-title";
+        projectTitle.className = "project-title";
+        projectTitle.innerHTML = name;
+
+        //project recover icon
+        let projectRecoverIcon = document.createElement("img");
+        projectRecoverIcon.className = "project-recover-icon";
+        projectRecoverIcon.id = "proj-recover-icon";
+        projectRecoverIcon.src = "icons/recover.svg";
+
+        //project trash icon
+        let projectTrashIcon = document.createElement("img");
+        projectTrashIcon.className = "project-trash-icon";
+        projectTrashIcon.id = "proj-trash-icon";
+        projectTrashIcon.src = "icons/trash.svg";
+
+        //append elements to title container
+        projectTitleContainer.append(projectTitle, projectRecoverIcon, projectTrashIcon);
+        
+        //append to main project container
+        projectContainer.prepend(projectTitleContainer);
+    };
+
     const renderTrashTask = (name, date, time) => {
         //task container
         let taskContainer = document.createElement("div");
@@ -432,9 +434,9 @@ const renderProject = container => {
 
     return {
         renderProjectTitle,
+        renderTask,
         renderTodayProjectTitle,
         renderTrashProjectTitle,
-        renderTask,
         renderTrashTask
     };
 };

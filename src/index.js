@@ -426,28 +426,36 @@ const todoApp = (() => {
         switch(proj.name) {
             case "Today":
                 display().todayProject(proj, projContainer);
-                //add back the task creator click event
+                //task creator click event
                 taskCreatorEvent(proj);
-                //add back the edit task event
+                //edit task on click
                 editTaskEvent(proj);
-                //add back the delete task event
+                //delete task on click
                 deleteTaskEvent(proj);
+                //cross off task on click
+                crossTaskEvent(proj);
+                //cross off sidetask on click
+                crossSideTaskEvent();
                 break;
             case "Trash":
                 display().trashProject(proj, projContainer);
                 break;
             default:
                 display().selectedProject(proj, projContainer);
-                //sort tasks by date
+                //sort tasks by date on click
                 sortProjectDatesEvent(proj);
                 //edit project
                 editProjectEvent(proj);
-                //add back the task creator click event
+                //task creator click event
                 taskCreatorEvent(proj);
-                //add back the edit task event
+                //edit task
                 editTaskEvent(proj);
-                //add back the delete task event
+                //delete task
                 deleteTaskEvent(proj);
+                //cross off task
+                crossTaskEvent(proj);
+                //cross off sidetask
+                crossSideTaskEvent();
                 break;
         };
     };
@@ -461,10 +469,6 @@ const todoApp = (() => {
         sideProjectTitleEvent();
         //add back the expand task event
         expandTaskEvent(proj);
-        //cross off task
-        crossTaskEvent(proj);
-        //cross off sidetask
-        crossSideTaskEvent();
     };
 
     //initialize necessary functions when page is launched
@@ -485,7 +489,7 @@ const todoApp = (() => {
 
     // -------- To be done -------
 
-    // trash section and functionalities
+    // trash section functionalities
     // home section displays user numbers. Num of tasks/projects/delete storage
     // task sub-list
     // display each section's value
