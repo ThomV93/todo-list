@@ -115,6 +115,18 @@ const todoApp = (() => {
         };
     };
 
+    //restore task to it's original parent
+    const restoreTask = (selectedProj, idx) => {
+        //store selected task
+        let task = selectedProj.taskList[idx];
+        //store original parent obj
+        let parent = projectsArray[getParentIdx(task.parentName)];
+        //add task back to original parent
+        parent.addTask(selectedProj.taskList[idx]);
+        //delete task from task project
+        trashProj.deleteTask(selectedProj.taskList[idx]);
+    };
+
 
     // ---------------- Navbar Events Section ----------------
 
@@ -184,7 +196,7 @@ const todoApp = (() => {
                 editProjectEvent(projectsArray[i]);
                 taskCreatorEvent(projectsArray[i]);
                 editTaskEvent(projectsArray[i]);
-                deleteTaskEvent(projectsArray[i]);
+                moveToTrashEvent(projectsArray[i]);
                 expandTaskEvent(projectsArray[i]);
                 crossTaskEvent(projectsArray[i]);
                 searchbarEvent(projectsArray[i]);
@@ -272,7 +284,8 @@ const todoApp = (() => {
         };
     };
 
-    const deleteTaskEvent = selectedProj => {
+    //move task to the trash section and delete it locally
+    const moveToTrashEvent = selectedProj => {
         //cache all displayed
         const taskTrashIcon = document.getElementsByClassName("task-trash-icon");
 
@@ -280,6 +293,33 @@ const todoApp = (() => {
             taskTrashIcon[i].addEventListener("click", () => {
                 //push to trash section
                 trashProj.addTask(selectedProj.taskList[i]);
+                //delete from the original project
+                selectedProj.deleteTask(i);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            });
+        };
+    };
+
+    //restore task to it's original parent
+    const restoreTaskEvent = selectedProj => {
+        //cache all displayed
+        const restoreTaskIcon = document.getElementsByClassName("task-restore-icon");
+
+        for(let i = 0; i < restoreTaskIcon.length; i++) {
+            restoreTaskIcon[i].addEventListener("click", () => {
+                restoreTask(selectedProj, i);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            });
+        };        
+    };
+
+    //delete task permanently
+    const deleteTaskEvent = selectedProj => {
+        //cache all displayed
+        const taskTrashRedIcon = document.getElementsByClassName("task-trash-red-icon");
+
+        for(let i = 0; i < taskTrashRedIcon.length; i++) {
+            taskTrashRedIcon[i].addEventListener("click", () => {
                 //delete from the original project
                 selectedProj.deleteTask(i);
                 updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
@@ -430,16 +470,22 @@ const todoApp = (() => {
                 taskCreatorEvent(proj);
                 //edit task on click
                 editTaskEvent(proj);
-                //delete task on click
-                deleteTaskEvent(proj);
+                //move task to trash section on click
+                moveToTrashEvent(proj);
                 //cross off task on click
                 crossTaskEvent(proj);
                 //cross off sidetask on click
                 crossSideTaskEvent();
                 break;
+
             case "Trash":
                 display().trashProject(proj, projContainer);
+                //restore to original project on click
+                restoreTaskEvent(proj);
+                //delete task permanently on click
+                deleteTaskEvent(proj);
                 break;
+
             default:
                 display().selectedProject(proj, projContainer);
                 //sort tasks by date on click
@@ -450,12 +496,10 @@ const todoApp = (() => {
                 taskCreatorEvent(proj);
                 //edit task
                 editTaskEvent(proj);
-                //delete task
-                deleteTaskEvent(proj);
+                //move task to trash section on click
+                moveToTrashEvent(proj);
                 //cross off task
                 crossTaskEvent(proj);
-                //cross off sidetask
-                crossSideTaskEvent();
                 break;
         };
     };
@@ -467,6 +511,8 @@ const todoApp = (() => {
         display().sideProjects(arr, sideContainer);
         //add back the sidebar projet's click event
         sideProjectTitleEvent();
+        //cross off sidetask
+        crossSideTaskEvent();
         //add back the expand task event
         expandTaskEvent(proj);
     };
@@ -488,21 +534,20 @@ const todoApp = (() => {
 
 
     // -------- To be done -------
-
     // trash section functionalities
     // home section displays user numbers. Num of tasks/projects/delete storage
     // task sub-list
     // display each section's value
-    // notes altered outside of the forms need to be saved
     // create local storage
     // credit
     
     // ---- CSS -----
-
     // media queries
 
     // ---- Bugs ----
     // deleted tasks are not deleted in the today object
-    // edited task get duplicated in the today section
+    // edited priority get duplicated in the today section
+    // edited date on today section don't erase task
+    // search don't work properly on trash section
 
 })();

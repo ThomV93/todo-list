@@ -293,11 +293,11 @@ const renderProject = container => {
         projectTitle.className = "project-title";
         projectTitle.innerHTML = name;
 
-        //project recover icon
-        let projectRecoverIcon = document.createElement("img");
-        projectRecoverIcon.className = "project-recover-icon";
-        projectRecoverIcon.id = "proj-recover-icon";
-        projectRecoverIcon.src = "icons/recover.svg";
+        //project restore icon
+        let projectrestoreIcon = document.createElement("img");
+        projectrestoreIcon.className = "project-restore-icon";
+        projectrestoreIcon.id = "proj-restore-icon";
+        projectrestoreIcon.src = "icons/restore.svg";
 
         //project trash icon
         let projectTrashIcon = document.createElement("img");
@@ -306,7 +306,7 @@ const renderProject = container => {
         projectTrashIcon.src = "icons/trash.svg";
 
         //append elements to title container
-        projectTitleContainer.append(projectTitle, projectRecoverIcon, projectTrashIcon);
+        projectTitleContainer.append(projectTitle, projectrestoreIcon, projectTrashIcon);
         
         //append to main project container
         projectContainer.prepend(projectTitleContainer);
@@ -338,14 +338,14 @@ const renderProject = container => {
         taskDate.className = "task-date";
         taskDate.innerHTML = date;
 
-        //task recover icon
-        let taskRecoverIcon = document.createElement("img");
-        taskRecoverIcon.className = "task-recover-icon";
-        taskRecoverIcon.src = "icons/recover.svg";
+        //task restore icon
+        let taskrestoreIcon = document.createElement("img");
+        taskrestoreIcon.className = "task-restore-icon";
+        taskrestoreIcon.src = "icons/restore.svg";
 
         //task trash icon
         let taskTrashIcon = document.createElement("img");
-        taskTrashIcon.className = "task-trash-icon";
+        taskTrashIcon.className = "task-trash-red-icon";
         taskTrashIcon.src = "icons/trash.svg";
 
         //---------- Expanded task section ---------
@@ -415,7 +415,7 @@ const renderProject = container => {
             taskTime,
             taskName,
             taskDate,
-            taskRecoverIcon,
+            taskrestoreIcon,
             taskTrashIcon,
             taskNotesContainer,
             taskCheckboxContainer
