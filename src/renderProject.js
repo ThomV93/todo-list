@@ -301,8 +301,8 @@ const renderProject = container => {
 
         //project trash icon
         let projectTrashIcon = document.createElement("img");
+        projectTrashIcon.id = "proj-trash-red-icon";
         projectTrashIcon.className = "project-trash-icon";
-        projectTrashIcon.id = "proj-trash-icon";
         projectTrashIcon.src = "icons/trash.svg";
 
         //append elements to title container

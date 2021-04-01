@@ -240,6 +240,7 @@ const todoApp = (() => {
         });
     };
 
+    //edit project's name on click
     const editProjectEvent = selectedProj => {
         //cache DOM element
         const projEditIcon = document.getElementById("proj-edit-icon");
@@ -249,6 +250,17 @@ const todoApp = (() => {
             projectForm().displayStoredValues(selectedProj);
             projectCreatorCancelBtnEvent();
             projectEditorSaveBtnEvent(selectedProj);
+        });
+    };
+
+    //delete all tasks on click
+    const trashDeleteAllEvent = selectedProj => {
+        //cache DOM element
+        const projTrashRedIcon = document.getElementById("proj-trash-red-icon");
+
+        projTrashRedIcon.addEventListener("click", () => {
+            selectedProj.taskList = [];
+            updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
         });
     };
 
@@ -480,6 +492,8 @@ const todoApp = (() => {
 
             case "Trash":
                 display().trashProject(proj, projContainer);
+                //delete all tasks event
+                trashDeleteAllEvent(proj);
                 //restore to original project on click
                 restoreTaskEvent(proj);
                 //delete task permanently on click
@@ -534,7 +548,8 @@ const todoApp = (() => {
 
 
     // -------- To be done -------
-    // trash section functionalities
+    // trash section restore all
+    // delete project
     // home section displays user numbers. Num of tasks/projects/delete storage
     // task sub-list
     // display each section's value
