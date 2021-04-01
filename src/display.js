@@ -72,6 +72,23 @@ const display = () => {
         };
     };
 
+    //render today project in the main display
+    const trashProject = (proj, container) => {
+        //clean previous list
+        container.innerHTML = "";
+        //create and append container
+        let projContainer = renderProject(container);
+        projContainer.renderTrashProjectTitle(proj.name);
+
+        //loop through each task of the project
+        for(let i = 0; i < proj.taskList.length; i++) {
+            //select each task
+            let task = proj.taskList[i];
+            //render tasks
+            projContainer.renderTrashTask(task.name, formatDate(task.date), task.time);
+        };
+    };
+
     //render all projects and sideprojects
     const renderAll = (arr, sideContainer, container) => {
         //loop through objects array
@@ -167,6 +184,7 @@ const display = () => {
         sideProjects,
         selectedProject,
         todayProject,
+        trashProject,
         renderAll,
         collapseSidebar,
         changeTheme,

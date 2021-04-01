@@ -391,6 +391,12 @@ button:focus {
     color: var(--orange);
 }
 
+#trash-title {
+    font-size: 35px;
+    font-weight: 400;
+    color: var(--orange);
+}
+
 #project-date-container {
     display: flex;
     align-items: center;
@@ -410,6 +416,16 @@ button:focus {
 }
 
 .project-edit-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.project-recover-icon {
+    grid-column: 11;
+    margin: auto 8px auto auto;
+}
+
+.project-recover-icon:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
@@ -514,6 +530,16 @@ button:focus {
 }
 
 .task-edit-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.task-recover-icon {
+    grid-column: 11;
+    margin: auto 8px auto auto;
+}
+
+.task-recover-icon:hover {
     cursor: pointer;
     transform: scale(1.1);
 }

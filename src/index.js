@@ -16,6 +16,8 @@ const todoApp = (() => {
     let projectsArray = [];
     //today project object
     let todayProj = project("Today");
+    //trash project object
+    let trashProj = project("Trash");
 
     //cache DOM elements
     const sunIcon_img = document.getElementById("sun-icon");
@@ -23,6 +25,7 @@ const todoApp = (() => {
     const searchbar_input = document.getElementById("searchbar");
     const sidebar = document.getElementById("sidebar");
     const sidebarTodayTitle = document.getElementById("sidebar-title-today");
+    const sidebarTrashTitle = document.getElementById("sidebar-title-trash");
     const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
     const sideProjectChevron = document.getElementById("sidebar-section-chevron-icon");
     const sidebarPlusIcon = document.getElementById("sidebar-section-plus-icon");
@@ -165,6 +168,12 @@ const todoApp = (() => {
         });
     };
 
+    const trashSectionEvent = () => {
+        sidebarTrashTitle.addEventListener("click", () => {
+            updateDisplay(projectsArray, trashProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+        });
+    };
+
     //click event to display selected project
     const sideProjectTitleEvent = () => {
         for (let i = 0; i < sidebarProjectTitleContainer_div.length; i++) {
@@ -269,6 +278,9 @@ const todoApp = (() => {
 
         for(let i = 0; i < taskTrashIcon.length; i++) {
             taskTrashIcon[i].addEventListener("click", () => {
+                //push to trash section
+                trashProj.addTask(selectedProj.taskList[i]);
+                //delete from the original project
                 selectedProj.deleteTask(i);
                 updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             });
@@ -414,9 +426,15 @@ const todoApp = (() => {
         switch(proj.name) {
             case "Today":
                 display().todayProject(proj, projContainer);
+                //add back the task creator click event
+                taskCreatorEvent(proj);
+                //add back the edit task event
+                editTaskEvent(proj);
+                //add back the delete task event
+                deleteTaskEvent(proj);
                 break;
             case "Trash":
-                console.log("Trash");
+                display().trashProject(proj, projContainer);
                 break;
             default:
                 display().selectedProject(proj, projContainer);
@@ -424,6 +442,12 @@ const todoApp = (() => {
                 sortProjectDatesEvent(proj);
                 //edit project
                 editProjectEvent(proj);
+                //add back the task creator click event
+                taskCreatorEvent(proj);
+                //add back the edit task event
+                editTaskEvent(proj);
+                //add back the delete task event
+                deleteTaskEvent(proj);
                 break;
         };
     };
@@ -435,12 +459,6 @@ const todoApp = (() => {
         display().sideProjects(arr, sideContainer);
         //add back the sidebar projet's click event
         sideProjectTitleEvent();
-        //add back the task creator click event
-        taskCreatorEvent(proj);
-        //add back the edit task event
-        editTaskEvent(proj);
-        //add back the delete task event
-        deleteTaskEvent(proj);
         //add back the expand task event
         expandTaskEvent(proj);
         //cross off task
@@ -455,6 +473,7 @@ const todoApp = (() => {
         collapseSidebarEvent();
         changeThemeEvent();
         todaySectionEvent();
+        trashSectionEvent();
         checkForToday(projectsArray);
         collapseSideProjectsEvent();
         sideProjectTitleEvent();
@@ -467,12 +486,12 @@ const todoApp = (() => {
     // -------- To be done -------
 
     // trash section and functionalities
-    // home section displays user numbers. Num of tasks/projects..
+    // home section displays user numbers. Num of tasks/projects/delete storage
     // task sub-list
     // display each section's value
     // notes altered outside of the forms need to be saved
     // create local storage
-    // credit section
+    // credit
     
     // ---- CSS -----
 

@@ -147,6 +147,38 @@ const renderProject = container => {
         mainTaskContainer.append(taskStyleContainer);
     };
 
+    // --------- Trash project section ----------
+
+    const renderTrashProjectTitle = name => {
+        //title container
+        let projectTitleContainer = document.createElement("div");
+        projectTitleContainer.className = "project-title-container";
+
+        //project title
+        let projectTitle = document.createElement("h3");
+        projectTitle.id = "trash-title";
+        projectTitle.className = "project-title";
+        projectTitle.innerHTML = name;
+
+        //project recover icon
+        let projectRecoverIcon = document.createElement("img");
+        projectRecoverIcon.className = "project-recover-icon";
+        projectRecoverIcon.id = "proj-recover-icon";
+        projectRecoverIcon.src = "icons/recover.svg";
+
+        //project trash icon
+        let projectTrashIcon = document.createElement("img");
+        projectTrashIcon.className = "project-trash-icon";
+        projectTrashIcon.id = "proj-trash-icon";
+        projectTrashIcon.src = "icons/trash.svg";
+
+        //append elements to title container
+        projectTitleContainer.append(projectTitle, projectRecoverIcon, projectTrashIcon);
+        
+        //append to main project container
+        projectContainer.prepend(projectTitleContainer);
+    };
+
 
 
     // --------- Task DOM factory module ---------
@@ -219,6 +251,7 @@ const renderProject = container => {
         let notesTextArea = document.createElement("textarea");
         notesTextArea.className = "task-notes";
         notesTextArea.innerHTML = "";
+        notesTextArea.disabled = true;
 
         //append elements to container
         taskNotesContainer.append(taskNotesTitle, notesTextArea);
@@ -277,6 +310,120 @@ const renderProject = container => {
         mainTaskContainer.append(taskContainer);
     };
 
+    const renderTrashTask = (name, date, time) => {
+        //task container
+        let taskContainer = document.createElement("div");
+        taskContainer.className = "task";
+
+        //checkbox input
+        let taskCheckboxInput = document.createElement("input");
+        taskCheckboxInput.className = "task-checkbox-input";
+        taskCheckboxInput.type = "checkbox";
+        taskCheckboxInput.disabled = true;
+
+        //task time
+        let taskTime = document.createElement("p");
+        taskTime.className = "task-time";
+        taskTime.innerHTML = time;
+
+        //task name
+        let taskName = document.createElement("p");
+        taskName.className = "task-name";
+        taskName.innerHTML = name;
+
+        //task date
+        let taskDate = document.createElement("p");
+        taskDate.className = "task-date";
+        taskDate.innerHTML = date;
+
+        //task recover icon
+        let taskRecoverIcon = document.createElement("img");
+        taskRecoverIcon.className = "task-recover-icon";
+        taskRecoverIcon.src = "icons/recover.svg";
+
+        //task trash icon
+        let taskTrashIcon = document.createElement("img");
+        taskTrashIcon.className = "task-trash-icon";
+        taskTrashIcon.src = "icons/trash.svg";
+
+        //---------- Expanded task section ---------
+
+        //----- Notes section ------
+        //expanded task notes container
+        let taskNotesContainer = document.createElement("div");
+        taskNotesContainer.id = "notes-container";
+        taskNotesContainer.className = "task-expanded";
+        taskNotesContainer.dataset.notes = "notes";
+        taskNotesContainer.style.position = "absolute";
+        taskNotesContainer.style.visibility = "hidden";
+
+        //notes title
+        let taskNotesTitle = document.createElement("h2");
+        taskNotesTitle.className = "task-expanded-title";
+        taskNotesTitle.innerHTML = "Notes:";
+
+        //notes text area
+        let notesTextArea = document.createElement("textarea");
+        notesTextArea.className = "task-notes";
+        notesTextArea.innerHTML = "";
+        notesTextArea.disabled = true;
+
+        //append elements to container
+        taskNotesContainer.append(taskNotesTitle, notesTextArea);
+
+        //----- Checkbox section -----
+        //expanded task checkbox container
+        let taskCheckboxContainer = document.createElement("div");
+        taskCheckboxContainer.id = "checkbox-container";
+        taskCheckboxContainer.className = "task-expanded";
+        taskCheckboxContainer.dataset.checkbox = "checkbox";
+        taskCheckboxContainer.style.position = "absolute";
+        taskCheckboxContainer.style.visibility = "hidden";
+
+        //checkbox title
+        let taskCheckboxTitle = document.createElement("h2");
+        taskCheckboxTitle.className = "task-expanded-title";
+        taskCheckboxTitle.innerHTML = "List:";
+
+        //----Check container ---
+        //individual checkbox container
+        let checkboxContainer = document.createElement("div");
+        checkboxContainer.className = "checkbox";
+
+        //check input
+        let checkInput = document.createElement("input");
+        checkInput.className = "check-input";
+        checkInput.type = "checkbox";
+
+        //check label
+        let checkLabel = document.createElement("label");
+        checkLabel.innerHTML = "Diamon Hands";
+
+        //append elements to individual checkbox container
+        checkboxContainer.append(checkInput, checkLabel);
+
+
+        //append elements to expanded checkbox container
+        taskCheckboxContainer.append(taskCheckboxTitle, checkboxContainer);
+
+        
+        //-------- Append all to task container ---------
+        taskContainer.append(
+            taskCheckboxInput,
+            taskTime,
+            taskName,
+            taskDate,
+            taskRecoverIcon,
+            taskTrashIcon,
+            taskNotesContainer,
+            taskCheckboxContainer
+        );
+
+
+        //append task container to main task container
+        mainTaskContainer.append(taskContainer);
+    };
+
     //append main task container to main project container
     projectContainer.append(mainTaskContainer);
 
@@ -286,7 +433,9 @@ const renderProject = container => {
     return {
         renderProjectTitle,
         renderTodayProjectTitle,
-        renderTask
+        renderTrashProjectTitle,
+        renderTask,
+        renderTrashTask
     };
 };
 
