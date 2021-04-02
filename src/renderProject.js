@@ -293,12 +293,6 @@ const renderProject = container => {
         projectTitle.className = "project-title";
         projectTitle.innerHTML = name;
 
-        //project restore icon
-        let projectrestoreIcon = document.createElement("img");
-        projectrestoreIcon.className = "project-restore-icon";
-        projectrestoreIcon.id = "proj-restore-icon";
-        projectrestoreIcon.src = "icons/restore.svg";
-
         //project trash icon
         let projectTrashIcon = document.createElement("img");
         projectTrashIcon.id = "proj-trash-red-icon";
@@ -306,7 +300,7 @@ const renderProject = container => {
         projectTrashIcon.src = "icons/trash.svg";
 
         //append elements to title container
-        projectTitleContainer.append(projectTitle, projectrestoreIcon, projectTrashIcon);
+        projectTitleContainer.append(projectTitle, projectTrashIcon);
         
         //append to main project container
         projectContainer.prepend(projectTitleContainer);

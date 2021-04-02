@@ -132,11 +132,13 @@ const todoApp = (() => {
 
 
     const collapseSidebarEvent = () => {
+        //cache DOM element
+        const projectTitleContainer = document.getElementsByClassName("project-title-container");
         //toggle boolean
         let toggle = false;
         //click event to run function and invert toggle
         listIcon_img.addEventListener("click", () => {
-            display().collapseSidebar(sidebar, projectDisplayContainer_div, toggle);
+            display().collapseSidebar(sidebar, projectDisplayContainer_div, projectTitleContainer, toggle);
             toggle = !toggle;
         });
     };
@@ -548,7 +550,6 @@ const todoApp = (() => {
 
 
     // -------- To be done -------
-    // trash section restore all
     // delete project
     // home section displays user numbers. Num of tasks/projects/delete storage
     // task sub-list
