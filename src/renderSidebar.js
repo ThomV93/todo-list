@@ -9,32 +9,10 @@ const renderSidebar = (container) => {
     let userDataSection = document.createElement("div");
     userDataSection.id = "user-data-section";
 
-
-    //section title
-    let userDataSectionTitle = document.createElement("h1");
-    userDataSectionTitle.className = "sidebar-section-title";
-    userDataSectionTitle.innerHTML = "To-Do's";
-
-    //sidebar HOME icon
-    let sidebarHomeIcon = document.createElement("img");
-    sidebarHomeIcon.id = "sidebar-home-icon";
-    sidebarHomeIcon.src = "icons/home.svg";
-
-    //sidebar HOME tile
-    let sidebarTitleHome = document.createElement("h2");
-    sidebarTitleHome.id = "sidebar-title-home";
-    sidebarTitleHome.className = "user-titles";
-    sidebarTitleHome.innerHTML = "Home";
-
-    //side HOME value
-    let sidebarValueHome = document.createElement("p");
-    sidebarValueHome.id = "sidebar-value-home";
-    sidebarValueHome.innerHTML = "0";
-
     //sidebar Today icon
     let sidebarTodayIcon = document.createElement("img");
     sidebarTodayIcon.id = "sidebar-today-icon";
-    sidebarTodayIcon.src = "icons/calendar.svg";
+    sidebarTodayIcon.src = "icons/bell.svg";
 
     //sidebar Today title
     let sidebarTitleToday = document.createElement("h2");
@@ -46,6 +24,22 @@ const renderSidebar = (container) => {
     let sidebarValueToday = document.createElement("p");
     sidebarValueToday.id = "sidebar-value-today";
     sidebarValueToday.innerHTML = "0";
+
+    //sidebar this week icon
+    let sidebarCalendarIcon = document.createElement("img");
+    sidebarCalendarIcon.id = "sidebar-calendar-icon";
+    sidebarCalendarIcon.src = "icons/calendar.svg";
+
+    //sidebar this week tile
+    let sidebarTitleWeek = document.createElement("h2");
+    sidebarTitleWeek.id = "sidebar-title-week";
+    sidebarTitleWeek.className = "user-titles";
+    sidebarTitleWeek.innerHTML = "Week";
+
+    //side this week value
+    let sidebarValueWeek = document.createElement("p");
+    sidebarValueWeek.id = "sidebar-value-week";
+    sidebarValueWeek.innerHTML = "0";
 
     //sidebar TRASH icon
     let sidebarTrashIcon = document.createElement("img");
@@ -66,13 +60,12 @@ const renderSidebar = (container) => {
     
     //Append all elements to User Data Section container
     userDataSection.append(
-        userDataSectionTitle,
-        sidebarHomeIcon,
-        sidebarTitleHome,
-        sidebarValueHome,
         sidebarTodayIcon,
         sidebarTitleToday,
         sidebarValueToday,
+        sidebarCalendarIcon,
+        sidebarTitleWeek,
+        sidebarValueWeek,
         sidebarTrashIcon,
         sidebarTitleTrash,
         sidebarValueTrash
