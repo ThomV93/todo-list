@@ -6,7 +6,7 @@ import projectForm from "./projectForm";
 import taskForm from "./taskForm";
 import renderTaskForm from "./renderTaskForm";
 import renderProjectForm from "./renderProjectForm";
-import {format} from 'date-fns';
+import {format, isSameWeek} from "date-fns";
 
 const todoApp = (() => {
 
@@ -16,6 +16,8 @@ const todoApp = (() => {
     let projectsArray = [];
     //today project object
     let todayProj = project("Today");
+    //week project object
+    let weekProj = project("Week");
     //trash project object
     let trashProj = project("Trash");
 
@@ -25,6 +27,7 @@ const todoApp = (() => {
     const searchbar_input = document.getElementById("searchbar");
     const sidebar = document.getElementById("sidebar");
     const sidebarTodayTitle = document.getElementById("sidebar-title-today");
+    const sidebarWeekTitle = document.getElementById("sidebar-title-week");
     const sidebarTrashTitle = document.getElementById("sidebar-title-trash");
     const sideProjectMainTitle = document.getElementById("sidebar-projects-section-title");
     const sideProjectChevron = document.getElementById("sidebar-section-chevron-icon");
@@ -39,8 +42,8 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "31/03/2021", "high");
-    let workTask2 = work.task("Send Emails", "10:30", "21/01/2021", "regular");
+    let workTask1 = work.task("Check Emails", "09:00", "03/04/2021", "high");
+    let workTask2 = work.task("Send Emails", "10:30", "04/04/2021", "regular");
     let workTask3 = work.task("Create reports", "14:00", "31/03/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     workTask2.notes = "Hello Notes";
@@ -55,7 +58,7 @@ const todoApp = (() => {
     let investing = project("Investing");
 
     let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00", "31/03/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "04/04/2021");
     let investingTask3 = investing.task("Test", "18:00", "31/03/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
@@ -76,7 +79,7 @@ const todoApp = (() => {
     projectsArray.push(coding);
 
 
-    // -------------------- projectsArray Aux Functions ---------------------
+    // -------------------- ProjectsArray Aux Functions ---------------------
 
 
     //retrieve task obejct from any project by name
@@ -94,7 +97,7 @@ const todoApp = (() => {
     };
 
     //find tasks with today's date and push to today project object
-    const checkForToday = arr => {
+    const checkForUpcoming = arr => {
         //get today's date
         let today = format(new Date(), "yyyy/MM/dd");
         //loop through projects array
@@ -110,7 +113,12 @@ const todoApp = (() => {
                     let todayTask = task;
                     todayProj.addTask(todayTask);
                 };
-
+                //if task is due this week, add to Week project object
+                let compareWeek = isSameWeek(new Date(formattedDate), new Date(today));
+                if(compareWeek){
+                    let weekTask = task;
+                    weekProj.addTask(weekTask);
+                };
             };
         };
     };
@@ -179,6 +187,12 @@ const todoApp = (() => {
     const todaySectionEvent = () => {
         sidebarTodayTitle.addEventListener("click", () => {
             updateDisplay(projectsArray, todayProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+        });
+    };
+
+    const weekSectionEvent = () => {
+        sidebarWeekTitle.addEventListener("click", () => {
+            updateDisplay(projectsArray, weekProj, projectDisplayContainer_div, sidebarProjectContainer_div);
         });
     };
 
@@ -479,6 +493,7 @@ const todoApp = (() => {
     const displayController = (proj, projContainer) => {
         switch(proj.name) {
             case "Today":
+            case "Week":
                 display().todayProject(proj, projContainer);
                 //task creator click event
                 taskCreatorEvent(proj);
@@ -539,8 +554,9 @@ const todoApp = (() => {
         collapseSidebarEvent();
         changeThemeEvent();
         todaySectionEvent();
+        weekSectionEvent();
         trashSectionEvent();
-        checkForToday(projectsArray);
+        checkForUpcoming(projectsArray);
         collapseSideProjectsEvent();
         sideProjectTitleEvent();
         projectCreatorEvent();
@@ -551,7 +567,6 @@ const todoApp = (() => {
 
     // -------- To be done -------
     // delete project
-    // home section displays user numbers. Num of tasks/projects/delete storage
     // task sub-list
     // display each section's value
     // create local storage
