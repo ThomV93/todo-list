@@ -177,8 +177,9 @@ button:focus {
 #sidebar-value-today {
     grid-row: 1;
     grid-column: 11;
-    margin: 0 0;
-    color: var(--dark-grey);
+    margin: auto 0;
+    color: var(--orange);
+    font-size: 15px;
 }
 
 #sidebar-calendar-icon {
@@ -196,8 +197,9 @@ button:focus {
 #sidebar-value-week {
     grid-row: 3;
     grid-column: 11;
-    margin: 0 0;
+    margin: auto 0;
     color: var(--dark-grey);
+    font-size: 15px;
 }
 
 #sidebar-trash-icon {
@@ -217,6 +219,7 @@ button:focus {
     grid-column: 11;
     margin: auto 0;
     color: var(--dark-grey);
+    font-size: 15px;
 }
 
 /*-------------    Sidebar Projects    --------------*/

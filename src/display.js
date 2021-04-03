@@ -142,6 +142,30 @@ const display = () => {
         };
     };
 
+    const sideValues = (today, week, trash) => {
+        // ----- Today Section -------
+        //today section value
+        let todayValue = today.taskList.length;
+        //cache DOM element
+        const todayDOMValue = document.getElementById("sidebar-value-today");
+        //update displayed value
+        todayDOMValue.innerHTML = todayValue;
+
+        // ----- Week Section -------
+        let weekValue = week.taskList.length;
+        //cache DOM element
+        const weekDOMValue = document.getElementById("sidebar-value-week");
+        //update displayed value
+        weekDOMValue.innerHTML = weekValue;
+
+        // ----- Trash Section -------
+        let trashValue = trash.taskList.length;
+        //cache DOM element
+        const trashDOMValue = document.getElementById("sidebar-value-trash");
+        //update displayed value
+        trashDOMValue.innerHTML = trashValue;
+    };
+
     //hide or display the projects and tasks displayed in the sidebar
     const collapseSideProjects = (chevron, container, bool) => {
         if (bool === false) {
@@ -197,6 +221,7 @@ const display = () => {
         collapseSidebar,
         changeTheme,
         collapseSideProjects,
+        sideValues,
         renderNotes,
         expandTask
     };

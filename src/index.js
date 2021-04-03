@@ -18,8 +18,12 @@ const todoApp = (() => {
     let todayProj = project("Today");
     //week project object
     let weekProj = project("Week");
+    //week section value
+    let weekValue = weekProj.taskList.length;
     //trash project object
     let trashProj = project("Trash");
+    //trash section value
+    let trashValue = trashProj.taskList.length;
 
     //cache DOM elements
     const sunIcon_img = document.getElementById("sun-icon");
@@ -69,7 +73,7 @@ const todoApp = (() => {
 
     let coding = project("Coding");
 
-    let codingTask1 = coding.task("Study", "19:00", "29/08/2021", "regular");
+    let codingTask1 = coding.task("Study", "19:00", "03/04/2021", "regular");
     let codingTask2 = coding.task("Study MORE", "20:30", "31/03/2021", "high");
     let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
@@ -172,17 +176,7 @@ const todoApp = (() => {
 
     // --------------- Sidebar Events Section ------------------
 
-
-    //hide or display the projects and tasks displayed in the sidebar
-    const collapseSideProjectsEvent = () => {
-        //toggle boolean
-        let toggle = false;
-        //click event to run function and invert toggle
-        sideProjectMainTitle.addEventListener("click", () => {
-            display().collapseSideProjects(sideProjectChevron, sidebarProjectContainer_div, toggle);
-            toggle = !toggle;
-        });
-    };
+    //Title events
 
     const todaySectionEvent = () => {
         sidebarTodayTitle.addEventListener("click", () => {
@@ -199,6 +193,17 @@ const todoApp = (() => {
     const trashSectionEvent = () => {
         sidebarTrashTitle.addEventListener("click", () => {
             updateDisplay(projectsArray, trashProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+        });
+    };
+
+    //hide or display the projects and tasks displayed in the sidebar
+    const collapseSideProjectsEvent = () => {
+        //toggle boolean
+        let toggle = false;
+        //click event to run function and invert toggle
+        sideProjectMainTitle.addEventListener("click", () => {
+            display().collapseSideProjects(sideProjectChevron, sidebarProjectContainer_div, toggle);
+            toggle = !toggle;
         });
     };
 
@@ -490,7 +495,7 @@ const todoApp = (() => {
 
     // --------------------- General -------------------------
 
-    const displayController = (proj, projContainer) => {
+    const projectDisplayController = (proj, projContainer) => {
         switch(proj.name) {
             case "Today":
             case "Week":
@@ -537,7 +542,7 @@ const todoApp = (() => {
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
         //display the updated project
-        displayController(proj, projContainer);
+        projectDisplayController(proj, projContainer);
         //display the updated sidebar project and task list
         display().sideProjects(arr, sideContainer);
         //add back the sidebar projet's click event
@@ -546,6 +551,8 @@ const todoApp = (() => {
         crossSideTaskEvent();
         //add back the expand task event
         expandTaskEvent(proj);
+        //display Today Value
+        display().sideValues(todayProj, weekProj, trashProj);
     };
 
     //initialize necessary functions when page is launched
@@ -561,16 +568,16 @@ const todoApp = (() => {
         sideProjectTitleEvent();
         projectCreatorEvent();
         crossSideTaskEvent();
+        display().sideValues(todayProj, weekProj, trashProj);
     })();
 
 
 
     // -------- To be done -------
-    // delete project
-    // task sub-list
     // display each section's value
     // create local storage
     // credit
+    // task sub-list
     
     // ---- CSS -----
     // media queries
