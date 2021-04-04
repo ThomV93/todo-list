@@ -260,7 +260,11 @@ const renderProject = container => {
         //task creator text
         let taskCreatorText = document.createElement("p");
         taskCreatorText.id = "task-creator-text";
-        taskCreatorText.innerHTML = "Add task due today";
+        if(name === "Today") {
+            taskCreatorText.innerHTML = "Add task due today";
+        } else {
+            taskCreatorText.innerHTML = "Add task due this week";
+        }
 
         //append elements to creator container
         taskCreatorContainer.append(taskCreatorImg, taskCreatorText);
