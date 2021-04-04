@@ -38,6 +38,8 @@ const todoApp = (() => {
     const sidebarPlusIcon = document.getElementById("sidebar-section-plus-icon");
     const sidebarProjectContainer_div = document.getElementById("sidebar-projects-section");
     const sidebarProjectTitleContainer_div = document.getElementsByClassName("sidebar-project-title-container");
+    const sidebarGitLogo = document.getElementById("github-logo");
+    const logo_img = document.getElementById("logo");
     const projectDisplayContainer_div = document.getElementById("project-display-container");
 
 
@@ -242,6 +244,15 @@ const todoApp = (() => {
                 updateDisplay(projectsArray, projectsArray[projIdx], projectDisplayContainer_div, sidebarProjectContainer_div);
             });
         };
+    };
+
+    const gitLogoEvent = () => {
+        sidebarGitLogo.addEventListener("mouseover", () => {
+            logo_img.src = "icons/github-orange.svg";
+        });
+        sidebarGitLogo.addEventListener("mouseleave", () => {
+            logo_img.src = "icons/github.svg";
+        });
     };
 
 
@@ -566,6 +577,7 @@ const todoApp = (() => {
         sideProjectTitleEvent();
         projectCreatorEvent();
         crossSideTaskEvent();
+        gitLogoEvent();
         display().sideValues(todayProj, weekProj, trashProj);
     })();
 

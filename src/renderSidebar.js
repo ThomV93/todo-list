@@ -101,12 +101,19 @@ const renderSidebar = (container) => {
     let credit = document.createElement("p");
     credit.innerHTML = "Made by Thomas Veit";
 
+    //logo link
+    let logoLink = document.createElement("a");
+    logoLink.id = "github-logo";
+    logoLink.href = "https://github.com/ThomV93/todo-list";
+    logoLink.target = "_blank";
+
     //git logo
     let gitLogo = document.createElement("img");
-    gitLogo.id = "github-logo";
+    gitLogo.id = "logo";
     gitLogo.src = "icons/github.svg";
 
-
+    //append img to link
+    logoLink.append(gitLogo);
 
     //-------------- Append to sidebar main container ----------
     
@@ -117,7 +124,7 @@ const renderSidebar = (container) => {
         projectsSectionPlusIcon,
         sidebarProjectsSection,
         credit,
-        gitLogo
+        logoLink
     );
 
     //----------- Append to Content container -----------
