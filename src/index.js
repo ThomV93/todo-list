@@ -566,7 +566,6 @@ const todoApp = (() => {
 
     //initialize necessary functions when page is launched
     const pageInit = (() => {
-        display().sideProjects(projectsArray, sidebarProjectContainer_div);
         collapseSidebarEvent();
         changeThemeEvent();
         todaySectionEvent();
@@ -574,9 +573,7 @@ const todoApp = (() => {
         trashSectionEvent();
         checkForUpcoming(projectsArray);
         collapseSideProjectsEvent();
-        sideProjectTitleEvent();
-        projectCreatorEvent();
-        crossSideTaskEvent();
+        updateDisplay(projectsArray, todayProj, projectDisplayContainer_div, sidebarProjectContainer_div)
         gitLogoEvent();
         display().sideValues(todayProj, weekProj, trashProj);
     })();
@@ -586,7 +583,6 @@ const todoApp = (() => {
     // -------- To be done -------
     // delete project
     // create local storage
-    // credit
     // task sub-list
     
     // ---- CSS -----
@@ -594,7 +590,7 @@ const todoApp = (() => {
 
     // ---- Bugs ----
     // deleted tasks are not deleted in the today object
-    // edited priority get duplicated in the today section
+    // edited task get duplicated in the today section
     // edited date on today section don't erase task
     // search don't work properly on trash section
 
