@@ -116,19 +116,11 @@ const display = () => {
         if (bool === false) {
             //hide sidebar
             sidebar.style.transform = "translateX(-450px)";
-            if(projTitle[0] !== undefined){
-                projTitle[0].style.transition = "width 0.4s ease";
-                projTitle[0].style.width = "85vw";
-            };
             //center projects and tasks
             projDisplay.style.gridColumn = "1 / -1";
         } else {
             sidebar.style.transform = "translateX(0)";
-            
-            if(projTitle[0] !== undefined){
-                projTitle[0].style.width = "65vw";
-            };
-            projDisplay.style.gridColumn = "4 / -1";
+            projDisplay.style.gridColumn = "5 / -1";
         };
     };
 
