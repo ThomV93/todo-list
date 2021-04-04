@@ -18,12 +18,8 @@ const todoApp = (() => {
     let todayProj = project("Today");
     //week project object
     let weekProj = project("Week");
-    //week section value
-    let weekValue = weekProj.taskList.length;
     //trash project object
     let trashProj = project("Trash");
-    //trash section value
-    let trashValue = trashProj.taskList.length;
 
     //cache DOM elements
     const sunIcon_img = document.getElementById("sun-icon");
@@ -83,7 +79,7 @@ const todoApp = (() => {
     coding.addTask(codingTask3);
 
     projectsArray.push(coding);
-
+    
 
     // -------------------- ProjectsArray Aux Functions ---------------------
 
@@ -573,6 +569,7 @@ const todoApp = (() => {
         trashSectionEvent();
         checkForUpcoming(projectsArray);
         collapseSideProjectsEvent();
+        projectCreatorEvent();
         updateDisplay(projectsArray, todayProj, projectDisplayContainer_div, sidebarProjectContainer_div)
         gitLogoEvent();
         display().sideValues(todayProj, weekProj, trashProj);

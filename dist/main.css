@@ -256,8 +256,9 @@ button:focus {
 
 #sidebar-projects-section {
     grid-column: 3/ -1;
-    grid-row: 4/ 9;
+    grid-row: 4/ 10;
     overflow: scroll;
+    border-bottom: 1.8px solid var(--grey);
 }
 
 .sidebar-project {
