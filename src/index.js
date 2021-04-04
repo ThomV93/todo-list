@@ -79,7 +79,7 @@ const todoApp = (() => {
     coding.addTask(codingTask3);
 
     projectsArray.push(coding);
-    
+
 
     // -------------------- ProjectsArray Aux Functions ---------------------
 
@@ -123,6 +123,11 @@ const todoApp = (() => {
                 };
             };
         };
+    };
+
+    const deleteProject = selectedProj => {
+        let projIdx = getParentIdx(selectedProj.name);
+        projectsArray.splice(projIdx, 1);
     };
 
     //restore task to it's original parent
@@ -211,6 +216,7 @@ const todoApp = (() => {
                 display().selectedProject(projectsArray[i], projectDisplayContainer_div);
                 sortProjectDatesEvent(projectsArray[i]);
                 editProjectEvent(projectsArray[i]);
+                deleteProjectEvent(projectsArray[i]);
                 taskCreatorEvent(projectsArray[i]);
                 editTaskEvent(projectsArray[i]);
                 moveToTrashEvent(projectsArray[i]);
@@ -276,6 +282,16 @@ const todoApp = (() => {
             projectForm().displayStoredValues(selectedProj);
             projectCreatorCancelBtnEvent();
             projectEditorSaveBtnEvent(selectedProj);
+        });
+    };
+
+    const deleteProjectEvent = (selectedProj) => {
+        //cache DOM element
+        const projTrashIcon = document.getElementById("proj-trash-icon");
+        //add click event to element
+        projTrashIcon.addEventListener("click", () => {
+            deleteProject(selectedProj);
+            updateDisplay(projectsArray, todayProj, projectDisplayContainer_div, sidebarProjectContainer_div);
         });
     };
 
@@ -578,7 +594,6 @@ const todoApp = (() => {
 
 
     // -------- To be done -------
-    // delete project
     // create local storage
     // task sub-list
     
