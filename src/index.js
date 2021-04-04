@@ -144,13 +144,11 @@ const todoApp = (() => {
 
 
     const collapseSidebarEvent = () => {
-        //cache DOM element
-        const projectTitleContainer = document.getElementsByClassName("project-title-container");
         //toggle boolean
         let toggle = false;
         //click event to run function and invert toggle
         listIcon_img.addEventListener("click", () => {
-            display().collapseSidebar(sidebar, projectDisplayContainer_div, projectTitleContainer, toggle);
+            display().collapseSidebar(sidebar, projectDisplayContainer_div, toggle);
             toggle = !toggle;
         });
     };

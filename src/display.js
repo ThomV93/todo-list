@@ -112,7 +112,7 @@ const display = () => {
     };
 
     //hide or display sidebar
-    const collapseSidebar = (sidebar, projDisplay, projTitle, bool) => {
+    const collapseSidebar = (sidebar, projDisplay, bool) => {
         if (bool === false) {
             //hide sidebar
             sidebar.style.transform = "translateX(-450px)";
