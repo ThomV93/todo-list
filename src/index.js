@@ -574,7 +574,7 @@ const todoApp = (() => {
 
 
     // -------- To be done -------
-    // display each section's value
+    // delete project
     // create local storage
     // credit
     // task sub-list

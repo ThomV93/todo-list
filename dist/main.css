@@ -34,8 +34,8 @@ body, #content {
 #content {
     position: absolute;
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
+    grid-template-columns: repeat(18, 1fr);
+    grid-template-rows: repeat(18, 1fr);
     overflow: auto;
     background-color: var(--off-white);
 }
@@ -51,20 +51,20 @@ button:focus {
 
 #navbar {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(18, 1fr);
     grid-column: 1/ -1;
     grid-row: 1;
+    padding: 0.2rem 1.8rem;
     background-color: var(--nav-orange);
-    padding: 0.5rem 2rem;
     box-sizing: border-box;
     z-index: 1;
 }
 
 #list-icon {
     grid-column: 1;
-    height: 45px;
+    height: 43px;
     width: auto;
-    margin: auto;
+    margin: auto 5px auto auto;
 }
 
 #list-icon:hover {
@@ -75,7 +75,7 @@ button:focus {
     display: flex;
     justify-content: center;
     justify-items: center;
-    grid-column: 4/ 9;
+    grid-column: 5/ 10;
     margin: auto auto auto 60px;
 }
 
@@ -104,7 +104,7 @@ button:focus {
 }
 
 #sun-icon {
-    grid-column: 11;
+    grid-column: 18;
     margin: auto 5px auto auto;
 }
 
@@ -113,7 +113,7 @@ button:focus {
 }
 
 #more-vertical-icon {
-    grid-column: 12;
+    grid-column: 19;
     margin: auto 2px;
 }
 
@@ -124,7 +124,7 @@ button:focus {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(10, 1fr);
     background-color: var(--light-grey);
-    grid-column: 1/ 4;
+    grid-column: 1/ 5;
     grid-row: 2/ -1;
     max-width: 400px;
     box-sizing: border-box;
@@ -256,7 +256,7 @@ button:focus {
 
 #sidebar-projects-section {
     grid-column: 3/ -1;
-    grid-row: 4/ 12;
+    grid-row: 4/ 9;
     overflow: scroll;
 }
 
@@ -343,15 +343,15 @@ button:focus {
 #sidebar > p {
     font-size: 14px;
     color: var(--dark-grey);
-    grid-column: 3/ 8;
+    grid-column: 2/ 10;
     grid-row: 10;
-    margin: auto;
+    margin: auto 0 auto auto;
 }
 
 #github-logo {
-    grid-column: 8;
+    grid-column: 10;
     grid-row: 10;
-    margin: auto 3px;
+    margin: auto auto auto 5px;
 }
 
 /*---------------------      Project Display     ----------------------*/
@@ -360,8 +360,8 @@ button:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 150px;
-    grid-column: 4/ -1;
+    padding: 1.8rem 4.2rem;
+    grid-column: 5/ -1;
     grid-row: 2/ -1;
     overflow: scroll;
     background-color: var(--off-white);
@@ -370,12 +370,12 @@ button:focus {
 
 .project {
     margin-bottom: 75px;
+    width: 100%;
 }
 
 .project-title-container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    width: 65vw;
     height: auto;
     margin-bottom: 10px;
     font-family: "Montserrat", sans-serif;
