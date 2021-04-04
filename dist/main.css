@@ -407,18 +407,19 @@ button:focus {
     display: flex;
     align-items: flex-end;
     grid-column: 10/11;
-    margin: auto;
+    margin: auto auto 0 auto;
     cursor: pointer;
 }
 
 .project-date {
     font-size: 18px;
+    font-weight: 500;
     color: var(--off-black);
 }
 
 .project-edit-icon {
     grid-column: 11;
-    margin: auto 8px auto auto;
+    margin: auto 8px 0 auto;
 }
 
 .project-edit-icon:hover {
@@ -428,7 +429,7 @@ button:focus {
 
 .project-trash-icon {
     grid-column: 12;
-    margin: auto auto auto 8px;
+    margin: auto auto 0 8px;
 }
 
 .project-trash-icon:hover {
