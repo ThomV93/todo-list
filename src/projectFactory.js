@@ -21,6 +21,19 @@ const project = name => {
         //parent name
         let parentName = projectName;
 
+        //subtask factory
+        const subTask = (name) => {
+            return {name};
+        };
+
+        const addSubTask = subTask => subList.push(subTask);
+
+        //find subtask index in the array by it's name
+        const findSubTaskIdx = subTaskName => subList.findIndex(subTask => subTask.name === subTaskName);
+
+        //delete subtask from task
+        const deleteSubTask = idx => subList.splice(idx, 1);
+
         return {
             name,
             time,
@@ -29,7 +42,11 @@ const project = name => {
             notes,
             subList,
             isActive,
-            parentName
+            parentName,
+            subTask,
+            addSubTask,
+            findSubTaskIdx,
+            deleteSubTask
         };
     };
 

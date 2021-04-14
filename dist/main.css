@@ -144,8 +144,6 @@ button:focus {
 }
 
 .sidebar-section-title {
-    grid-row: 2;
-    grid-column: 1/ -1;
     font-size: 28px;
     color: var(--orange);
     font-family: "Montserrat", sans-serif;
@@ -597,6 +595,7 @@ button:focus {
     grid-column: 9/ -1;
     margin: 0 auto;
     width: 80%;
+    height: 8vh;
     overflow: scroll;
 }
 
@@ -610,6 +609,7 @@ button:focus {
 .checkbox > label {
     color: var(--translucent-black);
     font-size: 14px;
+    width: 90%;
 }
 
 .check-input{

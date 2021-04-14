@@ -178,30 +178,10 @@ const renderProject = container => {
         //checkbox title
         let taskCheckboxTitle = document.createElement("h2");
         taskCheckboxTitle.className = "task-expanded-title";
-        taskCheckboxTitle.innerHTML = "List:";
+        taskCheckboxTitle.innerHTML = "SubTask List:";
 
-        //----Check container ---
-        //individual checkbox container
-        let checkboxContainer = document.createElement("div");
-        checkboxContainer.className = "checkbox";
+        taskCheckboxContainer.prepend(taskCheckboxTitle);
 
-        //check input
-        let checkInput = document.createElement("input");
-        checkInput.className = "check-input";
-        checkInput.type = "checkbox";
-
-        //check label
-        let checkLabel = document.createElement("label");
-        checkLabel.innerHTML = "Diamon Hands";
-
-        //append elements to individual checkbox container
-        checkboxContainer.append(checkInput, checkLabel);
-
-
-        //append elements to expanded checkbox container
-        taskCheckboxContainer.append(taskCheckboxTitle, checkboxContainer);
-
-        
         //-------- Append all to task container ---------
         taskContainer.append(
             taskCheckboxInput,
@@ -218,6 +198,29 @@ const renderProject = container => {
 
         //append task container to main task container
         mainTaskContainer.append(taskContainer);
+    };
+
+    //subTask DOM factory
+    const renderSubTask = (name, container) => {
+        //----Check container ---
+        //individual checkbox container
+        let checkboxContainer = document.createElement("div");
+        checkboxContainer.className = "checkbox";
+
+        //check input
+        let checkInput = document.createElement("input");
+        checkInput.className = "check-input";
+        checkInput.type = "checkbox";
+
+        //check label
+        let checkLabel = document.createElement("label");
+        checkLabel.innerHTML = name;
+
+        //append elements to individual checkbox container
+        checkboxContainer.append(checkInput, checkLabel);
+
+        //append elements to expanded checkbox container
+        container.append(checkboxContainer);
     };
 
 
@@ -427,6 +430,7 @@ const renderProject = container => {
     return {
         renderProjectTitle,
         renderTask,
+        renderSubTask,
         renderTodayProjectTitle,
         renderTrashProjectTitle,
         renderTrashTask

@@ -45,8 +45,8 @@ const todoApp = (() => {
     let work = project("Work");
 
     let workTask1 = work.task("Check Emails", "09:00", "03/04/2021", "high");
-    let workTask2 = work.task("Send Emails", "10:30", "04/04/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "31/03/2021", "high");
+    let workTask2 = work.task("Send Emails", "10:30", "05/04/2021", "regular");
+    let workTask3 = work.task("Create reports", "14:00", "08/04/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     workTask2.notes = "Hello Notes";
     work.addTask(workTask1);
@@ -54,14 +54,43 @@ const todoApp = (() => {
     work.addTask(workTask3);
     work.addTask(workTask4);
 
+    let workTask1Subtask = workTask1.subTask("Test");
+    workTask1.addSubTask(workTask1Subtask);
+
+    let workTask1Subtask1 = workTask1.subTask("Test1");
+    workTask1.addSubTask(workTask1Subtask1);
+
+    let workTask1Subtask2 = workTask1.subTask("Test2");
+    workTask1.addSubTask(workTask1Subtask2);
+
+    let workTask1Subtask3 = workTask1.subTask("Test3");
+    workTask1.addSubTask(workTask1Subtask3);
+
+    let workTask1Subtask4 = workTask1.subTask("Test4");
+    workTask1.addSubTask(workTask1Subtask4);
+
+    let workTask1Subtask5 = workTask1.subTask("Test5");
+    workTask1.addSubTask(workTask1Subtask5);
+
+
+
+    let workTask3Subtask = workTask1.subTask("SecondTest");
+    workTask3.addSubTask(workTask3Subtask);
+
+    let workTask3Subtask1 = workTask3.subTask("SecondTest1");
+    workTask3.addSubTask(workTask3Subtask1);
+
+    let workTask3Subtask2 = workTask3.subTask("SecondTest2");
+    workTask3.addSubTask(workTask3Subtask2);
+
     projectsArray.push(work);
 
 
     let investing = project("Investing");
 
     let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00", "04/04/2021");
-    let investingTask3 = investing.task("Test", "18:00", "31/03/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "05/04/2021");
+    let investingTask3 = investing.task("Buy High, Sell Low", "18:00", "07/04/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
     investing.addTask(investingTask3);
@@ -72,7 +101,7 @@ const todoApp = (() => {
     let coding = project("Coding");
 
     let codingTask1 = coding.task("Study", "19:00", "03/04/2021", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30", "31/03/2021", "high");
+    let codingTask2 = coding.task("Study MORE", "20:30", "07/04/2021", "high");
     let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
@@ -80,8 +109,8 @@ const todoApp = (() => {
 
     projectsArray.push(coding);
 
-
-    // -------------------- ProjectsArray Aux Functions ---------------------
+    
+    // -------------------- Projects Array Aux Functions ---------------------
 
 
     //retrieve task obejct from any project by name
@@ -596,6 +625,7 @@ const todoApp = (() => {
     // -------- To be done -------
     // create local storage
     // task sub-list
+    // update readme
     
     // ---- CSS -----
     // media queries
@@ -605,5 +635,8 @@ const todoApp = (() => {
     // edited task get duplicated in the today section
     // edited date on today section don't erase task
     // search don't work properly on trash section
+    // week don't clean itself
+    // delete proj not working well
+
 
 })();
