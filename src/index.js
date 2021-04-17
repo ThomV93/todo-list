@@ -456,8 +456,6 @@ const todoApp = (() => {
             projectForm().creator(projectsArray);
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, projectsArray[projectsArray.length - 1], projectDisplayContainer_div, sidebarProjectContainer_div);
-            //stop displaying the form
-            projectForm().close();
         });
     };
 
@@ -469,8 +467,6 @@ const todoApp = (() => {
             projectForm().editor(selectedProj);
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-            //stop displaying the form
-            projectForm().close();
         });
     };
 

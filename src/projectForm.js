@@ -11,10 +11,16 @@ const projectForm = () => {
         //store user input
         let projectName = formName.value;
 
-        //create new project
-        let newProject = project(projectName)
-        //add project to array
-        array.push(newProject);
+        if(projectName !== ""){
+            //create new project
+            let newProject = project(projectName)
+            //add project to array
+            array.push(newProject);
+            //close form
+            close();
+        } else {
+            formName.style.backgroundColor = "rgba(255, 0, 52, 0.2)";
+        };
     };
 
     //display stored values in the editor
@@ -27,11 +33,19 @@ const projectForm = () => {
 
     //editor section
     const editor = selectedProj => {
-        //store new value in the object
-        selectedProj.name = formName.value;
+        //store user input
+        let projectName = formName.value;
+
+        if(projectName !== ""){
+            //store new value in the object
+            selectedProj.name = projectName;
+            //close form
+            close();
+        } else {
+            formName.style.backgroundColor = "rgba(255, 0, 52, 0.2)";
+        };
     };
 
-    //close form
     const close = () => {
         document.body.removeChild(document.body.firstChild);
     };

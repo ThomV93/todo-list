@@ -657,10 +657,10 @@ button:focus {
     font-family: "Open Sans", sans-serif;
     border-radius: 5px;
     border: none;
-    height: auto;
+    height: 3vh;
     padding: 6px;
     margin: 4px 0;
-    width: 120px
+    width: 120px;
 }
 
 .form-input-container > label {
