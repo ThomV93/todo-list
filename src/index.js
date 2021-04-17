@@ -520,7 +520,6 @@ const todoApp = (() => {
         saveBtn.addEventListener("click", () => {
             taskForm().creator(selectedProj, todayProj);
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-            taskForm().close();
         });
     };
 
@@ -533,8 +532,6 @@ const todoApp = (() => {
             taskForm().editor(selectedProj, idx, todayProj);
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-            //stop displaying the form
-            taskForm().close();
         });
     };
 

@@ -43,6 +43,7 @@ const renderTaskForm = container => {
     let formName = document.createElement("input");
     formName.id = "form-name";
     formName.type = "text";
+    formName.maxLength = "20";
 
     //append elements to form name container
     formNameContainer.append(formLabelName, formName);

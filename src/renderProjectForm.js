@@ -35,7 +35,6 @@ const renderProjectForm = container => {
     let formName = document.createElement("input");
     formName.id = "form-name";
     formName.type = "text";
-    formName.minLength = "2";
     formName.maxLength = "12";
 
     //append elements to form name container

@@ -45,15 +45,22 @@ const taskForm = () => {
         let taskDate = formDate.value;
         let taskPriority = formFlag.src.indexOf("red-flag") != -1 ? "high" : "regular";
         let taskNotes = formNotes.value;
+        let required = [formName, formTime, formDate];
 
-        //create new task
-        let newTask = selectedProj.task(taskName, taskTime, taskDate, taskPriority);
-        //add task notes
-        newTask.notes = taskNotes;
-        //add task to the project
-        selectedProj.addTask(newTask);
-        //check if the task is due today and add to today's section as well
-        checkIfToday(todayObj, newTask, newTask.date);
+        if(taskName !== "" && taskTime !== "" && taskDate !== "") {
+            //create new task
+            let newTask = selectedProj.task(taskName, taskTime, taskDate, taskPriority);
+            //add task notes
+            newTask.notes = taskNotes;
+            //add task to the project
+            selectedProj.addTask(newTask);
+            //check if the task is due today and add to today's section as well
+            checkIfToday(todayObj, newTask, newTask.date);
+            //close form
+            close();
+        } else {
+            required.map(field => field.value === "" ? field.style.backgroundColor = "rgba(255, 0, 52, 0.2)" : field.style.backgroundColor = "#fff");
+        };
     };
 
 
@@ -81,16 +88,21 @@ const taskForm = () => {
     const editor = (selectedProj, idx, todayObj) => {
         //get selected task
         let selectedTask = selectedProj.taskList[idx];
-        
-        //store new values
-        selectedTask.name = formName.value;
-        selectedTask.time = formTime.value;
-        selectedTask.date = new Date(formDate.value);
-        selectedTask.priority = formFlag.src.indexOf("red-flag") != -1 ? "high" : "regular";
-        selectedTask.notes = formNotes.value;
 
-        //check if the task is due today and add to today's section as well
-        checkIfToday(todayObj, selectedTask, selectedTask.date);
+        if(formName.value !== "") {
+            //store new values
+            selectedTask.name = formName.value;
+            selectedTask.time = formTime.value;
+            selectedTask.date = new Date(formDate.value);
+            selectedTask.priority = formFlag.src.indexOf("red-flag") != -1 ? "high" : "regular";
+            selectedTask.notes = formNotes.value;
+            //check if the task is due today and add to today's section as well
+            checkIfToday(todayObj, selectedTask, selectedTask.date);
+            //close form
+            close();
+        } else {
+            formName.style.backgroundColor = "rgba(255, 0, 52, 0.2)";
+        };
     };
 
 
