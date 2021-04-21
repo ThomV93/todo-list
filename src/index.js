@@ -1,4 +1,6 @@
 //import necessary modules
+import "./css-reset.css";
+import "./main.css";
 import display from "./display";
 import searchbar from "./searchbar";
 import project from "./projectFactory";
