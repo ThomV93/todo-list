@@ -199,6 +199,7 @@ const display = () => {
             checkContainer[idx].style.position = "static";
             checkContainer[idx].style.visibility = "visible";
         } else {
+            task.style.backgroundColor = "";
             //apply on notes container
             notesContainer[idx].style.visibility = "hidden";
             notesContainer[idx].style.position = "absolute";
