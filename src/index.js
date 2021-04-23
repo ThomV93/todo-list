@@ -414,6 +414,7 @@ const todoApp = (() => {
 
     const expandTaskEvent = selectedProj => {
         //cache all displayed
+        const taskDOM = document.getElementsByClassName("task");
         const taskName = document.getElementsByClassName("task-name");
         const taskNotes = document.getElementsByClassName("task-notes");
         const taskNotesContainer = document.querySelectorAll("[data-notes]");
@@ -421,7 +422,7 @@ const todoApp = (() => {
 
         for(let i = 0; i < taskName.length; i++) {
             taskName[i].addEventListener("click", () => {
-                display().expandTask(taskNotesContainer, taskCheckboxContainer, i);
+                display().expandTask(taskDOM[i+1], taskNotesContainer, taskCheckboxContainer, i);
                 display().renderNotes(selectedProj, taskNotes, i);
             });
         };
@@ -552,7 +553,7 @@ const todoApp = (() => {
                 //move task to trash section on click
                 moveToTrashEvent(proj);
                 //cross off task on click
-                crossTaskEvent(proj);
+                crossTaskEvent(proj);``
                 //cross off sidetask on click
                 crossSideTaskEvent();
                 break;

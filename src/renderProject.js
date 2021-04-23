@@ -175,12 +175,27 @@ const renderProject = container => {
         taskCheckboxContainer.style.position = "absolute";
         taskCheckboxContainer.style.visibility = "hidden";
 
+        //title container
+        let taskCheckboxTitleContainer = document.createElement("div");
+        taskCheckboxTitleContainer.className = "task-checkbox-title-container";
+
         //checkbox title
         let taskCheckboxTitle = document.createElement("h2");
         taskCheckboxTitle.className = "task-expanded-title";
-        taskCheckboxTitle.innerHTML = "SubTask List:";
+        taskCheckboxTitle.innerHTML = "Sub-Tasks";
 
-        taskCheckboxContainer.prepend(taskCheckboxTitle);
+        //subtask plus icon
+        let taskCheckboxPlusIcon = document.createElement("img");
+        taskCheckboxPlusIcon.id = "task-checkbox-plus-icon";
+        taskCheckboxPlusIcon.src = "icons/plus-2.svg";
+
+        taskCheckboxTitleContainer.append(taskCheckboxTitle, taskCheckboxPlusIcon);
+
+        //main container
+        let subTaskContainer = document.createElement("div");
+        subTaskContainer.id = "sub-task-container";
+
+        taskCheckboxContainer.prepend(taskCheckboxTitleContainer, subTaskContainer);
 
         //-------- Append all to task container ---------
         taskContainer.append(

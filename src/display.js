@@ -54,7 +54,7 @@ const display = () => {
             proj.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.isActive);
 
             //cache container for subtasks
-            const checkboxContainerDOM = document.querySelectorAll("#checkbox-container")[i];
+            const checkboxContainerDOM = document.querySelectorAll("#sub-task-container")[i];
             //loop through each subtask
             for(let j = 0; j < task.subList.length; j++) {
                 //select subtask
@@ -189,8 +189,9 @@ const display = () => {
     };
 
     //visually expand task
-    const expandTask = (notesContainer, checkContainer, idx) => {
+    const expandTask = (task, notesContainer, checkContainer, idx) => {
         if(notesContainer[idx].style.position === "absolute") {
+            task.style.backgroundColor = "var(--hover-grey)";
             //apply on notes container
             notesContainer[idx].style.position = "static";
             notesContainer[idx].style.visibility = "visible";

@@ -596,14 +596,40 @@ button:focus {
     margin: 0 auto;
     width: 80%;
     height: 8vh;
+}
+
+.task-checkbox-title-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.task-checkbox-title-container > h2 {
+    grid-column: 1/ 4;
+    margin: auto 0;
+}
+
+.task-checkbox-title-container > img {
+    height: 22px;
+    width: auto;
+    grid-column: 5/ -1;
+    cursor: pointer;
+    transition: all 275ms ease;
+}
+
+.task-checkbox-title-container > img:hover {
+    transform: rotate(90deg) scale(1.2);
+}
+
+#sub-task-container {
     overflow: scroll;
+    height: 100%;
+    margin-top: 0.2rem;
 }
 
 .checkbox {
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 0.8rem;
 }
 
 .checkbox > label {
