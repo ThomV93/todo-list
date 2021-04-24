@@ -14,12 +14,14 @@ const project = name => {
         date = new Date(treatedDate);
         //notes storage
         let notes = "";
-        //checkbox storage
-        let subList = [];
         //task status
         let isActive = true;
+        //task expanded
+        let isCollapsed = true;
         //parent name
         let parentName = projectName;
+        //checkbox storage
+        let subList = [];
 
         //subtask factory
         const subTask = (name) => {
@@ -42,6 +44,7 @@ const project = name => {
             notes,
             subList,
             isActive,
+            isCollapsed,
             parentName,
             subTask,
             addSubTask,
@@ -55,6 +58,9 @@ const project = name => {
 
     //toggle task status
     const toggleTaskStatus = task => task.isActive === true ? task.isActive = false : task.isActive = true;
+
+    //toggle task display
+    const toggleTaskDisplay = task => task.isCollapsed === true ? task.isCollapsed = false : task.isCollapsed = true;
 
     //find task index in the array by it's name
     const findTaskIdx = taskName => taskList.findIndex(task => task.name === taskName);
@@ -79,6 +85,7 @@ const project = name => {
         task,
         addTask,
         toggleTaskStatus,
+        toggleTaskDisplay,
         sortDates,
         findTaskIdx,
         findTask,

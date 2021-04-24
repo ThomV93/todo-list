@@ -414,15 +414,13 @@ const todoApp = (() => {
 
     const expandTaskEvent = selectedProj => {
         //cache all displayed
-        const taskDOM = document.getElementsByClassName("task");
         const taskName = document.getElementsByClassName("task-name");
         const taskNotes = document.getElementsByClassName("task-notes");
-        const taskNotesContainer = document.querySelectorAll("[data-notes]");
-        const taskCheckboxContainer = document.querySelectorAll("[data-checkbox]");
 
         for(let i = 0; i < taskName.length; i++) {
             taskName[i].addEventListener("click", () => {
-                display().expandTask(taskDOM[i+1], taskNotesContainer, taskCheckboxContainer, i);
+                selectedProj.toggleTaskDisplay(selectedProj.taskList[i]);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
                 display().renderNotes(selectedProj, taskNotes, i);
             });
         };
@@ -627,11 +625,11 @@ const todoApp = (() => {
     // media queries
 
     // ---- Bugs ----
+    // notes displayed after creation and edits
     // deleted tasks are not deleted in the today object
     // edited task get duplicated in the today section
     // edited date on today section don't erase task
     // search don't work properly on trash section
-    // week don't clean itself
     // delete proj not working well
 
 

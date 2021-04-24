@@ -93,10 +93,11 @@ const renderProject = container => {
 
     // --------- Task DOM factory module ---------
 
-    const renderTask = (name, date, time, priority, status) => {
+    const renderTask = (name, date, time, priority, status, collapsed) => {
         //task container
         let taskContainer = document.createElement("div");
         taskContainer.className = "task";
+        taskContainer.style.backgroundColor = "";
 
         //checkbox input
         let taskCheckboxInput = document.createElement("input");
@@ -194,6 +195,17 @@ const renderProject = container => {
         //main container
         let subTaskContainer = document.createElement("div");
         subTaskContainer.id = "sub-task-container";
+
+        if (collapsed === false) {
+            //task container color
+            taskContainer.style.backgroundColor = "var(--hover-grey)";
+            //display notes
+            taskNotesContainer.style.position = "static";
+            taskNotesContainer.style.visibility = "visible";
+            //display checkbox
+            taskCheckboxContainer.style.position = "static";
+            taskCheckboxContainer.style.visibility = "visible";
+        };
 
         taskCheckboxContainer.prepend(taskCheckboxTitleContainer, subTaskContainer);
 

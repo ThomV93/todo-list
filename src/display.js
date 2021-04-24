@@ -51,7 +51,7 @@ const display = () => {
             //select each task
             let task = arrPos.taskList[i];
             //render tasks
-            proj.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.isActive);
+            proj.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.isActive, task.isCollapsed);
 
             //cache container for subtasks
             const checkboxContainerDOM = document.querySelectorAll("#sub-task-container")[i];
@@ -188,27 +188,6 @@ const display = () => {
         notes[idx].innerHTML = selectedProj.taskList[idx].notes;
     };
 
-    //visually expand task
-    const expandTask = (task, notesContainer, checkContainer, idx) => {
-        if(notesContainer[idx].style.position === "absolute") {
-            task.style.backgroundColor = "var(--hover-grey)";
-            //apply on notes container
-            notesContainer[idx].style.position = "static";
-            notesContainer[idx].style.visibility = "visible";
-            //apply on checkbox container
-            checkContainer[idx].style.position = "static";
-            checkContainer[idx].style.visibility = "visible";
-        } else {
-            task.style.backgroundColor = "";
-            //apply on notes container
-            notesContainer[idx].style.visibility = "hidden";
-            notesContainer[idx].style.position = "absolute";
-            //apply on checkbox container
-            checkContainer[idx].style.visibility = "hidden";
-            checkContainer[idx].style.position = "absolute";
-        };
-    };
-
     //format date to display
     const formatDate = date => {
         let formatted = format(date, "dd/MM/yyyy");
@@ -226,8 +205,7 @@ const display = () => {
         changeTheme,
         collapseSideProjects,
         sideValues,
-        renderNotes,
-        expandTask
+        renderNotes
     };
 };
 
