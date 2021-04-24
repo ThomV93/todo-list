@@ -572,14 +572,14 @@ button:focus {
 }
 
 #notes-container {
-    grid-column: 2/ 9;
+    grid-column: 2/ 8;
     margin: auto 0;
 }
 
 #notes-container > textarea {
     color: var(--translucent-black);
     height: 8vh;
-    width: 80%;
+    width: 90%;
     font-size: 14px;
     border: none;
     border-radius: 5px;
@@ -592,9 +592,9 @@ button:focus {
 }
 
 #checkbox-container {
-    grid-column: 9/ -1;
-    margin: 0 auto;
-    width: 80%;
+    grid-column: 8/ -1;
+    margin: 0 auto 0 8vw;
+    width: 60%;
     height: 8vh;
 }
 
@@ -612,6 +612,7 @@ button:focus {
     height: 22px;
     width: auto;
     grid-column: 5/ -1;
+    margin: auto 0 auto auto;
     cursor: pointer;
     transition: all 275ms ease;
 }
@@ -624,6 +625,9 @@ button:focus {
     overflow: scroll;
     height: 100%;
     margin-top: 0.2rem;
+    background-color: var(--off-white);
+    border-radius: 5px;
+    padding: 0.2rem 0.8rem;
 }
 
 .checkbox {
