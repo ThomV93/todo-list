@@ -78,7 +78,17 @@ const display = () => {
             //select each task
             let task = proj.taskList[i];
             //render tasks
-            projContainer.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.isActive);
+            projContainer.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.isActive, task.isCollapsed);
+
+            //cache container for subtasks
+            const checkboxContainerDOM = document.querySelectorAll("#sub-task-container")[i];
+            //loop through each subtask
+            for(let j = 0; j < task.subList.length; j++) {
+                //select subtask
+                let subTask = task.subList[j];
+                //render subtask
+                projContainer.renderSubTask(subTask.name, checkboxContainerDOM, subTask.isSubTaskActive, task.name);
+            };
         };
     };
 

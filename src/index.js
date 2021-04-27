@@ -46,9 +46,9 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "03/04/2021", "high");
+    let workTask1 = work.task("Check Emails", "09:00", "27/04/2021", "high");
     let workTask2 = work.task("Send Emails", "10:30", "05/04/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "08/04/2021", "high");
+    let workTask3 = work.task("Create reports", "14:00", "29/04/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     workTask2.notes = "Hello Notes";
     work.addTask(workTask1);
