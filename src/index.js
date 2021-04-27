@@ -8,7 +8,7 @@ import projectForm from "./projectForm";
 import taskForm from "./taskForm";
 import renderTaskForm from "./renderTaskForm";
 import renderProjectForm from "./renderProjectForm";
-import {format, isSameWeek, sub} from "date-fns";
+import {format, isSameWeek} from "date-fns";
 
 const todoApp = (() => {
 
@@ -427,6 +427,24 @@ const todoApp = (() => {
     };
 
 
+    // ---------------- Subtask Events Section ----------------
+
+
+    const crossSubtaskEvent = selectedProj => {
+        //cache DOM element
+        const checkInput = document.getElementsByClassName("check-input");
+        for(let i = 0; i < checkInput.length; i++) {
+            checkInput[i].addEventListener("click", () => {
+                let taskIdx = selectedProj.findTaskIdx(checkInput[i].dataset.parent);
+                let taskObj = selectedProj.taskList[taskIdx];
+                let subTaskObj = taskObj.findSubTask(checkInput[i].name);
+                taskObj.toggleSubTaskStatus(subTaskObj);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            });
+        };
+    };
+
+
     // ---------------- Project Form Events --------------------
 
     
@@ -552,13 +570,15 @@ const todoApp = (() => {
                 moveToTrashEvent(proj);
                 //cross off task on click
                 crossTaskEvent(proj);
+                //cross off subtask on click
+                crossSubtaskEvent(proj);
                 //cross off sidetask on click
                 crossSideTaskEvent();
                 break;
 
             case "Trash":
                 display().trashProject(proj, projContainer);
-                //delete all tasks event
+                //delete all tasks on click
                 trashDeleteAllEvent(proj);
                 //restore to original project on click
                 restoreTaskEvent(proj);
@@ -570,16 +590,18 @@ const todoApp = (() => {
                 display().selectedProject(proj, projContainer);
                 //sort tasks by date on click
                 sortProjectDatesEvent(proj);
-                //edit project
+                //edit project on click
                 editProjectEvent(proj);
-                //task creator click event
+                //task creator on click 
                 taskCreatorEvent(proj);
-                //edit task
+                //edit task on click
                 editTaskEvent(proj);
                 //move task to trash section on click
                 moveToTrashEvent(proj);
-                //cross off task
+                //cross off task on click
                 crossTaskEvent(proj);
+                //cross off subtask on click
+                crossSubtaskEvent(proj);
                 break;
         };
     };

@@ -8,6 +8,7 @@ const project = name => {
 
     //task factory
     const task = (name, time, date, priority) => {
+        let taskName = name;
         //format date string to yyyy-MM-dd
         let treatedDate = date.split("/").reverse().join("-");
         //date string to date obj
@@ -27,10 +28,13 @@ const project = name => {
         const subTask = (name) => {
             //subTask status
             let isSubTaskActive = true;
+            // parent name
+            let parentTaskName = taskName;
 
             return {
                 name,
-                isSubTaskActive
+                isSubTaskActive,
+                parentTaskName
             };
         };
 
@@ -38,6 +42,9 @@ const project = name => {
 
         //toggle Subtask status
         const toggleSubTaskStatus = subTask => subTask.isSubTaskActive === true ? subTask.isSubTaskActive = false : subTask.isSubTaskActive = true;
+
+        //find task in the array
+        const findSubTask = subTaskName => subList.find(subTask => subTask.name === subTaskName);
 
         //find subtask index in the array by it's name
         const findSubTaskIdx = subTaskName => subList.findIndex(subTask => subTask.name === subTaskName);
@@ -56,8 +63,9 @@ const project = name => {
             isCollapsed,
             parentName,
             subTask,
-            toggleSubTaskStatus,
             addSubTask,
+            toggleSubTaskStatus,
+            findSubTask,
             findSubTaskIdx,
             deleteSubTask
         };

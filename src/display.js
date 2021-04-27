@@ -60,7 +60,7 @@ const display = () => {
                 //select subtask
                 let subTask = task.subList[j];
                 //render subtask
-                proj.renderSubTask(subTask.name, checkboxContainerDOM, subTask.isSubTaskActive);
+                proj.renderSubTask(subTask.name, checkboxContainerDOM, subTask.isSubTaskActive, task.name);
             };
         };
     };

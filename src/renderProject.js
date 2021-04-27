@@ -228,7 +228,7 @@ const renderProject = container => {
     };
 
     //subTask DOM factory
-    const renderSubTask = (name, container, subStatus) => {
+    const renderSubTask = (name, container, subStatus, parentName) => {
         //----Check container ---
         //individual checkbox container
         let checkboxContainer = document.createElement("div");
@@ -238,6 +238,8 @@ const renderProject = container => {
         let checkInput = document.createElement("input");
         checkInput.className = "check-input";
         checkInput.type = "checkbox";
+        checkInput.name = name;
+        checkInput.dataset.parent = parentName;
 
         //check label
         let checkLabel = document.createElement("label");
