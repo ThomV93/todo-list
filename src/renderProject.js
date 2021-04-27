@@ -250,8 +250,15 @@ const renderProject = container => {
             checkLabel.style.textDecoration = "line-through";
         };
 
+        //minus icon
+        let minusIcon = document.createElement("img");
+        minusIcon.src = "icons/minus.svg";
+        minusIcon.className = "minus-icon";
+        minusIcon.dataset.name = name;
+        minusIcon.dataset.parent = parentName;
+
         //append elements to individual checkbox container
-        checkboxContainer.append(checkInput, checkLabel);
+        checkboxContainer.append(checkInput, checkLabel, minusIcon);
 
         //append elements to expanded checkbox container
         container.append(checkboxContainer);

@@ -430,6 +430,22 @@ const todoApp = (() => {
     // ---------------- Subtask Events Section ----------------
 
 
+    //delete subtask on click
+    const deleteSubtaskEvent = selectedProj => {
+        //cache DOM element
+        const minusIcon = document.getElementsByClassName("minus-icon");
+        for(let i = 0; i < minusIcon.length; i++) {
+            minusIcon[i].addEventListener("click", () => {
+                let taskIdx = selectedProj.findTaskIdx(minusIcon[i].dataset.parent);
+                let taskObj = selectedProj.taskList[taskIdx];
+                let subTaskObjIdx = taskObj.findSubTaskIdx(minusIcon[i].dataset.name);
+                taskObj.deleteSubTask(subTaskObjIdx);
+                updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+            });
+        };
+    };
+
+    //cross off subtask on click
     const crossSubtaskEvent = selectedProj => {
         //cache DOM element
         const checkInput = document.getElementsByClassName("check-input");
@@ -574,6 +590,8 @@ const todoApp = (() => {
                 crossSubtaskEvent(proj);
                 //cross off sidetask on click
                 crossSideTaskEvent();
+                //delete subtask on click
+                deleteSubtaskEvent(proj);
                 break;
 
             case "Trash":
@@ -602,6 +620,8 @@ const todoApp = (() => {
                 crossTaskEvent(proj);
                 //cross off subtask on click
                 crossSubtaskEvent(proj);
+                //delete subtask on click
+                deleteSubtaskEvent(proj);
                 break;
         };
     };

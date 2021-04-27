@@ -612,7 +612,7 @@ button:focus {
     height: 22px;
     width: auto;
     grid-column: 5/ -1;
-    margin: auto 0 auto auto;
+    margin: auto auto auto 0;
     cursor: pointer;
     transition: all 275ms ease;
 }
@@ -631,18 +631,21 @@ button:focus {
 }
 
 .checkbox {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     box-sizing: border-box;
 }
 
 .checkbox > label {
+    grid-column: 2/ 5;
     color: var(--translucent-black);
     font-size: 14px;
     width: 90%;
+    margin: 3px 6px 3px 0;
 }
 
 .check-input{
+    grid-column: 1;
     width: 15px;
     height: 15px;
     border-radius: 50%;
@@ -655,6 +658,16 @@ button:focus {
 
 .check-input:checked {
     background-color: var(--orange);
+}
+
+.minus-icon {
+    grid-column: 6/ -1;
+    margin: auto auto auto 2px;
+}
+
+.minus-icon:hover {
+    cursor: pointer;
+    transform: scale(1.2);
 }
 
 /* -----------  Task form ------------- */
