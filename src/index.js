@@ -8,7 +8,7 @@ import projectForm from "./projectForm";
 import taskForm from "./taskForm";
 import renderTaskForm from "./renderTaskForm";
 import renderProjectForm from "./renderProjectForm";
-import {format, isSameWeek} from "date-fns";
+import {format, isSameWeek, sub} from "date-fns";
 
 const todoApp = (() => {
 
@@ -551,7 +551,7 @@ const todoApp = (() => {
                 //move task to trash section on click
                 moveToTrashEvent(proj);
                 //cross off task on click
-                crossTaskEvent(proj);``
+                crossTaskEvent(proj);
                 //cross off sidetask on click
                 crossSideTaskEvent();
                 break;
@@ -619,7 +619,6 @@ const todoApp = (() => {
     // -------- To be done -------
     // create local storage
     // task sub-list
-    // update readme
     
     // ---- CSS -----
     // media queries

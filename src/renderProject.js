@@ -228,7 +228,7 @@ const renderProject = container => {
     };
 
     //subTask DOM factory
-    const renderSubTask = (name, container) => {
+    const renderSubTask = (name, container, subStatus) => {
         //----Check container ---
         //individual checkbox container
         let checkboxContainer = document.createElement("div");
@@ -242,6 +242,11 @@ const renderProject = container => {
         //check label
         let checkLabel = document.createElement("label");
         checkLabel.innerHTML = name;
+
+        if (subStatus === false) {
+            checkInput.checked = true;
+            checkLabel.style.textDecoration = "line-through";
+        };
 
         //append elements to individual checkbox container
         checkboxContainer.append(checkInput, checkLabel);

@@ -25,10 +25,19 @@ const project = name => {
 
         //subtask factory
         const subTask = (name) => {
-            return {name};
+            //subTask status
+            let isSubTaskActive = true;
+
+            return {
+                name,
+                isSubTaskActive
+            };
         };
 
         const addSubTask = subTask => subList.push(subTask);
+
+        //toggle Subtask status
+        const toggleSubTaskStatus = subTask => subTask.isSubTaskActive === true ? subTask.isSubTaskActive = false : subTask.isSubTaskActive = true;
 
         //find subtask index in the array by it's name
         const findSubTaskIdx = subTaskName => subList.findIndex(subTask => subTask.name === subTaskName);
@@ -47,6 +56,7 @@ const project = name => {
             isCollapsed,
             parentName,
             subTask,
+            toggleSubTaskStatus,
             addSubTask,
             findSubTaskIdx,
             deleteSubTask
