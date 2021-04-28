@@ -174,6 +174,22 @@ const todoApp = (() => {
         trashProj.deleteTask(selectedProj.taskList[idx]);
     };
 
+    const eventBundle = selectedProj => {
+        sortProjectDatesEvent(selectedProj);
+        editProjectEvent(selectedProj);
+        deleteProjectEvent(selectedProj);
+        taskCreatorEvent(selectedProj);
+        editTaskEvent(selectedProj);
+        moveToTrashEvent(selectedProj);
+        expandTaskEvent(selectedProj);
+        crossTaskEvent(selectedProj);
+        searchbarEvent(selectedProj);
+        subTaskCreatorEvent(selectedProj);
+        crossSubtaskEvent(selectedProj);
+        deleteSubtaskEvent(selectedProj);
+        subTaskCreatorEvent(selectedProj);
+    };
+
 
     // ---------------- Navbar Events Section ----------------
 
@@ -246,16 +262,7 @@ const todoApp = (() => {
             //add event listener to each element
             sidebarProjectTitleContainer_div[i].addEventListener("click", () => {
                 display().selectedProject(projectsArray[i], projectDisplayContainer_div);
-                sortProjectDatesEvent(projectsArray[i]);
-                editProjectEvent(projectsArray[i]);
-                deleteProjectEvent(projectsArray[i]);
-                taskCreatorEvent(projectsArray[i]);
-                editTaskEvent(projectsArray[i]);
-                moveToTrashEvent(projectsArray[i]);
-                expandTaskEvent(projectsArray[i]);
-                crossTaskEvent(projectsArray[i]);
-                searchbarEvent(projectsArray[i]);                
-                subTaskCreatorEvent();
+                eventBundle(projectsArray[i]);
             });
         };
     };
@@ -706,7 +713,6 @@ const todoApp = (() => {
 
     // -------- To be done -------
     // create local storage
-    // task sub-list
     
     // ---- CSS -----
     // media queries
