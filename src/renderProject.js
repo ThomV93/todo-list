@@ -187,8 +187,9 @@ const renderProject = container => {
 
         //subtask plus icon
         let taskCheckboxPlusIcon = document.createElement("img");
-        taskCheckboxPlusIcon.id = "task-checkbox-plus-icon";
         taskCheckboxPlusIcon.src = "icons/plus-2.svg";
+        taskCheckboxPlusIcon.className = "task-checkbox-plus-icon";
+        taskCheckboxPlusIcon.dataset.name = name;
 
         taskCheckboxTitleContainer.append(taskCheckboxTitle, taskCheckboxPlusIcon);
 

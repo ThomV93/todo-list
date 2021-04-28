@@ -6,6 +6,7 @@ import searchbar from "./searchbar";
 import project from "./projectFactory";
 import projectForm from "./projectForm";
 import taskForm from "./taskForm";
+import subTaskForm from "./subTaskForm";
 import renderTaskForm from "./renderTaskForm";
 import renderProjectForm from "./renderProjectForm";
 import {format, isSameWeek} from "date-fns";
@@ -253,7 +254,8 @@ const todoApp = (() => {
                 moveToTrashEvent(projectsArray[i]);
                 expandTaskEvent(projectsArray[i]);
                 crossTaskEvent(projectsArray[i]);
-                searchbarEvent(projectsArray[i]);
+                searchbarEvent(projectsArray[i]);                
+                subTaskCreatorEvent();
             });
         };
     };
@@ -548,7 +550,7 @@ const todoApp = (() => {
     };
 
     //task form save button event
-    const taskCreatorSaveBtnEvent = (selectedProj) => {
+    const taskCreatorSaveBtnEvent = selectedProj => {
         //cache DOM element
         const saveBtn = document.getElementById("form-save-btn");
 
@@ -571,6 +573,46 @@ const todoApp = (() => {
     };
 
 
+    // --------------------- Subtask Form Events --------------------
+
+
+    const subTaskCreatorEvent = selectedProj => {
+        //cache DOM element
+        const plusIcon = document.getElementsByClassName("task-checkbox-plus-icon");
+
+        for(let i = 0; i < plusIcon.length; i++) {
+            plusIcon[i].addEventListener("click", () => {
+                let taskObj = selectedProj.taskList[selectedProj.findTaskIdx(plusIcon[i].dataset.name)];
+                renderProjectForm(document.body);
+                subTaskForm().changeName();
+                subTaskCreatorCancelBtnEvent();
+                subTaskCreatorSaveBtnEvent(selectedProj, taskObj);
+            });
+        };
+    };
+
+    //task form cancel button event
+    const subTaskCreatorCancelBtnEvent = () => {
+        //cache DOM element
+        const formCancelBtn = document.getElementById("project-form-cancel-btn");
+        //close the form on click
+        formCancelBtn.addEventListener("click", () => {
+            subTaskForm().close();
+        });
+    };
+
+    //task form save button event
+    const subTaskCreatorSaveBtnEvent = (selectedProj, task) => {
+        //cache DOM element
+        const saveBtn = document.getElementById("project-form-save-btn");
+
+        saveBtn.addEventListener("click", () => {
+            subTaskForm().creator(task);
+            updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
+        });
+    };
+
+
     // --------------------- General -------------------------
 
     const projectDisplayController = (proj, projContainer) => {
@@ -586,12 +628,14 @@ const todoApp = (() => {
                 moveToTrashEvent(proj);
                 //cross off task on click
                 crossTaskEvent(proj);
-                //cross off subtask on click
-                crossSubtaskEvent(proj);
                 //cross off sidetask on click
                 crossSideTaskEvent();
+                //cross off subtask on click
+                crossSubtaskEvent(proj);
                 //delete subtask on click
                 deleteSubtaskEvent(proj);
+                //subtask creator form event
+                subTaskCreatorEvent(proj);
                 break;
 
             case "Trash":
@@ -622,6 +666,8 @@ const todoApp = (() => {
                 crossSubtaskEvent(proj);
                 //delete subtask on click
                 deleteSubtaskEvent(proj);
+                //subtask creator form event
+                subTaskCreatorEvent(proj);
                 break;
         };
     };
