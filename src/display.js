@@ -51,7 +51,7 @@ const display = () => {
             //select each task
             let task = arrPos.taskList[i];
             //render tasks
-            proj.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.isActive, task.isCollapsed);
+            proj.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.notes, task.isActive, task.isCollapsed);
 
             //cache container for subtasks
             const checkboxContainerDOM = document.querySelectorAll("#sub-task-container")[i];
@@ -78,7 +78,7 @@ const display = () => {
             //select each task
             let task = proj.taskList[i];
             //render tasks
-            projContainer.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.isActive, task.isCollapsed);
+            projContainer.renderTask(task.name, formatDate(task.date), task.time, task.priority, task.notes, task.isActive, task.isCollapsed);
 
             //cache container for subtasks
             const checkboxContainerDOM = document.querySelectorAll("#sub-task-container")[i];
@@ -193,11 +193,6 @@ const display = () => {
         };
     };
 
-    const renderNotes = (selectedProj, notes, idx) => {
-        //display notes stored in the object
-        notes[idx].innerHTML = selectedProj.taskList[idx].notes;
-    };
-
     //format date to display
     const formatDate = date => {
         let formatted = format(date, "dd/MM/yyyy");
@@ -214,8 +209,7 @@ const display = () => {
         collapseSidebar,
         changeTheme,
         collapseSideProjects,
-        sideValues,
-        renderNotes
+        sideValues
     };
 };
 

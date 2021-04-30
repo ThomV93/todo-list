@@ -93,7 +93,7 @@ const renderProject = container => {
 
     // --------- Task DOM factory module ---------
 
-    const renderTask = (name, date, time, priority, status, collapsed) => {
+    const renderTask = (name, date, time, priority, notes, status, collapsed) => {
         //task container
         let taskContainer = document.createElement("div");
         taskContainer.className = "task";
@@ -161,7 +161,7 @@ const renderProject = container => {
         //notes text area
         let notesTextArea = document.createElement("textarea");
         notesTextArea.className = "task-notes";
-        notesTextArea.innerHTML = "";
+        notesTextArea.innerHTML = notes;
         notesTextArea.disabled = true;
 
         //append elements to container

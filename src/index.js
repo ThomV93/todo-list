@@ -47,9 +47,9 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "27/04/2021", "high");
+    let workTask1 = work.task("Check Emails", "09:00", "30/04/2021", "high");
     let workTask2 = work.task("Send Emails", "10:30", "05/04/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "29/04/2021", "high");
+    let workTask3 = work.task("Create reports", "14:00", "30/04/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     workTask2.notes = "Hello Notes";
     work.addTask(workTask1);
@@ -92,7 +92,7 @@ const todoApp = (() => {
     let investing = project("Investing");
 
     let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00", "05/04/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "28/04/2021");
     let investingTask3 = investing.task("Buy High, Sell Low", "18:00", "07/04/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
@@ -104,7 +104,7 @@ const todoApp = (() => {
     let coding = project("Coding");
 
     let codingTask1 = coding.task("Study", "19:00", "03/04/2021", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30", "07/04/2021", "high");
+    let codingTask2 = coding.task("Study MORE", "20:30", "30/04/2021", "high");
     let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
@@ -424,13 +424,11 @@ const todoApp = (() => {
     const expandTaskEvent = selectedProj => {
         //cache all displayed
         const taskName = document.getElementsByClassName("task-name");
-        const taskNotes = document.getElementsByClassName("task-notes");
 
         for(let i = 0; i < taskName.length; i++) {
             taskName[i].addEventListener("click", () => {
                 selectedProj.toggleTaskDisplay(selectedProj.taskList[i]);
                 updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
-                display().renderNotes(selectedProj, taskNotes, i);
             });
         };
     };
@@ -460,8 +458,7 @@ const todoApp = (() => {
         const checkInput = document.getElementsByClassName("check-input");
         for(let i = 0; i < checkInput.length; i++) {
             checkInput[i].addEventListener("click", () => {
-                let taskIdx = selectedProj.findTaskIdx(checkInput[i].dataset.parent);
-                let taskObj = selectedProj.taskList[taskIdx];
+                let taskObj = selectedProj.taskList[selectedProj.findTaskIdx(checkInput[i].dataset.parent)];
                 let subTaskObj = taskObj.findSubTask(checkInput[i].name);
                 taskObj.toggleSubTaskStatus(subTaskObj);
                 updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
@@ -718,10 +715,9 @@ const todoApp = (() => {
     // media queries
 
     // ---- Bugs ----
-    // notes displayed after creation and edits
     // deleted tasks are not deleted in the today object
-    // edited task get duplicated in the today section
-    // edited date on today section don't erase task
+    // created/ edited task get duplicated in the today/week section
+    // edited date don't erase task on today/ week proj
     // search don't work properly on trash section
     // delete proj not working well
 
