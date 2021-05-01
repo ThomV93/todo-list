@@ -47,9 +47,9 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "30/04/2021", "high");
+    let workTask1 = work.task("Check Emails", "09:00", "01/05/2021", "high");
     let workTask2 = work.task("Send Emails", "10:30", "05/04/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "30/04/2021", "high");
+    let workTask3 = work.task("Create reports", "14:00", "01/05/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     workTask2.notes = "Hello Notes";
     work.addTask(workTask1);
@@ -104,7 +104,7 @@ const todoApp = (() => {
     let coding = project("Coding");
 
     let codingTask1 = coding.task("Study", "19:00", "03/04/2021", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30", "30/04/2021", "high");
+    let codingTask2 = coding.task("Study MORE", "20:30", "01/05/2021", "high");
     let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
@@ -325,7 +325,7 @@ const todoApp = (() => {
         });
     };
 
-    const deleteProjectEvent = (selectedProj) => {
+    const deleteProjectEvent = selectedProj => {
         //cache DOM element
         const projTrashIcon = document.getElementById("proj-trash-icon");
         //add click event to element
@@ -658,6 +658,8 @@ const todoApp = (() => {
                 sortProjectDatesEvent(proj);
                 //edit project on click
                 editProjectEvent(proj);
+                //add back event to delete proj
+                deleteProjectEvent(proj);
                 //task creator on click 
                 taskCreatorEvent(proj);
                 //edit task on click
@@ -719,7 +721,6 @@ const todoApp = (() => {
     // created/ edited task get duplicated in the today/week section
     // edited date don't erase task on today/ week proj
     // search don't work properly on trash section
-    // delete proj not working well
 
 
 })();
