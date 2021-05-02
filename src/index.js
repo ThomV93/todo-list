@@ -113,7 +113,7 @@ const todoApp = (() => {
     projectsArray.push(coding);
 
     
-    // -------------------- Projects Array Aux Functions ---------------------
+    // -------------------- Aux Functions ---------------------
 
 
     //retrieve task obejct from any project by name
@@ -162,6 +162,17 @@ const todoApp = (() => {
     const deleteProject = selectedProj => {
         let projIdx = getParentIdx(selectedProj.name);
         projectsArray.splice(projIdx, 1);
+    };
+
+    const moveToTrash = (selectedProj, idx) => {
+        if(selectedProj.name === "Today" || selectedProj.name === "Week"){
+            let origParent = projectsArray[getParentIdx(selectedProj.taskList[idx].parentName)];
+            let origtaskIdx = origParent.findTaskIdx(selectedProj.taskList[idx].name);
+            origParent.deleteTask(origtaskIdx);
+        } else{
+            //delete from the original project
+            selectedProj.deleteTask(idx);
+        };
     };
 
     //restore task to it's original parent
@@ -389,8 +400,7 @@ const todoApp = (() => {
             taskTrashIcon[i].addEventListener("click", () => {
                 //push to trash section
                 trashProj.addTask(selectedProj.taskList[i]);
-                //delete from the original project
-                selectedProj.deleteTask(i);
+                moveToTrash(selectedProj, i);
                 updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
             });
         };
@@ -683,10 +693,10 @@ const todoApp = (() => {
     };
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
-        //display the updated project
-        projectEventsController(proj, projContainer);
         //check for tasks due to today and this week
         checkForUpcoming(projectsArray);
+        //display the updated project
+        projectEventsController(proj, projContainer);
         //display the updated sidebar project and task list
         display().sideProjects(arr, sideContainer);
         //add back search event
@@ -714,17 +724,11 @@ const todoApp = (() => {
         display().sideValues(todayProj, weekProj, trashProj);
     })();
 
-
-
     // -------- To be done -------
     // display tasks of the week in date order
     // create local storage
     
     // ---- CSS -----
     // media queries
-
-    // --- Bugs ----
-    // edited/ deleted tasks are not erased from today/week projs
-
 
 })();
