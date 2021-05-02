@@ -47,9 +47,9 @@ const todoApp = (() => {
 
     let work = project("Work");
 
-    let workTask1 = work.task("Check Emails", "09:00", "01/05/2021", "high");
-    let workTask2 = work.task("Send Emails", "10:30", "05/04/2021", "regular");
-    let workTask3 = work.task("Create reports", "14:00", "01/05/2021", "high");
+    let workTask1 = work.task("Check Emails", "09:00", "02/05/2021", "high");
+    let workTask2 = work.task("Send Emails", "10:30", "05/05/2021", "regular");
+    let workTask3 = work.task("Create reports", "14:00", "02/05/2021", "high");
     let workTask4 = work.task("Open Tickets", "16:00", "13/04/2021", "regular");
     workTask2.notes = "Hello Notes";
     work.addTask(workTask1);
@@ -92,7 +92,7 @@ const todoApp = (() => {
     let investing = project("Investing");
 
     let investingTask1 = investing.task("Tea Time", "15:00", "29/08/2021");
-    let investingTask2 = investing.task("Dinner", "18:00", "28/04/2021");
+    let investingTask2 = investing.task("Dinner", "18:00", "03/05/2021");
     let investingTask3 = investing.task("Buy High, Sell Low", "18:00", "07/04/2021");
     investing.addTask(investingTask1);
     investing.addTask(investingTask2);
@@ -103,8 +103,8 @@ const todoApp = (() => {
 
     let coding = project("Coding");
 
-    let codingTask1 = coding.task("Study", "19:00", "03/04/2021", "regular");
-    let codingTask2 = coding.task("Study MORE", "20:30", "01/05/2021", "high");
+    let codingTask1 = coding.task("Study", "19:00", "04/05/2021", "regular");
+    let codingTask2 = coding.task("Study MORE", "20:30", "02/05/2021", "high");
     let codingTask3 = coding.task("Stretch back", "22:00", "29/08/2021", "regular");
     coding.addTask(codingTask1);
     coding.addTask(codingTask2);
@@ -132,6 +132,8 @@ const todoApp = (() => {
 
     //find tasks with today's date and push to today project object
     const checkForUpcoming = arr => {
+        todayProj.taskList.length = 0;
+        weekProj.taskList.length = 0;
         //get today's date
         let today = format(new Date(), "yyyy/MM/dd");
         //loop through projects array
@@ -559,7 +561,7 @@ const todoApp = (() => {
         const saveBtn = document.getElementById("form-save-btn");
 
         saveBtn.addEventListener("click", () => {
-            taskForm().creator(selectedProj, todayProj);
+            taskForm().creator(selectedProj);
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
         });
     };
@@ -570,7 +572,7 @@ const todoApp = (() => {
         const saveBtn = document.getElementById("form-save-btn");
 
         saveBtn.addEventListener("click", () => {
-            taskForm().editor(selectedProj, idx, todayProj);
+            taskForm().editor(selectedProj, idx);
             //update display and reintroduce necessary event listeners
             updateDisplay(projectsArray, selectedProj, projectDisplayContainer_div, sidebarProjectContainer_div);
         });
@@ -619,7 +621,7 @@ const todoApp = (() => {
 
     // --------------------- General -------------------------
 
-    const projectDisplayController = (proj, projContainer) => {
+    const projectEventsController = (proj, projContainer) => {
         switch(proj.name) {
             case "Today":
             case "Week":
@@ -682,7 +684,9 @@ const todoApp = (() => {
 
     const updateDisplay = (arr, proj, projContainer, sideContainer) => {
         //display the updated project
-        projectDisplayController(proj, projContainer);
+        projectEventsController(proj, projContainer);
+        //check for tasks due to today and this week
+        checkForUpcoming(projectsArray);
         //display the updated sidebar project and task list
         display().sideProjects(arr, sideContainer);
         //add back search event
@@ -713,15 +717,14 @@ const todoApp = (() => {
 
 
     // -------- To be done -------
+    // display tasks of the week in date order
     // create local storage
     
     // ---- CSS -----
     // media queries
 
-    // ---- Bugs ----
-    // deleted tasks are not deleted in the today object
-    // created/ edited task get duplicated in the today/week section
-    // edited date don't erase task on today/ week proj
+    // --- Bugs ----
+    // edited/ deleted tasks are not erased from today/week projs
 
 
 })();

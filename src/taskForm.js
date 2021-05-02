@@ -12,17 +12,6 @@ const taskForm = () => {
     
     // ----------- Aux Functions Section -----------------
 
-
-    //check if task is due today and push to today project object
-    const checkIfToday = (todayObj, task, date) => {
-        let todayDate = format(new Date(), "yyyy/MM/dd");
-        let formattedDate = format(date, "yyyy/MM/dd");
-
-        if(todayDate === formattedDate){
-            todayObj.addTask(task);
-        };
-    };
-
     //display correct flag
     const displayCorrectFlag = (flag, bool) => {
         //display correct flag
@@ -38,7 +27,7 @@ const taskForm = () => {
     // -------------- Creator section -----------------
 
 
-    const creator = (selectedProj, todayObj) => {
+    const creator = (selectedProj) => {
         //store user input
         let taskName = formName.value;
         let taskTime = formTime.value;
@@ -54,8 +43,6 @@ const taskForm = () => {
             newTask.notes = taskNotes;
             //add task to the project
             selectedProj.addTask(newTask);
-            //check if the task is due today and add to today's section as well
-            checkIfToday(todayObj, newTask, newTask.date);
             //close form
             close();
         } else {
@@ -85,7 +72,7 @@ const taskForm = () => {
         formNotes.value = selectedProj.taskList[idx].notes;
     };
 
-    const editor = (selectedProj, idx, todayObj) => {
+    const editor = (selectedProj, idx) => {
         //get selected task
         let selectedTask = selectedProj.taskList[idx];
 
@@ -96,8 +83,6 @@ const taskForm = () => {
             selectedTask.date = new Date(formDate.value);
             selectedTask.priority = formFlag.src.indexOf("red-flag") != -1 ? "high" : "regular";
             selectedTask.notes = formNotes.value;
-            //check if the task is due today and add to today's section as well
-            checkIfToday(todayObj, selectedTask, selectedTask.date);
             //close form
             close();
         } else {
