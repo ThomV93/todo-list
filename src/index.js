@@ -683,6 +683,8 @@ const todoApp = (() => {
         projectDisplayController(proj, projContainer);
         //display the updated sidebar project and task list
         display().sideProjects(arr, sideContainer);
+        //add back search event
+        searchbarEvent(proj);
         //add back the sidebar projet's click event
         sideProjectTitleEvent();
         //cross off sidetask
@@ -720,7 +722,6 @@ const todoApp = (() => {
     // deleted tasks are not deleted in the today object
     // created/ edited task get duplicated in the today/week section
     // edited date don't erase task on today/ week proj
-    // search don't work properly on trash section
 
 
 })();

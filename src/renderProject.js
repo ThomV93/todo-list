@@ -347,6 +347,31 @@ const renderProject = container => {
         
         //append to main project container
         projectContainer.prepend(projectTitleContainer);
+
+        //--------- Task DOM creator section -----------
+
+        //task style container
+        let taskStyleContainer = document.createElement("div");
+        taskStyleContainer.className = "task";
+        taskStyleContainer.dataset.creator = "y";
+
+        //task creator container
+        let taskCreatorContainer = document.createElement("div");
+        taskCreatorContainer.id = "creator-container";
+
+        //task creator text
+        let taskCreatorText = document.createElement("p");
+        taskCreatorText.id = "task-creator-text";
+        taskCreatorText.innerHTML = "Restore or delete tasks permanently";
+
+        //append elements to creator container
+        taskCreatorContainer.append(taskCreatorText);
+
+        //append to task style container
+        taskStyleContainer.append(taskCreatorContainer);
+
+        //append to main task container
+        mainTaskContainer.append(taskStyleContainer);
     };
 
     const renderTrashTask = (name, date, time) => {
