@@ -105,7 +105,7 @@ const display = () => {
             //select each task
             let task = proj.taskList[i];
             //render tasks
-            projContainer.renderTrashTask(task.name, formatDate(task.date), task.time);
+            projContainer.renderTrashTask(task.name, formatDate(task.date), task.time, false);
         };
     };
 

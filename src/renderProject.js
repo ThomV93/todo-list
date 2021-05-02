@@ -374,7 +374,7 @@ const renderProject = container => {
         mainTaskContainer.append(taskStyleContainer);
     };
 
-    const renderTrashTask = (name, date, time) => {
+    const renderTrashTask = (name, date, time, status) => {
         //task container
         let taskContainer = document.createElement("div");
         taskContainer.className = "task";
@@ -400,6 +400,13 @@ const renderProject = container => {
         taskDate.className = "task-date";
         taskDate.innerHTML = date;
 
+        if (status === false) {
+            taskCheckboxInput.checked = true;
+            taskTime.style.textDecoration = "line-through";
+            taskName.style.textDecoration = "line-through";
+            taskDate.style.textDecoration = "line-through";
+        };
+
         //task restore icon
         let taskrestoreIcon = document.createElement("img");
         taskrestoreIcon.className = "task-restore-icon";
@@ -410,66 +417,6 @@ const renderProject = container => {
         taskTrashIcon.className = "task-trash-red-icon";
         taskTrashIcon.src = "icons/trash.svg";
 
-        //---------- Expanded task section ---------
-
-        //----- Notes section ------
-        //expanded task notes container
-        let taskNotesContainer = document.createElement("div");
-        taskNotesContainer.id = "notes-container";
-        taskNotesContainer.className = "task-expanded";
-        taskNotesContainer.dataset.notes = "notes";
-        taskNotesContainer.style.position = "absolute";
-        taskNotesContainer.style.visibility = "hidden";
-
-        //notes title
-        let taskNotesTitle = document.createElement("h2");
-        taskNotesTitle.className = "task-expanded-title";
-        taskNotesTitle.innerHTML = "Notes:";
-
-        //notes text area
-        let notesTextArea = document.createElement("textarea");
-        notesTextArea.className = "task-notes";
-        notesTextArea.innerHTML = "";
-        notesTextArea.disabled = true;
-
-        //append elements to container
-        taskNotesContainer.append(taskNotesTitle, notesTextArea);
-
-        //----- Checkbox section -----
-        //expanded task checkbox container
-        let taskCheckboxContainer = document.createElement("div");
-        taskCheckboxContainer.id = "checkbox-container";
-        taskCheckboxContainer.className = "task-expanded";
-        taskCheckboxContainer.dataset.checkbox = "checkbox";
-        taskCheckboxContainer.style.position = "absolute";
-        taskCheckboxContainer.style.visibility = "hidden";
-
-        //checkbox title
-        let taskCheckboxTitle = document.createElement("h2");
-        taskCheckboxTitle.className = "task-expanded-title";
-        taskCheckboxTitle.innerHTML = "List:";
-
-        //----Check container ---
-        //individual checkbox container
-        let checkboxContainer = document.createElement("div");
-        checkboxContainer.className = "checkbox";
-
-        //check input
-        let checkInput = document.createElement("input");
-        checkInput.className = "check-input";
-        checkInput.type = "checkbox";
-
-        //check label
-        let checkLabel = document.createElement("label");
-        checkLabel.innerHTML = "Diamon Hands";
-
-        //append elements to individual checkbox container
-        checkboxContainer.append(checkInput, checkLabel);
-
-
-        //append elements to expanded checkbox container
-        taskCheckboxContainer.append(taskCheckboxTitle, checkboxContainer);
-
         
         //-------- Append all to task container ---------
         taskContainer.append(
@@ -478,9 +425,7 @@ const renderProject = container => {
             taskName,
             taskDate,
             taskrestoreIcon,
-            taskTrashIcon,
-            taskNotesContainer,
-            taskCheckboxContainer
+            taskTrashIcon
         );
 
 

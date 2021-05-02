@@ -632,8 +632,8 @@ const todoApp = (() => {
                 moveToTrashEvent(proj);
                 //cross off task on click
                 crossTaskEvent(proj);
-                //cross off sidetask on click
-                crossSideTaskEvent();
+                //add back the expand task event
+                expandTaskEvent(proj);
                 //cross off subtask on click
                 crossSubtaskEvent(proj);
                 //delete subtask on click
@@ -668,6 +668,8 @@ const todoApp = (() => {
                 moveToTrashEvent(proj);
                 //cross off task on click
                 crossTaskEvent(proj);
+                //add back the expand task event
+                expandTaskEvent(proj);
                 //cross off subtask on click
                 crossSubtaskEvent(proj);
                 //delete subtask on click
@@ -689,8 +691,6 @@ const todoApp = (() => {
         sideProjectTitleEvent();
         //cross off sidetask
         crossSideTaskEvent();
-        //add back the expand task event
-        expandTaskEvent(proj);
         //display Today Value
         display().sideValues(todayProj, weekProj, trashProj);
     };
